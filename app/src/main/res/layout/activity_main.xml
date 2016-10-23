@@ -10,4 +10,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.duanli.student_portal.MainActivity">
 
+    <fragment android:name="com.example.duanli.student_portal.ExchangeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:id="@+id/exchange_fragment"
+        tools:layout="@layout/fragment_exchange"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="250dp" />
+
+    <fragment android:name="com.example.duanli.student_portal.eventsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:id="@+id/event_fragment"
+        tools:layout="@layout/fragment_events"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="250dp" />
 </RelativeLayout>
