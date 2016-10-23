@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class EventListViewActivity extends AppCompatActivity {
 
+    // TXL330
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
