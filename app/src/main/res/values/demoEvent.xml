@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_item_detail">ItemDetailActivity</string>
+    <string name="demoEventTitle">Halloween Maze</string>
+    <string name="demoEventOrganizer">Student Portal Demo Group</string>
+    <string name="demoTimeDate">Monday Oct.31st 10:00pm</string>
+    <string name="demoTimeDateTag">Date and Time:</string>
+    <string name="demoLocationTag">Location:</string>
+    <string name="demoLocation">Nord Hall</string>
+    <string name="demoPriceTag">Price:</string>
+    <string name="demoPrice">Child $6 Adult $8 </string>
+    <string name="demoCapacityTag">Capacity:</string>
+    <string name="demoCapacity">20</string>
+    <string name="demoHashTag">#Halloween #Maze #Horror </string>
+    <string name="demoDescription">
+
+
+    "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+    </string>
+</resources>
