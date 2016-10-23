@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    tools:context="com.example.duanli.student_portal.eventsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:id="@+id/fabAddEvent"
+        app:backgroundTint="@android:color/transparent"
+        android:layout_gravity="end|right"/>
+
+    <TextView
+        android:text="Events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventsHeader"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/cast_expanded_controller_background_color"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="252dp"
+        android:id="@+id/exchangeImage"
+        android:src="@mipmap/events"/>
+
+
+</FrameLayout>
