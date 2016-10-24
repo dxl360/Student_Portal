@@ -10,4 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.duanli.student_portal.EventListViewActivity">
 
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold" >
+    </TextView>
+
 </RelativeLayout>
