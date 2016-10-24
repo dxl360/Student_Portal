@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    tools:context="com.example.duanli.student_portal.ExchangeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:id="@+id/fabAddItem"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="24dp"
+        app:rippleColor="@android:color/transparent"
+        android:layout_gravity="end|right"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="252dp"
+        android:id="@+id/exchangeImage"
+        android:src="@mipmap/exchange"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/exchange_title"
+        tools:text="Exchange"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/cast_expanded_controller_background_color"/>
+
+</FrameLayout>
