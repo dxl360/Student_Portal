@@ -99,4 +99,14 @@ public class SlidingMenu extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void onClick(View v) {
+
+        if(v.getId() == R.id.fabAddItem) {
+            startActivity(new Intent(this, NewItemActivity.class));
+        } else if(v.getId() == R.id.fabAddEvent) {
+            startActivity(new Intent(this, NewEventActivity.class));
+        }
+
+    }
 }
