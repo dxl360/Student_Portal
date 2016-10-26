@@ -19,10 +19,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".EventDetailActivity"
@@ -33,16 +30,29 @@
             android:label="@string/title_activity_item_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ManageActivity" />
+
+        <activity
+            android:name=".ManageActivity"
+            android:label="Manage"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EventListViewActivity" />
         <activity android:name=".ItemListViewActivity" />
+
         <activity
             android:name=".NewEventActivity"
             android:label="@string/title_activity_new_event"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
+
         <activity
             android:name=".NewItemActivity"
             android:label="@string/title_activity_new_item"
@@ -51,12 +61,10 @@
         <activity
             android:name=".SlidingMenu"
             android:label="@string/title_activity_sliding_menu"
-<<<<<<< HEAD
-            android:theme="@style/AppTheme.NoActionBar" />
-=======
             android:theme="@style/AppTheme.NoActionBar">
+
+
         </activity>
->>>>>>> origin/master
     </application>
 
 </manifest>
