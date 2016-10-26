@@ -12,15 +12,37 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_sliding_menu" />
+
+    <fragment android:name="com.example.duanli.student_portal.eventsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/event_fragment"
+        tools:layout="@layout/fragment_events"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="250dp"
+        android:layout_gravity="bottom" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <fragment android:name="com.example.duanli.student_portal.ExchangeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:id="@+id/exchange_fragment"
+        tools:layout="@layout/fragment_exchange"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginBottom="250dp"
+        android:layout_gravity="center_vertical" />
 
 </android.support.design.widget.CoordinatorLayout>

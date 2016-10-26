@@ -91,7 +91,8 @@ public class SlidingMenu extends AppCompatActivity
         } else if (id == R.id.Manage) {
             startActivity((new Intent(this, ManageActivity.class)));
         } else if (id == R.id.Logout) {
-            // close app
+            finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
