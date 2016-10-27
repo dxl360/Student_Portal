@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class ItemListViewActivity extends Activity {
     public static final String TAG = ItemListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+    Toolbar toolbar;
+    ImageButton FAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
