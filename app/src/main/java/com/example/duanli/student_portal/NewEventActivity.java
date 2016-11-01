@@ -1,5 +1,6 @@
 package com.example.duanli.student_portal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -54,7 +55,50 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             Event event = new Event(organizerName,eventName,date,time,location,price,capacity,description);
             event.addEvent();
             finish();
+            startActivity(new Intent(this, EventDetailActivity.class));
         }
 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static boolean isValidEmail(String s) {
+        return true;
+    }
+
+    public static boolean isValidName(String s) {
+        return true;
+    }
+
+    public static boolean isValidDate(String s) {
+        return true;
+    }
+
+    public static boolean isValidTime(String s) {
+        return true;
+    }
+
+    public static boolean isValidContact(String s) {
+        return true;
     }
 }

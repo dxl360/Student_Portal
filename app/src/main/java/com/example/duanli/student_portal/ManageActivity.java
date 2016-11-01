@@ -19,7 +19,7 @@ public class ManageActivity extends AppCompatActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Events","Exchange"};
-    int Numboftabs =2;
+    int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package com.example.duanli.student_portal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -48,6 +49,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Item item = new Item(sellerName,itemName,price,contact,description);
             item.addItem();
             finish();
+            startActivity(new Intent(this, ItemDetailActivity.class));
         }
 
     }

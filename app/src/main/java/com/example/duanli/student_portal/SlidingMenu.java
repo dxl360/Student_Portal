@@ -25,14 +25,14 @@ public class SlidingMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,28 +85,17 @@ public class SlidingMenu extends AppCompatActivity
         if (id == R.id.Profile) {
             startActivity(new Intent(this, ProfileActivity.class));
         } else if (id == R.id.Events) {
-            startActivity(new Intent(this, EventListViewActivity.class));
+            startActivity(new Intent(this, NewEventActivity.class));
         } else if (id == R.id.Exchange) {
-            startActivity(new Intent(this, ItemListViewActivity.class));
+            startActivity(new Intent(this, NewItemActivity.class));
         } else if (id == R.id.Manage) {
             startActivity((new Intent(this, ManageActivity.class)));
         } else if (id == R.id.Logout) {
-            finish();
-            System.exit(0);
+            // close app
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void onClick(View v) {
-
-        if(v.getId() == R.id.fabAddItem) {
-            startActivity(new Intent(this, NewItemActivity.class));
-        } else if(v.getId() == R.id.fabAddEvent) {
-            startActivity(new Intent(this, NewEventActivity.class));
-        }
-
     }
 }
