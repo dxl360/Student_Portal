@@ -1,16 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.33"
+        android:background="#0b0b0b"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/item1"
+            android:scaleType="centerCrop"
+            android:alpha=".75"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="You Are In Tab 2"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items I've bought"
+            android:ems="10"
+            android:textSize="30sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:id="@+id/editText"
+            android:textColor="@android:color/white"
+            android:textStyle="normal|bold" />
 
-</RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.33"
+        android:background="#0a0909"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/item2"
+            android:scaleType="centerCrop"
+            android:alpha=".75"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items that I watchlisted"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:selectAllOnFocus="false"
+            android:textStyle="normal|bold"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.33"
+        android:background="#080808"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/item3"
+            android:scaleType="centerCrop"
+            android:alpha=".75"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items I've sold"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:selectAllOnFocus="false"
+            android:textStyle="normal|bold"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</LinearLayout>

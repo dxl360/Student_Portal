@@ -17,10 +17,9 @@
             android:alpha=".75"
             />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:text="Events I've joined"
             android:ems="10"
             android:textSize="30sp"
@@ -29,8 +28,7 @@
             android:textAlignment="center"
             android:id="@+id/editText"
             android:textColor="@android:color/white"
-            android:textStyle="normal|bold"
-            android:focusable="false" />
+            android:textStyle="normal|bold" />
 
 
     </RelativeLayout>
@@ -49,10 +47,9 @@
             android:alpha=".75"
             />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:text="Events I'm interested"
             android:ems="10"
             android:id="@+id/editText2"
@@ -62,8 +59,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:focusable="false"  />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -79,10 +75,9 @@
             android:scaleType="centerCrop"
             android:alpha=".75"
             />
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:text="Events I started"
             android:ems="10"
             android:id="@+id/editText3"
@@ -92,8 +87,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:focusable="false" />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </LinearLayout>

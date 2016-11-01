@@ -17,6 +17,7 @@ public class EventListViewActivity extends Activity {
 
     private ListView mListView;
 
+    // TXL330
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
