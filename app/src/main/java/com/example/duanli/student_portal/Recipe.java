@@ -11,11 +11,10 @@ import java.util.ArrayList;
 
 public class Recipe {
 
-    public static final String TAG = Recipe.class.getSimpleName();
+    public static final String TAG = com.example.duanli.student_portal.Recipe.class.getSimpleName();
 
     public String title;
     public String description;
-    public String imageUrl;
     public String instructionUrl;
     public String label;
 
@@ -34,7 +33,6 @@ public class Recipe {
 
                 recipe.title = recipes.getJSONObject(i).getString("title");
                 recipe.description = recipes.getJSONObject(i).getString("description");
-                recipe.imageUrl = recipes.getJSONObject(i).getString("image");
                 recipe.instructionUrl = recipes.getJSONObject(i).getString("url");
                 recipe.label = recipes.getJSONObject(i).getString("dietLabel");
 

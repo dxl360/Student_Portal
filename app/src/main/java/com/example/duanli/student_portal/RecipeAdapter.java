@@ -6,22 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class ListViewAdapter extends BaseAdapter {
+public class RecipeAdapter extends BaseAdapter {
 
-    public static final String TAG = ListViewAdapter.class.getSimpleName();
-    public static final HashMap<String, Integer> LABEL_COLORS = new HashMap<String, Integer>();
+    public static final String TAG = RecipeAdapter.class.getSimpleName();
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Recipe> mDataSource;
 
 
-    public ListViewAdapter(Context context, ArrayList<Recipe> items) {
+    public RecipeAdapter(Context context, ArrayList<Recipe> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,8 +56,6 @@ public class ListViewAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
-//}
 
     /**
      * Get a View that displays the data at the specified position in the data set. You can either
@@ -145,6 +140,5 @@ public class ListViewAdapter extends BaseAdapter {
         public TextView titleTextView;
         public TextView subtitleTextView;
         public TextView detailTextView;
-        public ImageView thumbnailImageView;
     }
 }
