@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.duanli.student_portal.ItemDetailActivity">
+
+    <item android:id="@+id/watchlist"
+        android:title="Add To Watchlist"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/cancel_watchlist"
+        android:title="Cancel Watchlist"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/reserve"
+        android:title="Add To Reservation"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/cancel_reserve"
+        android:title="Cancel Reservation"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+
+</menu>

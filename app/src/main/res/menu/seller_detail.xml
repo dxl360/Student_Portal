@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.duanli.student_portal.ItemDetailActivity">
+
+    <item android:id="@+id/edit_item"
+        android:title="Edit Item"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/resolve"
+        android:title="Resolve Reservation"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/reject"
+        android:title="Reject Reservation"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/block"
+        android:title="Block Current Buyer"
+        android:orderInCategory="4"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/delete_item"
+        android:title="Delete Item"
+        android:orderInCategory="5"
+        app:showAsAction="never"/>
+</menu>
+

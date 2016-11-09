@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.duanli.student_portal.EventDetailActivity">
+
+    <item android:id="@+id/bookmark"
+        android:title="Add To Bookmark"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/cancel_bookmark"
+        android:title="Cancel Bookmark"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/join"
+        android:title="Join Event"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/cancel_join"
+        android:title="Cancel Join"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+</menu>
+

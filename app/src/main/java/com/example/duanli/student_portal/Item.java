@@ -13,11 +13,11 @@ public class Item implements Serializable {
     private String price;
     private String contact;
     private String description;
+    private int status; //0 available 1 reserved 2 resolved
 
     public String getSellerName() {
         return sellerName;
     }
-
     public void setSellerName(String sellerName) {
         this.sellerName = sellerName;
     }
@@ -32,7 +32,6 @@ public class Item implements Serializable {
     public String getPrice() {
         return price;
     }
-
     public void setPrice(String price) {
         this.price = price;
     }
@@ -40,7 +39,7 @@ public class Item implements Serializable {
     public String getContact() {
         return contact;
     }
-    public void setConect(String contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
