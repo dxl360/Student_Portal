@@ -2,8 +2,11 @@ package com.example.duanli.student_portal;
 
 import android.content.Context;
 import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,9 @@ import android.view.ViewGroup;
  * to handle interaction events.
  * Use the {@link ExchangeFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author Chris Tsuei
+ * Exchange Fragment which will hold a preview of exchange items
+ * called by the main activity fragment for display on the homepage
  */
 public class ExchangeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -28,10 +34,13 @@ public class ExchangeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    FloatingActionButton addItem = null;
 
     public ExchangeFragment() {
         // Required empty public constructor
     }
+    // empty constructor
+    public ExchangeFragment() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -40,17 +49,12 @@ public class ExchangeFragment extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment ExchangeFragment.
+     * Method that processes the xml file and pulls/pushes the changes to the screen
+     * @param inflater LayoutInflater that will inflate fragment view
+     * @param container view the fragment's UI atached to
+     * @param savedInstanceState fragment being reconstructed from a previous state
+     * @return what the screen should look  like
      */
-    // TODO: Rename and change types and number of parameters
-    public static ExchangeFragment newInstance(String param1, String param2) {
-        ExchangeFragment fragment = new ExchangeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,18 @@ public class ExchangeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_exchange, container, false);
+
+        // button interactions (click the plus button)
+        addItem = (FloatingActionButton) rootView.findViewById(R.id.fabAddItem);
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addItem = new Intent(getActivity(), NewItemActivity.class);
+                getActivity().startActivity(addItem);
+            }
+        });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,5 +120,6 @@ public class ExchangeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        return rootView;
     }
 }

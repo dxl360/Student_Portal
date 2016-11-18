@@ -17,13 +17,14 @@ import android.content.Intent;
 
 public class SlidingMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
+    Toolbar toolbar = null;
+    NavigationView navigationView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,14 @@ public class SlidingMenu extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
+        MainActivity fragment = new MainActivity();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,6 +50,7 @@ public class SlidingMenu extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -88,10 +98,36 @@ public class SlidingMenu extends AppCompatActivity
             startActivity(new Intent(this, NewEventActivity.class));
         } else if (id == R.id.Exchange) {
             startActivity(new Intent(this, NewItemActivity.class));
+            ProfileActivity fragment = new ProfileActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
+        }
+        else if (id == R.id.Events) {
+          /*  EventListViewActivity fragment = new EventListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();*/
+            Intent intent = new Intent(this, EventListViewActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.Exchange) {
+           /* ItemListViewActivity fragment = new ItemListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();*/
+            Intent intent = new Intent(this, ItemListViewActivity.class);
+            startActivity(intent);
         } else if (id == R.id.Manage) {
             startActivity((new Intent(this, ManageActivity.class)));
+            Intent intent = new Intent(this, ManageActivity.class);
+            startActivity(intent);
         } else if (id == R.id.Logout) {
             // close app
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

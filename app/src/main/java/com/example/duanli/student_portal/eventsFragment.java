@@ -2,8 +2,11 @@ package com.example.duanli.student_portal;
 
 import android.content.Context;
 import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,9 @@ import android.view.ViewGroup;
  * to handle interaction events.
  * Use the {@link eventsFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *  @author Chris Tsuei
+ * Event Fragment which will hold a preview of event items
+ * called by the main activity fragment for display on the homepage
  */
 public class eventsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -28,10 +34,13 @@ public class eventsFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    FloatingActionButton addEvent = null;
 
     public eventsFragment() {
         // Required empty public constructor
     }
+    // empty constructor
+    public eventsFragment() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -40,6 +49,11 @@ public class eventsFragment extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment eventsFragment.
+     * Method that processes the xml file and pulls/pushes the changes to the screen
+     * @param inflater LayoutInflater that will inflate fragment view
+     * @param container view the fragment's UI atached to
+     * @param savedInstanceState fragment being reconstructed from a previous state
+     * @return what the screen should look  like
      */
     // TODO: Rename and change types and number of parameters
     public static eventsFragment newInstance(String param1, String param2) {
@@ -63,6 +77,10 @@ public class eventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+
+        // button interactions (click the plus button)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_events, container, false);
     }

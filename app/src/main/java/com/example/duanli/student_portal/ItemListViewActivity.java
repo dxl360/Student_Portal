@@ -36,6 +36,7 @@ public class ItemListViewActivity extends Activity {
 
         // Create list view
         mListView = (ListView) findViewById(R.id.recipe_list_view);
+        mListView = (ListView) findViewById(R.id.exchange_list);
         mListView.setAdapter(adapter);
 
         // Set what happens when a list view item is clicked
@@ -55,3 +56,4 @@ public class ItemListViewActivity extends Activity {
         });
     }}
 
+    }}
