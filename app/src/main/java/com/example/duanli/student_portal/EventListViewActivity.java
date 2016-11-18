@@ -32,7 +32,6 @@ public class EventListViewActivity extends Activity {
         ListViewAdapter adapter = new ListViewAdapter(this, recipeList);
 
         // Create list view
-        mListView = (ListView) findViewById(R.id.recipe_list_view);
         mListView = (ListView) findViewById(R.id.event_list);
         mListView.setAdapter(adapter);
 

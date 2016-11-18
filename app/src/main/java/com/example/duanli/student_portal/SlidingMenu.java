@@ -1,9 +1,6 @@
 package com.example.duanli.student_portal;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +13,6 @@ import android.content.Intent;
 
 
 public class SlidingMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
         implements NavigationView.OnNavigationItemSelectedListener{
 
     Toolbar toolbar = null;
@@ -26,14 +22,6 @@ public class SlidingMenu extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_menu);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         MainActivity fragment = new MainActivity();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
@@ -49,7 +37,6 @@ public class SlidingMenu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -93,11 +80,6 @@ public class SlidingMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Profile) {
-            startActivity(new Intent(this, ProfileActivity.class));
-        } else if (id == R.id.Events) {
-            startActivity(new Intent(this, NewEventActivity.class));
-        } else if (id == R.id.Exchange) {
-            startActivity(new Intent(this, NewItemActivity.class));
             ProfileActivity fragment = new ProfileActivity();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
@@ -122,11 +104,9 @@ public class SlidingMenu extends AppCompatActivity
             Intent intent = new Intent(this, ItemListViewActivity.class);
             startActivity(intent);
         } else if (id == R.id.Manage) {
-            startActivity((new Intent(this, ManageActivity.class)));
             Intent intent = new Intent(this, ManageActivity.class);
             startActivity(intent);
         } else if (id == R.id.Logout) {
-            // close app
             finish();
         }
 

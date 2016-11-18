@@ -35,7 +35,6 @@ public class ItemListViewActivity extends Activity {
         ListViewAdapter adapter = new ListViewAdapter(this, recipeList);
 
         // Create list view
-        mListView = (ListView) findViewById(R.id.recipe_list_view);
         mListView = (ListView) findViewById(R.id.exchange_list);
         mListView.setAdapter(adapter);
 
@@ -54,6 +53,4 @@ public class ItemListViewActivity extends Activity {
             }
 
         });
-    }}
-
     }}
