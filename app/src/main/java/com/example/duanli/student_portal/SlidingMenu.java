@@ -1,9 +1,7 @@
 package com.example.duanli.student_portal;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
 
 
 public class SlidingMenu extends AppCompatActivity
@@ -85,9 +82,9 @@ public class SlidingMenu extends AppCompatActivity
         if (id == R.id.Profile) {
             startActivity(new Intent(this, ProfileActivity.class));
         } else if (id == R.id.Events) {
-            startActivity(new Intent(this, NewEventActivity.class));
+            startActivity(new Intent(this, EventListViewActivity.class));
         } else if (id == R.id.Exchange) {
-            startActivity(new Intent(this, NewItemActivity.class));
+            startActivity(new Intent(this, ItemListViewActivity.class));
         } else if (id == R.id.Manage) {
             startActivity((new Intent(this, ManageActivity.class)));
         } else if (id == R.id.Logout) {

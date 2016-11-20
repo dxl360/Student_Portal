@@ -393,23 +393,13 @@
 
 package com.example.duanli.student_portal;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.widget.Toast;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 //    @Override
@@ -434,6 +424,7 @@ public class LoginActivity extends AppCompatActivity {
             // create a instance of SQLite Database
             loginDataBaseAdapter=new LoginDataBaseAdapter(this);
             loginDataBaseAdapter=loginDataBaseAdapter.open();
+            loginDataBaseAdapter.insertEntry("xyz123@case.edu","123456");
 
             // Get The Refference Of Buttons
             bLogIn=(Button)findViewById(R.id.bLogIn);
