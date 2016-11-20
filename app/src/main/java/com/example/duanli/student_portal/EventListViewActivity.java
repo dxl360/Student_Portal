@@ -8,20 +8,26 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
-public class EventListViewActivity extends Activity {
+public class EventListViewActivity extends Activity{
 
     public static final String TAG = EventListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+
+    Toolbar mActionBarToolbar;
 
     // TXL330
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list_view);
+
+        //mActionBarToolbar = (Toolbar) findViewById(R.id.Events);
+        //mActionBarToolbar.setTitle("Events");
 
         final Context context = this;
 

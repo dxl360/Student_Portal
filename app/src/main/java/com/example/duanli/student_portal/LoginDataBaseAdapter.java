@@ -43,15 +43,16 @@ public class LoginDataBaseAdapter
 
     public void insertEntry(String userName,String password)
     {
+        db = dbHelper.getWritableDatabase();
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("USERNAME", userName);
         newValues.put("PASSWORD",password);
-
         // Insert the row into your table
         db.insert("LOGIN", null, newValues);
-        ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+        // Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
     }
+
     public int deleteEntry(String UserName)
     {
         //String id=String.valueOf(ID);
@@ -60,6 +61,7 @@ public class LoginDataBaseAdapter
         // Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
         return numberOFEntriesDeleted;
     }
+
     public String getSinlgeEntry(String userName)
     {
         Cursor cursor=db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);

@@ -5,6 +5,7 @@ package com.example.duanli.student_portal;
  */
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import android.os.Bundle;
@@ -13,43 +14,63 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.Response;
+//import com.android.volley.toolbox.Volley;
+//
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_register);
-//
-//
-//        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
-//        final EditText etUserID = (EditText) findViewById(R.id.etUserID);
-//        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
-//        final Button bRegister = (Button) findViewById(R.id.bRegister);
-//
-//
-//    }
+
     EditText etUsername,etPassword,etConfirmPassword;
     Button btnCreateAccount;
-
     LoginDataBaseAdapter loginDataBaseAdapter;
+    boolean success = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        createInDatabase();
+    }
 
-        // get Instance  of Database Adapter
-        loginDataBaseAdapter=new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter=loginDataBaseAdapter.open();
+    public void saveUser(String userName, String password, String confirmPassword, boolean istest) {
+        // get Instance of Database Adapter
+        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        // check if any of the fields are vacant
+        if (userName.equals("") || password.equals("") || confirmPassword.equals("")) {
+            //Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();
+            success = false;
+            return;
+        }
+        // check if both password matches
+        if (!password.equals(confirmPassword)) {
+            //Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
+            success = false;
+            return;
+        } else {
+            if (!istest){
+                // Save the Data in Database
+                loginDataBaseAdapter.insertEntry(userName, password);
+            }
+            //Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+            success = true;
+        }
+    }
 
-        // Get Refferences of Views
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        loginDataBaseAdapter.close();
+    }
+
+    public void createInDatabase() {
+        // Get References of Views
         etUsername=(EditText)findViewById(R.id.etUsername);
         etPassword=(EditText)findViewById(R.id.etPassword);
         etConfirmPassword=(EditText)findViewById(R.id.etConfirmPassword);
@@ -59,37 +80,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-
                 String userName=etUsername.getText().toString();
                 String password=etPassword.getText().toString();
                 String confirmPassword=etConfirmPassword.getText().toString();
-
-                // check if any of the fields are vaccant
-                if(userName.equals("")||password.equals("")||confirmPassword.equals(""))
-                {
-                    Toast.makeText(getApplicationContext(), "Field Vaccant", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                // check if both password matches
-                if(!password.equals(confirmPassword))
-                {
-                    Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                else
-                {
-                    // Save the Data in Database
-                    loginDataBaseAdapter.insertEntry(userName, password);
-                    Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
-                }
+                saveUser(userName, password, confirmPassword, false);
             }
         });
     }
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
 
-        loginDataBaseAdapter.close();
-    }
+
 }

@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="com.example.duanli.student_portal.EventListViewActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:elevation="2dp"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+        android:background="@color/colorPrimary"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Events"
+        android:layout_gravity="start"
+        android:id="@+id/toolbar_title"
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
+
+    </android.support.v7.widget.Toolbar>
 
     <ListView
         android:id="@+id/event_list"
@@ -12,20 +41,14 @@
         android:layout_width="match_parent">
     </ListView>
 
-    <android.support.v7.widget.Toolbar
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:elevation="2dp"
-        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-        android:background="@color/ColorPrimary"
-        xmlns:android="http://schemas.android.com/apk/res/android" />
+    <!--<ImageButton-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:src="@drawable/ic_menu_share"-->
+        <!--android:background="@drawable/circle"-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:layout_gravity="right|bottom" />-->
 
-    <ImageButton
-        android:layout_margin="15dp"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_menu_share"
-        android:background="@drawable/circle"
-        android:id="@+id/imageButton"
-        android:layout_gravity="right|bottom" />
-</RelativeLayout>
+</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

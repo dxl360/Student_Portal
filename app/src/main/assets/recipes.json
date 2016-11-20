@@ -18,6 +18,27 @@
       "servings": 4,
       "dietLabel": "October 24 6:00 pm - 9:00 pm",
       "ingredientLines" : [ "2 or 3 links of chineses sausage, cut into 1/4 inch slices", "4 cloves garlic, minced", "4 cups cold cooked rice", "2 tablespoons light soy sauce", "1/2 teaspoon salt", "1/4 teaspoon sugar", "1/4 teaspoon white pepper", "To garnish:", "Finely chopped green onion or cilantro" ]
+    },
+
+    {
+      "title": "Frat Party ",
+      "image" : "https://www.edamam.com/web-img/341/3417c234dadb687c0d3a45345e86bff4.jpg",
+      "url": "http://www.seriouseats.com/recipes/2011/06/stir-fried-rice-with-chinese-sausage-recipe.html",
+      "description": "Phi Beta Gamma House",
+      "servings": 4,
+      "dietLabel": "October 28 9:00 pm - 12:00 am",
+      "ingredientLines" : [ "2 or 3 links of chineses sausage, cut into 1/4 inch slices", "4 cloves garlic, minced", "4 cups cold cooked rice", "2 tablespoons light soy sauce", "1/2 teaspoon salt", "1/4 teaspoon sugar", "1/4 teaspoon white pepper", "To garnish:", "Finely chopped green onion or cilantro" ]
+    },
+
+    {
+      "title": "Thwing Study Over",
+      "image" : "https://www.edamam.com/web-img/341/3417c234dadb687c0d3a45345e86bff4.jpg",
+      "url": "http://www.seriouseats.com/recipes/2011/06/stir-fried-rice-with-chinese-sausage-recipe.html",
+      "description": "Thwing Center Altrium and Ballroom",
+      "servings": 4,
+      "dietLabel": "October 29 2:00 pm - 6:00 pm",
+      "ingredientLines" : [ "2 or 3 links of chineses sausage, cut into 1/4 inch slices", "4 cloves garlic, minced", "4 cups cold cooked rice", "2 tablespoons light soy sauce", "1/2 teaspoon salt", "1/4 teaspoon sugar", "1/4 teaspoon white pepper", "To garnish:", "Finely chopped green onion or cilantro" ]
     }
+
   ]
 }

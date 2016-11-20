@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="270dp"
+    android:background="#0b0b0b"
     tools:context="com.example.duanli.student_portal.eventsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,19 +17,25 @@
         app:backgroundTint="@android:color/transparent"
         android:layout_gravity="end|right"/>
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:id="@+id/exchangeImage"
+        android:src="@drawable/manage3"
+        android:alpha=".75"
+        android:scaleType="centerCrop"/>
+
+
     <TextView
         android:text="Events"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/eventsHeader"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/cast_expanded_controller_background_color"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="252dp"
-        android:id="@+id/exchangeImage"
-        android:src="@mipmap/events"/>
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:padding="20dp"/>
 
 
 </FrameLayout>
