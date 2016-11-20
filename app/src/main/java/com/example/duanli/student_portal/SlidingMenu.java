@@ -13,23 +13,23 @@ import android.view.MenuItem;
 
 
 public class SlidingMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
+    Toolbar toolbar = null;
+    NavigationView navigationView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        MainActivity fragment = new MainActivity();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,7 +37,7 @@ public class SlidingMenu extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -80,15 +80,42 @@ public class SlidingMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Profile) {
+<<<<<<< HEAD
             startActivity(new Intent(this, ProfileActivity.class));
         } else if (id == R.id.Events) {
             startActivity(new Intent(this, EventListViewActivity.class));
         } else if (id == R.id.Exchange) {
             startActivity(new Intent(this, ItemListViewActivity.class));
+=======
+            ProfileActivity fragment = new ProfileActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
+        }
+        else if (id == R.id.Events) {
+          /*  EventListViewActivity fragment = new EventListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();*/
+            Intent intent = new Intent(this, EventListViewActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.Exchange) {
+           /* ItemListViewActivity fragment = new ItemListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();*/
+            Intent intent = new Intent(this, ItemListViewActivity.class);
+            startActivity(intent);
+>>>>>>> master
         } else if (id == R.id.Manage) {
-            startActivity((new Intent(this, ManageActivity.class)));
+            Intent intent = new Intent(this, ManageActivity.class);
+            startActivity(intent);
         } else if (id == R.id.Logout) {
-            // close app
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

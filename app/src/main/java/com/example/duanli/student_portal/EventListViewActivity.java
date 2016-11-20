@@ -47,7 +47,11 @@ public class EventListViewActivity extends ActionBarActivity{
         RecipeAdapter adapter = new RecipeAdapter(this, recipeList);
 
         // Create list view
+<<<<<<< HEAD
         mListView = (ListView) findViewById(R.id.event_list_view);
+=======
+        mListView = (ListView) findViewById(R.id.event_list);
+>>>>>>> master
         mListView.setAdapter(adapter);
 
         // Set what happens when a list view item is clicked
@@ -65,6 +69,7 @@ public class EventListViewActivity extends ActionBarActivity{
             }
 
         });
+<<<<<<< HEAD
     }
 
     @Override
@@ -151,3 +156,6 @@ public class EventListViewActivity extends ActionBarActivity{
         //
     }
 }
+=======
+    }}
+>>>>>>> master

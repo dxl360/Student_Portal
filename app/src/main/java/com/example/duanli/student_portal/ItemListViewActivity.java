@@ -31,7 +31,11 @@ public class ItemListViewActivity extends AppCompatActivity {
         RecipeAdapter adapter = new RecipeAdapter(this, recipeList);
 
         // Create list view
+<<<<<<< HEAD
         mListView = (ListView) findViewById(R.id.item_list_view);
+=======
+        mListView = (ListView) findViewById(R.id.exchange_list);
+>>>>>>> master
         mListView.setAdapter(adapter);
 
         // Set what happens when a list view item is clicked
@@ -49,8 +53,12 @@ public class ItemListViewActivity extends AppCompatActivity {
             }
 
         });
+<<<<<<< HEAD
     }
 
 
 }
 
+=======
+    }}
+>>>>>>> master

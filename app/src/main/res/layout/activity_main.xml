@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.duanli.student_portal.MainActivity">
+    android:fitsSystemWindows="true">
 
+<<<<<<< HEAD
 =======
     <fragment android:name="com.example.duanli.student_portal.ExchangeFragment"
+=======
+    <LinearLayout
+        android:id="@+id/event_frag"
+>>>>>>> master
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_weight="1"
-        android:id="@+id/exchange_fragment"
-        tools:layout="@layout/fragment_exchange"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="250dp" />
-
-    <fragment android:name="com.example.duanli.student_portal.eventsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_weight="1"
-        android:id="@+id/event_fragment"
-        tools:layout="@layout/fragment_events"
+        android:layout_height="224dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="250dp" />
+        android:orientation="horizontal">
+    </LinearLayout>
 
+<<<<<<< HEAD
 >>>>>>> master
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+=======
+    <LinearLayout
+        android:id="@+id/exchange_frag"
+>>>>>>> master
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ListActivity" >
-
-        <ListView
-            android:id="@+id/mobile_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-
+        android:layout_height="288dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
     </LinearLayout>
 
+<<<<<<< HEAD
 </RelativeLayout>
+=======
+</android.support.design.widget.CoordinatorLayout>
+>>>>>>> master
