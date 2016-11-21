@@ -19,7 +19,6 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
-
         etEventName = (EditText) findViewById(R.id.etEventName);
         etDate = (EditText) findViewById(R.id.etDate);
         etTime = (EditText) findViewById(R.id.etTime);
@@ -29,21 +28,17 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         etDescription = (EditText) findViewById(R.id.etDescription);
         Create = (Button) findViewById(R.id.button);
         Create.setOnClickListener(this);
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
     @Override
     public void onClick(View v) {
-
         if(v.getId() == R.id.button) {
             Toast.makeText(NewEventActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
-            organizerName = ThisUser.username;
+            organizerName = new User().getUserName();
             eventName = etEventName.getText().toString();
             date = etDate.getText().toString();
             time = etTime.getText().toString();
@@ -51,7 +46,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             price = etPrice.getText().toString();
             capacity = etCapacity.getText().toString();
             description = etDescription.getText().toString();
-
+            if (isValidOrganizerName(organizerName) && isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
             Event event = new Event(organizerName,eventName,date,time,location,price,capacity,description);
             event.addEvent();
             finish();
@@ -60,45 +55,48 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static boolean isValidEmail(String s) {
-        return true;
+    public static boolean isValidOrganizerName(String s)
+    {
+        String ITEMNAME_REGEX="^(?=.{5,20}$)[a-zA-Z0-9]+$";
+        if (!s.equals("")) {
+            if (s.matches(ITEMNAME_REGEX)) {
+                return true;}}
+        return false;
     }
 
-    public static boolean isValidName(String s) {
-        return true;
+    public static boolean isValidEventName(String s)
+    {
+        String ITEMNAME_REGEX="^(?=.{5,20}$)[a-zA-Z0-9]+$";
+        if (!s.equals("")) {
+            if (s.matches(ITEMNAME_REGEX)) {
+                return true;}}
+        return false;
     }
 
-    public static boolean isValidDate(String s) {
-        return true;
+    //date in formate yyyy-mm-dd from 1900-01-01 through 2099-12-31
+    public static boolean isValidDate(String s){
+        String DATE_REGEX = "^(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$";
+        if (!s.equals("")) {
+            if (s.matches(DATE_REGEX)) {
+                return true;}}
+        return false;
     }
 
-    public static boolean isValidTime(String s) {
-        return true;
+    //time in format xx:xx
+    public static boolean isValidTime(String s){
+        String TIME_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+        if (!s.equals("")) {
+            if (s.matches(TIME_REGEX)) {
+                return true;}}
+        return false;
     }
 
-    public static boolean isValidContact(String s) {
-        return true;
+    public static boolean isValidDescription(String s)
+    {
+        String ITEMNAME_REGEX="^(?=.{5,20}$)[a-zA-Z0-9]+$";
+        if (!s.equals("")) {
+            if (s.matches(ITEMNAME_REGEX)) {
+                return true;}}
+        return false;
     }
 }

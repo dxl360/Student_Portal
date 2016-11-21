@@ -20,17 +20,17 @@ public class Event implements Serializable {
 
 //    public int getEventId() { return eventID; }
 
-    public String getOrganizerNameName() {
+    public String getOrganizerName() {
         return organizerName;
     }
-    public void setOrganizerNameName(String organizerName) {
+    public void setOrganizerName(String organizerName) {
         this.organizerName = organizerName;
     }
 
-    public String getItemName() {
+    public String getEventName() {
         return eventName;
     }
-    public void setItemName(String eventName) {
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
