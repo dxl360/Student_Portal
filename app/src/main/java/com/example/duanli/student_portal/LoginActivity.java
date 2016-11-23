@@ -414,6 +414,7 @@ public class LoginActivity extends AppCompatActivity {
 //        final Button bLogin = (Button) findViewById(R.id.bLogIn);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         Button bLogIn,bRegister;
         LoginDataBaseAdapter loginDataBaseAdapter;
 
@@ -457,6 +458,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
                     }
 =======
+=======
+>>>>>>> master
     Button bLogIn, bRegister;
     LoginDataBaseAdapter loginDataBaseAdapter;
     boolean success = false;
@@ -494,12 +497,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
                 }
                 emailChecker(userName, password, false);
                 passwordChecker(password, false);
             }
         });
+<<<<<<< HEAD
 
         // Set OnClick Listener on Register button
         bRegister.setOnClickListener(new View.OnClickListener() {
@@ -514,13 +521,35 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+=======
+
+        // Set OnClick Listener on Register button
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                /// Create Intent for SignUpActivity  abd Start The Activity
+                Intent intentSignUP = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intentSignUP);
+
+            }
+        });
+    }
+
+>>>>>>> master
     public void passwordChecker(String password, boolean isTest) {
         if (password.length() > 12) {
             success = false;
             return;
+<<<<<<< HEAD
 
         }
 
+=======
+
+        }
+
+>>>>>>> master
         char ch = password.charAt(0);
 
         if (!(Character.isLowerCase(ch))) {
@@ -561,11 +590,19 @@ public class LoginActivity extends AppCompatActivity {
             success = true;
         }
     }
+<<<<<<< HEAD
 
 
     public void emailChecker(String userName, String password, boolean isTest) {
 
 
+=======
+
+
+    public void emailChecker(String userName, String password, boolean isTest) {
+
+
+>>>>>>> master
         // check if any of the fields are vacant
         if (userName.equals("") || password.equals("")) {
 

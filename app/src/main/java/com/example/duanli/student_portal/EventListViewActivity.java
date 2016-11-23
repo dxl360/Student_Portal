@@ -17,11 +17,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class EventListViewActivity extends ActionBarActivity{
+=======
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
+
+public class EventListViewActivity extends Activity{
+>>>>>>> master
 =======
 import android.support.v7.widget.Toolbar;
 
@@ -42,6 +50,8 @@ public class EventListViewActivity extends Activity{
 =======
     Toolbar mActionBarToolbar;
 
+    Toolbar mActionBarToolbar;
+
     // TXL330
 >>>>>>> master
     @Override
@@ -50,8 +60,13 @@ public class EventListViewActivity extends Activity{
         setContentView(R.layout.activity_event_list_view);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+=======
+        //mActionBarToolbar = (Toolbar) findViewById(R.id.Events);
+        //mActionBarToolbar.setTitle("Events");
+>>>>>>> master
 =======
         //mActionBarToolbar = (Toolbar) findViewById(R.id.Events);
         //mActionBarToolbar.setTitle("Events");
