@@ -424,7 +424,7 @@ public class LoginActivity extends AppCompatActivity {
 //        final Button bLogin = (Button) findViewById(R.id.bLogIn);
 
     Button bLogIn, bRegister;
-    LoginDataBaseAdapter loginDataBaseAdapter;
+    SPDatabaseHelper spdh;
     boolean success = false;
 
     @Override
@@ -433,8 +433,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // create a instance of SQLite Database
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        spdh = new SPDatabaseHelper(this);
+        //spdh = spdh.open();
 
         // Get The Reference Of Buttons
         bLogIn = (Button) findViewById(R.id.bLogIn);
@@ -452,7 +452,8 @@ public class LoginActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString();
 
                 // fetch the Password form database for respective user name
-                String storedPassword = loginDataBaseAdapter.getSinlgeEntry(userName);
+                User currentUser = spdh.queryUser(userName);
+                String storedPassword = currentUser.getPassword();
                 // check if the Stored password matches with  Password entered by user
                 if (password.equals(storedPassword)) {
                     Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
@@ -556,7 +557,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // Close The Database
-        loginDataBaseAdapter.close();
+        //loginDataBaseAdapter.close();
     }
 }
 //

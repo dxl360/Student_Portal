@@ -23,7 +23,5 @@
         android:title="Delete Event"
         android:orderInCategory="4"
         app:showAsAction="never"/>
-
-
 </menu>
 

@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etUsername,etPassword,etConfirmPassword;
     Button btnCreateAccount;
-    LoginDataBaseAdapter loginDataBaseAdapter;
+    SPDatabaseHelper spdh;
     boolean success = false;
 
     @Override
@@ -39,8 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void saveUser(String userName, String password, String confirmPassword, boolean istest) {
         // get Instance of Database Adapter
-        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        spdh = new SPDatabaseHelper(this);
+        //loginDataBaseAdapter = loginDataBaseAdapter.open();
         // check if any of the fields are vacant
         if (userName.equals("") || password.equals("") || confirmPassword.equals("")) {
             //Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();
@@ -54,8 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         } else {
             if (!istest){
+                User user = new User(-1, userName, password);
                 // Save the Data in Database
-                loginDataBaseAdapter.insertEntry(userName, password);
+                spdh.insertUser(user);
             }
             //Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
             success = true;
@@ -66,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
-        loginDataBaseAdapter.close();
+        //loginDataBaseAdapter.close();
     }
 
     public void createInDatabase() {

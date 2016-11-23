@@ -13,7 +13,8 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
 
     Button Create;
     EditText etEventName,etDate,etTime,etLocation,etPrice,etCapacity,etDescription;
-    String organizerName,eventName,date,time,location,price,capacity,description;
+    String organizerName,eventName,date,time,location,description;
+    int price,capacity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,8 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             date = etDate.getText().toString();
             time = etTime.getText().toString();
             location = etLocation.getText().toString();
-            price = etPrice.getText().toString();
-            capacity = etCapacity.getText().toString();
+            price = Integer.parseInt(etPrice.getText().toString());
+            capacity = Integer.parseInt(etCapacity.getText().toString());
             description = etDescription.getText().toString();
             if (isValidOrganizerName(organizerName) && isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
             Event event = new Event(organizerName,eventName,date,time,location,price,capacity,description);

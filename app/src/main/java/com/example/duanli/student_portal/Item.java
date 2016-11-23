@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 
+    private int itemID;
+    private String itemPicture;
+    private int Seller;
     private String sellerName;
     private String itemName;
     private String price;

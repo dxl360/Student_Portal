@@ -8,29 +8,31 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
 
-//    private int eventID;
-    private String organizerName;
-    private String eventName;
-    private String date;
-    private String time;
-    private String location;
-    private String price;
-    private String capacity;
-    private String description;
+    private int eventID= -1;
+    private String organizerName="";
+    private String eventName="";
+    private String posterURL="";
+    private String date="";
+    private String time="";
+    private String location="";
+    private int price=0;
+    private int capacity=0;
+    private String description="";
 
-//    public int getEventId() { return eventID; }
 
-    public String getOrganizerName() {
+    public String getOrganizerNameName() {
         return organizerName;
     }
-    public void setOrganizerName(String organizerName) {
+    public void setOrganizerNameName(String organizerName) {
         this.organizerName = organizerName;
     }
 
-    public String getEventName() {
+    public int getEventID() {return eventID;}
+
+    public String getItemName() {
         return eventName;
     }
-    public void setEventName(String eventName) {
+    public void setItemName(String eventName) {
         this.eventName = eventName;
     }
 
@@ -55,16 +57,15 @@ public class Event implements Serializable {
         this.location = location;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
-    public void setPrice(String price) { this.price = price;
-    }
+    public void setPrice(int price) { this.price = price;}
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
-    public void setCapacity(String capacity) {
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
@@ -75,9 +76,12 @@ public class Event implements Serializable {
         this.description = description;
     }
 
+    public String getPosterURL(){ return posterURL;}
+    public void setPosterURL(String posterURL) {this.posterURL=posterURL;}
+
     public Event(){}
 
-    public Event(String OrganizerName,String EventName,String Date,String Time,String Location,String Price,String Capacity,String Description) {
+    public Event(String OrganizerName,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
         organizerName = OrganizerName;
         eventName = EventName;
         date = Date;
