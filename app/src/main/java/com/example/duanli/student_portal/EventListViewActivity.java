@@ -16,11 +16,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+<<<<<<< HEAD
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class EventListViewActivity extends ActionBarActivity{
+=======
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
+
+public class EventListViewActivity extends Activity{
+>>>>>>> master
 
     public static final String TAG = EventListViewActivity.class.getSimpleName();
 
@@ -30,13 +38,24 @@ public class EventListViewActivity extends ActionBarActivity{
     private boolean isSearchOpened = false;
     private EditText edtSeach;
 
+<<<<<<< HEAD
+=======
+    Toolbar mActionBarToolbar;
+
+    // TXL330
+>>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list_view);
 
+<<<<<<< HEAD
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+=======
+        //mActionBarToolbar = (Toolbar) findViewById(R.id.Events);
+        //mActionBarToolbar.setTitle("Events");
+>>>>>>> master
 
         final Context context = this;
 

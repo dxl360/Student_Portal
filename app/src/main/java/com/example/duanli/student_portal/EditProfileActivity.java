@@ -1,9 +1,5 @@
 package com.example.duanli.student_portal;
 
-/**
- * Created by Peiyan on 2016/10/24.
- */
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,4 +30,87 @@ public class EditProfileActivity extends AppCompatActivity {
         final Button bEditProfile = (Button) findViewById(R.id.bEditProfile);
 
     }
-}
+    boolean success = false;
+    public void ageChecker(String age, boolean isTest) {
+        if (age.isEmpty()) {
+            success = false;
+            return;
+        }
+        for (int i = 0; i < age.length(); i++) {
+            if (i == 0 && age.charAt(i) == '-') {
+                if (age.length() == 1) {
+
+                    success = false;
+                    return;
+                } else continue;
+            }
+            if (Integer.parseInt(age) < 0 || Integer.parseInt(age) > 100) {
+                success = false;
+                return;
+            }
+
+
+                else {
+
+                    if (!isTest) {
+
+                        //loginDataBaseAdapter.insertEntry(userName, password);
+                    }
+
+                    success = true;
+                }
+            }
+
+
+        }
+
+    public void emailChecker(String password,  boolean isTest) {
+
+
+        // check if any of the fields are vacant
+        if (password.equals("") ) {
+
+            success = false;
+            return;
+        }
+        // check if password contains"@"
+        if (!password.contains("@")) {
+
+            success = false;
+            return;
+        } else {
+            if (!isTest){
+
+                //loginDataBaseAdapter.insertEntry(userName, password);
+            }
+
+            success = true;
+        }
+
+
+    }
+
+ public void phoneNumberChecker(String phoneNumber, boolean isTest){
+    if(phoneNumber.equals("")){
+
+        success = false;
+        return;
+    }
+
+     if (phoneNumber.length() != 10) {
+         success = false;
+         return;
+
+     }
+
+     else{
+         if (!isTest){
+
+             //loginDataBaseAdapter.insertEntry(userName, password);
+         }
+
+         success = true;
+     }
+     }
+ }
+

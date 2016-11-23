@@ -402,6 +402,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
+
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -412,6 +413,7 @@ public class LoginActivity extends AppCompatActivity {
 //        final TextView tvRegisterLink = (TextView) findViewById(R.id.bRegister);
 //        final Button bLogin = (Button) findViewById(R.id.bLogIn);
 
+<<<<<<< HEAD
         Button bLogIn,bRegister;
         LoginDataBaseAdapter loginDataBaseAdapter;
 
@@ -454,80 +456,142 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
                     }
-                }
-            });
+=======
+    Button bLogIn, bRegister;
+    LoginDataBaseAdapter loginDataBaseAdapter;
+    boolean success = false;
 
-            // Set OnClick Listener on Register button
-            bRegister.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-                    /// Create Intent for SignUpActivity  abd Start The Activity
-                    Intent intentSignUP=new Intent(getApplicationContext(),RegisterActivity.class);
-                    startActivity(intentSignUP);
+        // create a instance of SQLite Database
+        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
+
+        // Get The Reference Of Buttons
+        bLogIn = (Button) findViewById(R.id.bLogIn);
+        bRegister = (Button) findViewById(R.id.bRegister);
+
+        // Set OnClick Listener on LogIn button
+        bLogIn.setOnClickListener(new View.OnClickListener() {
+            final EditText etUsername = (EditText) findViewById(R.id.etUsername);
+            final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+
+            public void onClick(View v) {
+
+                // get The User name and Password
+                String userName = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+
+                // fetch the Password form database for respective user name
+                String storedPassword = loginDataBaseAdapter.getSinlgeEntry(userName);
+                // check if the Stored password matches with  Password entered by user
+                if (password.equals(storedPassword)) {
+                    Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), SlidingMenu.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+>>>>>>> master
                 }
-            });
+                emailChecker(userName, password, false);
+                passwordChecker(password, false);
+            }
+        });
+
+        // Set OnClick Listener on Register button
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+                /// Create Intent for SignUpActivity  abd Start The Activity
+                Intent intentSignUP = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intentSignUP);
+
+            }
+        });
+    }
+
+    public void passwordChecker(String password, boolean isTest) {
+        if (password.length() > 12) {
+            success = false;
+            return;
+
         }
 
-        @Override
-        protected void onDestroy() {
-            super.onDestroy();
-            // Close The Database
-            loginDataBaseAdapter.close();
+        char ch = password.charAt(0);
+
+        if (!(Character.isLowerCase(ch))) {
+            for (int i = 1; i < password.length(); i++) {
+                ch = password.charAt(i);
+
+                if (!Character.isLowerCase(ch)) {
+                    System.out.println("Invalid password - Must have a Lower Case character.");
+                    password = "";
+                    success = false;
+                    return;
+                }
+                // end if
+
+            } //end for
+
+
+        } else if (!(Character.isUpperCase(ch))) {
+
+            for (int i = 0; i < password.length(); i++) {
+
+                ch = password.charAt(i);
+
+                if (!Character.isUpperCase(ch)) {
+                    System.out.println("Invalid password - Must have an Upper Case character.");
+                    password = "";
+                    success = false;
+                    return;
+                } // end if
+            } //end for
+
+        } else {
+            if (!isTest) {
+
+                //loginDataBaseAdapter.insertEntry(userName, password);
+            }
+
+            success = true;
         }
-//        tvRegisterLink.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-//                LoginActivity.this.startActivity(registerIntent);
-//            }
-//        });
-//
-//        bLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final String username = etUsername.getText().toString();
-//                final String password = etPassword.getText().toString();
-//
-//                // Response received from the server
-//                Response.Listener<String> responseListener = new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonResponse = new JSONObject(response);
-//                            boolean success = jsonResponse.getBoolean("success");
-//
-//                            if (success) {
-//                                String name = jsonResponse.getString("name");
-//                                int age = jsonResponse.getInt("age");
-//
-////                                Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-////                                intent.putExtra("name", name);
-////                                intent.putExtra("age", age);
-////                                intent.putExtra("username", username);
-////                                LoginActivity.this.startActivity(intent);
-//                            } else {
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-//                                builder.setMessage("Login Failed")
-//                                        .setNegativeButton("Retry", null)
-//                                        .create()
-//                                        .show();
-//                            }
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                };
-//
-//                LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
-//                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-//                queue.add(loginRequest);
-//                // this needs to be fixed. Now the slidingmenu activity will be started whenever the login button is clicked
-//                startActivity(new Intent(LoginActivity.this, SlidingMenu.class));
-//            }
-//        });
-//    }
+    }
+
+
+    public void emailChecker(String userName, String password, boolean isTest) {
+
+
+        // check if any of the fields are vacant
+        if (userName.equals("") || password.equals("")) {
+
+            success = false;
+            return;
+        }
+        // check if password contains"@"
+        if (!password.contains("@")) {
+
+            success = false;
+            return;
+        } else {
+            if (!isTest) {
+
+                //loginDataBaseAdapter.insertEntry(userName, password);
+            }
+
+            success = true;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Close The Database
+        loginDataBaseAdapter.close();
+    }
 }
-
-
+//
