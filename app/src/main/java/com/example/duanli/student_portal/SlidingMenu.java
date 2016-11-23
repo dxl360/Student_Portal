@@ -79,31 +79,44 @@ public class SlidingMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.Profile) {
-            ProfileActivity fragment = new ProfileActivity();
+        if (id == R.id.Home) {
+            MainActivity fragment = new MainActivity();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frag_container, fragment);
             fragmentTransaction.commit();
         }
-        else if (id == R.id.Events) {
-          /*  EventListViewActivity fragment = new EventListViewActivity();
+        else if (id == R.id.Profile) {
+            ProfileActivity fragment = new ProfileActivity();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frag_container, fragment);
-            fragmentTransaction.commit();*/
+            fragmentTransaction.commit();
+            }
+        else if (id == R.id.Events) {
+      /*  EventListViewActivity fragment = new EventListViewActivity();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();*/
             Intent intent = new Intent(this, EventListViewActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.Exchange) {
-           /* ItemListViewActivity fragment = new ItemListViewActivity();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frag_container, fragment);
-            fragmentTransaction.commit();*/
+       /* ItemListViewActivity fragment = new ItemListViewActivity();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();*/
             Intent intent = new Intent(this, ItemListViewActivity.class);
             startActivity(intent);
-        } else if (id == R.id.Manage) {
+        }
+        else if (id == R.id.Manage) {
+      /*  ManageActivity fragment = new ManageActivity();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frag_container, fragment);
+        fragmentTransaction.commit();*/
             Intent intent = new Intent(this, ManageActivity.class);
             startActivity(intent);
         } else if (id == R.id.Logout) {
