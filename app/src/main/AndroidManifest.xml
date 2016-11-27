@@ -52,12 +52,6 @@
         </activity>
 
         <activity
-            android:name=".ManageActivity"
-            android:label="Manage"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity
             android:name=".NewEventActivity"
             android:label="@string/title_activity_new_event"
             android:theme="@style/AppTheme.NoActionBar">

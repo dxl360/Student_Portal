@@ -112,13 +112,11 @@ public class SlidingMenu extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.Manage) {
-      /*  ManageActivity fragment = new ManageActivity();
+        ManageActivity fragment = new ManageActivity();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frag_container, fragment);
-        fragmentTransaction.commit();*/
-            Intent intent = new Intent(this, ManageActivity.class);
-            startActivity(intent);
+        fragmentTransaction.commit();
         } else if (id == R.id.Logout) {
             finish();
         }
