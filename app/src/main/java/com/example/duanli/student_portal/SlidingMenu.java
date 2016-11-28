@@ -121,6 +121,11 @@ public class SlidingMenu extends AppCompatActivity
             finish();
         }
 
+        // highlight the selected item and change the toolbar title
+        item.setChecked(true);
+        setTitle(item.getTitle());
+
+        // close the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
