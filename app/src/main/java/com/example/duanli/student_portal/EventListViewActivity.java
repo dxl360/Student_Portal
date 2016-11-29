@@ -31,8 +31,17 @@ public class EventListViewActivity extends Activity{
 
         final Context context = this;
 
+        int filter = getIntent().getExtras().getInt("case");
+
+        final ArrayList<Recipe> recipeList;
         // Get data to display
-        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", this);
+        if (filter == 1) {
+            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", this);
+            System.out.println("here");
+        }
+        else {
+           recipeList = Recipe.getRecipesFromFile("recipes.json", this);
+        }
 
         // Create adapter
         ListViewAdapter adapter = new ListViewAdapter(this, recipeList);

@@ -100,6 +100,7 @@ public class SlidingMenu extends AppCompatActivity
         fragmentTransaction.replace(R.id.frag_container, fragment);
         fragmentTransaction.commit();*/
             Intent intent = new Intent(this, EventListViewActivity.class);
+            intent.putExtra("case", 0);
             startActivity(intent);
         }
         else if (id == R.id.Exchange) {

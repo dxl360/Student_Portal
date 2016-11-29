@@ -27,8 +27,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         Create = (Button) findViewById(R.id.button);
         Create.setOnClickListener(this);
 
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

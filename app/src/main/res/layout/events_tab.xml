@@ -15,6 +15,7 @@
             android:src="@drawable/manage1"
             android:scaleType="centerCrop"
             android:alpha=".75"
+            android:id="@+id/image1"
             />
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
-            android:id="@+id/editText"
+            android:id="@+id/eventJoined"
             android:textColor="@android:color/white"
             android:textStyle="normal|bold" />
 
@@ -45,6 +46,7 @@
             android:src="@drawable/manage2"
             android:scaleType="centerCrop"
             android:alpha=".75"
+            android:id="@+id/image2"
             />
 
         <TextView
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Events I'm interested"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/eventInterested"
             android:selectAllOnFocus="false"
             android:textStyle="normal|bold"
             android:textSize="30sp"
@@ -74,13 +76,14 @@
             android:src="@drawable/manage3"
             android:scaleType="centerCrop"
             android:alpha=".75"
+            android:id="@+id/image3"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Events I started"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/eventStarted"
             android:selectAllOnFocus="false"
             android:textStyle="normal|bold"
             android:textSize="30sp"
