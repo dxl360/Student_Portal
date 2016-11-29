@@ -1,41 +1,38 @@
 package com.example.duanli.student_portal;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class ItemListViewActivity extends Activity {
+public class ItemListViewActivity extends Fragment {
 
     public static final String TAG = ItemListViewActivity.class.getSimpleName();
 
     private ListView mListView;
-    Toolbar toolbar;
-    ImageButton FAB;
+
+    public ItemListViewActivity() {}
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list_view);
-
-        final Context context = this;
+        View rootView = inflater.inflate(R.layout.activity_item_list_view, container, false);
 
         // Get data to display
-        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", this);
+        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
 
         // Create adapter
-        ListViewAdapter adapter = new ListViewAdapter(this, recipeList);
+        ListViewAdapter adapter = new ListViewAdapter(getContext(), recipeList);
 
         // Create list view
-        mListView = (ListView) findViewById(R.id.exchange_list);
+        mListView = (ListView) rootView.findViewById(R.id.exchange_list);
         mListView.setAdapter(adapter);
 
         // Set what happens when a list view item is clicked
@@ -45,7 +42,7 @@ public class ItemListViewActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe selectedRecipe = recipeList.get(position);
 
-                Intent detailIntent = new Intent(context, ItemDetailActivity.class);
+                Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
                 detailIntent.putExtra("url", selectedRecipe.instructionUrl);
 
@@ -53,4 +50,6 @@ public class ItemListViewActivity extends Activity {
             }
 
         });
-    }}
+        return rootView;
+    }
+}

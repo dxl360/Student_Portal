@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
 
 
 public class SlidingMenu extends AppCompatActivity
@@ -94,30 +93,28 @@ public class SlidingMenu extends AppCompatActivity
             fragmentTransaction.commit();
             }
         else if (id == R.id.Events) {
-      /*  EventListViewActivity fragment = new EventListViewActivity();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frag_container, fragment);
-        fragmentTransaction.commit();*/
-            Intent intent = new Intent(this, EventListViewActivity.class);
+            EventListViewActivity fragment = new EventListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
+            /*Intent intent = new Intent(this, EventListViewActivity.class);
             intent.putExtra("case", 0);
-            startActivity(intent);
+            startActivity(intent);*/
         }
         else if (id == R.id.Exchange) {
-       /* ItemListViewActivity fragment = new ItemListViewActivity();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frag_container, fragment);
-        fragmentTransaction.commit();*/
-            Intent intent = new Intent(this, ItemListViewActivity.class);
-            startActivity(intent);
+            ItemListViewActivity fragment = new ItemListViewActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
         }
         else if (id == R.id.Manage) {
-        ManageActivity fragment = new ManageActivity();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
-                getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frag_container, fragment);
-        fragmentTransaction.commit();
+            ManageActivity fragment = new ManageActivity();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.Logout) {
             finish();
         }
