@@ -43,13 +43,13 @@ public class RegisterActivity extends AppCompatActivity {
         //loginDataBaseAdapter = loginDataBaseAdapter.open();
         // check if any of the fields are vacant
         if (userName.equals("") || password.equals("") || confirmPassword.equals("")) {
-            //Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();
             success = false;
             return;
         }
         // check if both password matches
         if (!password.equals(confirmPassword)) {
-            //Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
             success = false;
             return;
         } else {
@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // Save the Data in Database
                 spdh.insertUser(user);
             }
-            //Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
             success = true;
         }
     }
