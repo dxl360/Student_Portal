@@ -14,12 +14,15 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     Button Create;
     EditText etItemName,etPrice,etContact,etDescription;
     String sellerName,itemName,price,contact,description;
-
+    SPDatabaseHelper spdh;
+    int userID;/* hc */
+    Bundle bundle;/* hc */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
-
+        bundle = getIntent().getExtras();/* hc */
+        userID = bundle.getInt("userID");/* hc */
         etItemName = (EditText) findViewById(R.id.etItemName);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etContact = (EditText) findViewById(R.id.etContact);
@@ -33,21 +36,30 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        // get Instance of Database Adapter
+        spdh = new SPDatabaseHelper(this);
 
         if(v.getId() == R.id.button) {
             Toast.makeText(NewItemActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
-            sellerName = new User().getUserName();
+            User currentUser = spdh.queryUserID(userID);
+            sellerName = currentUser.getUserName();
+            System.out.println(sellerName);
             itemName = etItemName.getText().toString();
             price = etPrice.getText().toString();
             contact = etContact.getText().toString();
             description = etDescription.getText().toString();
             if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
-            Item item = new Item(sellerName,itemName,price,contact,description);
-            item.addItem();
+            Item item = new Item(-1, itemName,sellerName);
+//            item.addItem();
+            // Save the Data in Database
+            spdh.insertItem(item);
             finish();
-            startActivity(new Intent(this, ItemDetailActivity.class));
+            Intent intent = new Intent(this, ItemDetailActivity.class);
+            intent.putExtra("userID", userID);
+            intent.putExtra("itemName", itemName);
+            startActivity(intent);
         }
 
     }

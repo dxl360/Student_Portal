@@ -20,7 +20,7 @@ public class Event implements Serializable {
     private String description="";
 
 
-    public String getOrganizerNameName() {
+    public String getOrganizerName() {
         return organizerName;
     }
     public void setOrganizerNameName(String organizerName) {
@@ -29,10 +29,10 @@ public class Event implements Serializable {
 
     public int getEventID() {return eventID;}
 
-    public String getItemName() {
+    public String getEventName() {
         return eventName;
     }
-    public void setItemName(String eventName) {
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
@@ -81,7 +81,8 @@ public class Event implements Serializable {
 
     public Event(){}
 
-    public Event(String OrganizerName,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
+    public Event(int EventID, String OrganizerName,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
+        eventID=EventID;
         organizerName = OrganizerName;
         eventName = EventName;
         date = Date;

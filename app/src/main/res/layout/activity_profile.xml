@@ -41,7 +41,12 @@
                 android:layout_marginTop="50dp"
                 />
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="Name"
+                android:id="@+id/etUserID"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,15 +55,6 @@
                 android:layout_marginTop="30dp"
                 android:hint="Username"
                 android:id="@+id/etUsername"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:layout_marginTop="30dp"
-                android:hint="abc123"
-                android:id="@+id/userNameFromDB"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -71,26 +67,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
-                android:layout_marginTop="30dp"
-                android:hint="N/A"
-                android:id="@+id/etContactFromDB"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="30dp"
                 android:hint="Email"
                 android:id="@+id/etEmail"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="30dp"
-                android:hint="abc123@case.edu"
-                android:id="@+id/etEmailFromDB"/>
 
         </LinearLayout>
     </ScrollView>

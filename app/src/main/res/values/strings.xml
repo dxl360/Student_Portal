@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student Portal</string>
+    <string name="app_name">Student_Portal</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -123,15 +123,4 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>
-
-    <string name="item_preview">
-        "Some Textbook \n"
-        "It is new and completely blank.
-        Literally, I am selling you nothing here."
-    </string>
-
-    <string name="event_preview">
-        "End of the Semester \n"
-        "Something we all are waiting for. \n"
-    </string>
 </resources>

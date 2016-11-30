@@ -48,7 +48,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             capacity = Integer.parseInt(etCapacity.getText().toString());
             description = etDescription.getText().toString();
             if (isValidOrganizerName(organizerName) && isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
-            Event event = new Event(organizerName,eventName,date,time,location,price,capacity,description);
+            Event event = new Event(-1,organizerName,eventName,date,time,location,price,capacity,description);
             event.addEvent();
             finish();
             startActivity(new Intent(this, EventDetailActivity.class));

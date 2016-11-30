@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * @author
@@ -17,14 +16,12 @@ import android.widget.Toast;
 public class ProfileActivity extends Fragment {
 
     // empty constructor
-    public ProfileActivity() {
-    }
+    public ProfileActivity() {}
 
     /**
      * Method that processes the xml file and pulls/pushes the changes to the screen
-     *
-     * @param inflater           LayoutInflater that will inflate fragment view
-     * @param container          view the fragment's UI atached to
+     * @param inflater LayoutInflater that will inflate fragment view
+     * @param container view the fragment's UI atached to
      * @param savedInstanceState fragment being reconstructed from a previous state
      * @return what the screen should look  like
      */
@@ -33,50 +30,29 @@ public class ProfileActivity extends Fragment {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.activity_profile, container, false);
 
-
         // linking xml objects to actual fields
         final TextView etUsername = (TextView) rootView.findViewById(R.id.etUsername);
         final TextView etPhoneNumber = (TextView) rootView.findViewById(R.id.etPhoneNumber);
         final TextView etEmail = (TextView) rootView.findViewById(R.id.etEmail);
-
+        final TextView etUserID = (TextView) rootView.findViewById(R.id.etUserID);
 
         // button interactions (onClick)
         final ImageView ivEdit = (ImageView) rootView.findViewById(R.id.ivEdit);
         ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditProfileActivity fragment = new EditProfileActivity();
-                android.support.v4.app.FragmentTransaction fragmentTransaction =
-                        getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frag_container, fragment);
-                fragmentTransaction.commit();
-
-                // fetch the Password form database for respective user name
-
-
-                // check if the Stored password matches with  Password entered by user
-
-
+                Intent editProfileIntent = new Intent(getActivity(), EditProfileActivity.class);
+                getActivity().startActivity(editProfileIntent);
             }
-
         });
-        String userName = etUsername.getText().toString();
 
-  /*      User currentUser = spdh.queryUser(userName);
-        String storedPassword = currentUser.getPassword();
-        String phoneNumber = currentUser.getContact();
-        String email = currentUser.getEmail();
-        userName = currentUser.getEmail().substring(0, 3);
-        */
-        TextView etUsernameFromDB = (TextView) rootView.findViewById(R.id.userNameFromDB);
-        TextView etEmailFromDB = (TextView) rootView.findViewById(R.id.etEmailFromDB);
-        TextView etContactFromDB = (TextView) rootView.findViewById(R.id.etContactFromDB);
-        etUsernameFromDB.setText("abc123");
-        etEmailFromDB.setText("abc123@case.edu");
-        etContactFromDB.setText("N/A");
-        etUsername.setText("Username");
-        etPhoneNumber.setText("Phone number");
-        etEmail.setText("Email");
         return rootView;
     }
+
+
 }
+
+
+
+
+

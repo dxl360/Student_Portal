@@ -5,6 +5,7 @@ import android.content.Context;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class Recipe {
 
         try {
             // Load data
-            String jsonString = loadJsonFromAsset(filename, context);
+            String jsonString = loadJsonFromAsset("recipes.json", context);
             JSONObject json = new JSONObject(jsonString);
             JSONArray recipes = json.getJSONArray("recipes");
 

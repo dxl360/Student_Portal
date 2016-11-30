@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="270dp"
     android:background="#0b0b0b"
     tools:context="com.example.duanli.student_portal.eventsFragment">
 
@@ -20,37 +20,22 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="270dp"
         android:id="@+id/exchangeImage"
         android:src="@drawable/manage3"
         android:alpha=".75"
         android:scaleType="centerCrop"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:text="Event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/eventsHeader"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@android:color/white"
-            android:textSize="28sp"
-            android:padding="20dp"/>
 
-        <TextView
-            android:text="@string/event_preview"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:textColor="@android:color/white"
-            android:id="@+id/topEvent"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+    <TextView
+        android:text="Events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventsHeader"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        android:padding="20dp"/>
 
 
 </FrameLayout>

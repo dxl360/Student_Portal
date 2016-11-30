@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/event_frag"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </RelativeLayout>
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:id="@+id/exchange_frag"
-        android:layout_weight="1"
+    <LinearLayout
+        android:id="@+id/event_frag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </RelativeLayout>
-</LinearLayout>
+        android:layout_height="258dp"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/exchange_frag"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

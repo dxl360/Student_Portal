@@ -1,42 +1,41 @@
 package com.example.duanli.student_portal;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class ItemListViewActivity extends Fragment {
+public class ItemListViewActivity extends Activity {
 
     public static final String TAG = ItemListViewActivity.class.getSimpleName();
 
     private ListView mListView;
-
-    public ItemListViewActivity() {}
+    Toolbar toolbar;
+    ImageButton FAB;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        View rootView = inflater.inflate(R.layout.activity_item_list_view, container, false);
+        setContentView(R.layout.activity_item_list_view);
+
+        final Context context = this;
 
         // Get data to display
-        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
+        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", this);
 
         // Create adapter
-        ListViewAdapter adapter = new ListViewAdapter(getContext(), recipeList);
+        ListViewAdapter adapter = new ListViewAdapter(this, recipeList);
 
         // Create list view
-        mListView = (ListView) rootView.findViewById(R.id.exchange_list);
+        mListView = (ListView) findViewById(R.id.exchange_list);
         mListView.setAdapter(adapter);
 
         // Set what happens when a list view item is clicked
@@ -46,7 +45,7 @@ public class ItemListViewActivity extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe selectedRecipe = recipeList.get(position);
 
-                Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
+                Intent detailIntent = new Intent(context, ItemDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
                 detailIntent.putExtra("url", selectedRecipe.instructionUrl);
 
@@ -54,21 +53,4 @@ public class ItemListViewActivity extends Fragment {
             }
 
         });
-        return rootView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_search, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if (id == R.id.search){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-}
+    }}

@@ -7,48 +7,24 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.duanli.student_portal.EventDetailActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
-
-    <!--<include layout="@layout/content_item_detail" />-->
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
+        app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_menu_today"
+        app:backgroundTint="?android:attr/colorPrimaryDark"
+        app:fabSize="mini"
+        app:rippleColor="?android:attr/colorBackground" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.duanli.student_portal.ItemDetailActivity"
-        tools:showIn="@layout/activity_item_detail">
+        tools:context="com.example.duanli.student_portal.EventDetailActivityDetailActivity"
+        tools:showIn="@layout/activity_event_detail">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -64,8 +40,8 @@
                 android:gravity="center_horizontal"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
-                android:textSize="28sp"
-                android:text="@string/demoEventTitle"/>
+                android:textSize="28sp"/>
+            <!--android:text="@string/demoEventTitle"/>-->
 
             <TextView
                 android:id="@+id/tvEventOrganizer"
@@ -74,30 +50,28 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="16sp"
-                android:layout_below="@+id/tvEventName"
-                android:text="@string/demoEventOrganizer"/>
+                android:layout_below="@+id/tvEventName" />
 
             <TextView
                 android:id="@+id/tvEventTimeDateTag"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="@dimen/text_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventOrganizer"
                 android:layout_alignParentLeft="true"
-                android:text="@string/demoTimeDateTag"/>
+                android:text="@string/EventTimeDateTag"/>
 
             <TextView
                 android:id="@+id/tvEventTimeDate"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventOrganizer"
                 android:layout_toRightOf="@+id/tvEventTimeDateTag"
-                android:layout_marginLeft="5dp"
-                android:text="@string/demoTimeDate"/>
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/tvEventLocationTag"
@@ -108,7 +82,7 @@
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventTimeDate"
                 android:layout_alignParentLeft="true"
-                android:text="@string/demoLocationTag"/>
+                android:text="@string/EventLocationTag"/>
 
             <TextView
                 android:id="@+id/tvEventLocation"
@@ -118,8 +92,7 @@
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventTimeDate"
                 android:layout_toRightOf="@+id/tvEventLocationTag"
-                android:layout_marginLeft="5dp"
-                android:text="@string/demoLocation"/>
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/tvEventPriceTag"
@@ -130,7 +103,7 @@
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventLocation"
                 android:layout_alignParentLeft="true"
-                android:text="@string/demoPriceTag"/>
+                android:text="@string/EventPriceTag"/>
 
             <TextView
                 android:id="@+id/tvEventPrice"
@@ -140,8 +113,7 @@
                 android:layout_below="@+id/tvEventLocation"
                 android:textSize="14sp"
                 android:layout_toRightOf="@+id/tvEventPriceTag"
-                android:layout_marginLeft="5dp"
-                android:text="@string/demoPrice"/>
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/tvEventCapacityTag"
@@ -152,7 +124,7 @@
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventPrice"
                 android:layout_alignParentLeft="true"
-                android:text="@string/demoCapacityTag"/>
+                android:text="@string/EventCapacityTag"/>
 
             <TextView
                 android:id="@+id/tvEventCapacity"
@@ -162,8 +134,7 @@
                 android:textSize="14sp"
                 android:layout_below="@+id/tvEventPrice"
                 android:layout_toRightOf="@+id/tvEventCapacityTag"
-                android:layout_marginLeft="5dp"
-                android:text="@string/demoCapacity"/>
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/tvEventDescription"
@@ -174,21 +145,41 @@
                 android:layout_marginRight="@dimen/text_margin"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/tvEventCapacity"
-                android:text="@string/demoDescription"/>
+                android:layout_below="@id/tvEventCapacity" />
 
             <TextView
-                android:id="@+id/tvHashTag"
+                android:id="@+id/tvEventHashTag"
                 android:layout_marginTop="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_below="@id/tvEventDescription"
                 android:layout_marginLeft="5dp"
-                android:text="@string/demoHashTag"/>
+                />
 
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/event_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <ImageView
+            android:id="@+id/event_backdrop"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+
+    </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>
