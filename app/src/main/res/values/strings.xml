@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Student_Portal</string>
+    <string name="app_name">Student Portal</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -105,4 +105,34 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_item_detail">ItemDetailActivity</string>
+    <string name="title_activity_sliding_menu">SlidingMenu</string>
+    <string name="title_activity_new_item">Create New Item</string>
+    <string name="title_activity_new_event">Create New Event</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_exchange">ExchangeActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="ItemSellerTag">Seller:</string>
+    <string name="ItemTypeTag">Category:</string>
+    <string name="ItemPriceTag">Price:</string>
+    <string name="ItemContactTag">Contact:</string>
+    <string name="EventTimeDateTag">Date and Time:</string>
+    <string name="EventLocationTag">Location:</string>
+    <string name="EventPriceTag">Price:</string>
+    <string name="EventCapacityTag">Capacity:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="item_preview">
+        "ABCD123 Textbook \n"
+        "This is a blank textbook for the class ABCD123.
+        It is new and completely blank.
+        Literally, I am selling you nothing here."
+    </string>
+
+    <string name="event_preview">
+        "End of the Semester \n"
+        "Something we all are waiting for. \n"
+    </string>
 </resources>

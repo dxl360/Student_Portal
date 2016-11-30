@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.duanli.student_portal.EventDetailActivity">
+
+    <item android:id="@+id/edit_event"
+        android:title="Edit Event"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/edit_permission"
+        android:title="Edit Permission"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/scan_permission"
+        android:title="QR Check In"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/delete_event"
+        android:title="Delete Event"
+        android:orderInCategory="4"
+        app:showAsAction="never"/>
+</menu>
+
