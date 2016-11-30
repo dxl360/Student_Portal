@@ -13,7 +13,7 @@ public class User {
     private String email;
     private double rate=-1;
     private int numberRate=0;
-    private int contact;
+    private String contact;
 
     public User() {super();}
 
@@ -25,7 +25,7 @@ public class User {
         this.password=password;
     }
 
-    public User(int ID, String username, String password, int gender, String major, String email, double rate, int numberRate, int contact)
+    public User(int ID, String username, String password, int gender, String major, String email, double rate, int numberRate, String contact)
     {
         this.userID=ID;
         this.userName=username;
@@ -54,7 +54,7 @@ public class User {
 
     public int getNumberRate(){return numberRate;}
 
-    public int getContact(){return contact;}
+    public String getContact(){return contact;}
 
     public boolean verifyPassword(String input)
     {

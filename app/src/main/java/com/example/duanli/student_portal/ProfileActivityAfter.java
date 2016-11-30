@@ -14,10 +14,10 @@ import android.widget.Toast;
  * @author
  * Profile fragment to be displayed when selected in the sliding menu
  */
-public class ProfileActivity extends Fragment {
+public class ProfileActivityAfter extends Fragment {
 
     // empty constructor
-    public ProfileActivity() {
+    public ProfileActivityAfter() {
     }
 
     /**
@@ -51,6 +51,7 @@ public class ProfileActivity extends Fragment {
                 fragmentTransaction.replace(R.id.frag_container, fragment);
                 fragmentTransaction.commit();
 
+
                 // fetch the Password form database for respective user name
 
 
@@ -71,9 +72,9 @@ public class ProfileActivity extends Fragment {
         TextView etUsernameFromDB = (TextView) rootView.findViewById(R.id.userNameFromDB);
         TextView etEmailFromDB = (TextView) rootView.findViewById(R.id.etEmailFromDB);
         TextView etContactFromDB = (TextView) rootView.findViewById(R.id.etContactFromDB);
-        etUsernameFromDB.setText("abc123");
+        etUsernameFromDB.setText("Mike");
         etEmailFromDB.setText("abc123@case.edu");
-        etContactFromDB.setText("N/A");
+        etContactFromDB.setText("216666666");
         etUsername.setText("Username");
         etPhoneNumber.setText("Phone number");
         etEmail.setText("Email");

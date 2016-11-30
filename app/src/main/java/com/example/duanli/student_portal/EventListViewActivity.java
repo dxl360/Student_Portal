@@ -37,8 +37,14 @@ public class EventListViewActivity extends Fragment{
         final ArrayList<Recipe> recipeList;
         // Get data to display
         if (filter == 1) {
-            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
+            recipeList = Recipe.getRecipesFromFile("eventsJoined.json", getContext());
             System.out.println("here");
+        }
+        else if  (filter == 2){
+            recipeList = Recipe.getRecipesFromFile("eventsInterested.json", getContext());
+        }
+        else if  (filter == 3){
+            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
         }
         else {
            recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
