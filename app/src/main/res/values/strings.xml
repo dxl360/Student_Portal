@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student_Portal</string>
+    <string name="app_name">Student Portal</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -126,8 +126,9 @@
 
     <string name="item_preview">
         "ABCD123 Textbook \n"
-        "This is a blank textbook for the class ABCD123. It is new and completely blank. Literally,
-        I am selling you nothing here."
+        "This is a blank textbook for the class ABCD123.
+        It is new and completely blank.
+        Literally, I am selling you nothing here."
     </string>
 
     <string name="event_preview">
