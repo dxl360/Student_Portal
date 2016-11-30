@@ -26,16 +26,31 @@
         android:alpha=".75"
         android:scaleType="centerCrop"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:text="Top Event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventsHeader"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:padding="20dp"/>
 
-    <TextView
-        android:text="Events"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/eventsHeader"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:padding="20dp"/>
+        <TextView
+            android:text="@string/event_preview"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/topEvent"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
 </FrameLayout>

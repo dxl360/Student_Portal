@@ -123,4 +123,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="item_preview">
+        "ABCD123 Textbook \n"
+        "This is a blank textbook for the class ABCD123. It is new and completely blank. Literally,
+        I am selling you nothing here."
+    </string>
+
+    <string name="event_preview">
+        "End of the Semester \n"
+        "Something we all are waiting for. \n"
+    </string>
 </resources>
