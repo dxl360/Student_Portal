@@ -17,6 +17,7 @@ public class EventListViewActivity extends Fragment{
     public static final String TAG = EventListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+    Bundle bundle;
 
     public EventListViewActivity() {}
 
@@ -26,18 +27,19 @@ public class EventListViewActivity extends Fragment{
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.activity_event_list_view, container, false);
 
-
+        bundle = this.getArguments();
+        int filter = bundle.getInt("case");
         //int filter = getIntent().getExtras().getInt("case");
 
-        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
+        final ArrayList<Recipe> recipeList;
         // Get data to display
-        /*if (filter == 1) {
+        if (filter == 1) {
             recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
             System.out.println("here");
         }
         else {
            recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
-        }*/
+        }
 
         // Create adapter
         ListViewAdapter adapter = new ListViewAdapter(getContext(), recipeList);

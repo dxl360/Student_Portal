@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.os.Bundle;
 
 public class EventTab extends Fragment implements View.OnClickListener{
 
     TextView joined;
+    Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,9 +28,14 @@ public class EventTab extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.image1 || v.getId() == R.id.eventJoined) {
-            Intent newActivity1 = new Intent(v.getContext(), EventListViewActivity.class);
-            newActivity1.putExtra("case", 1);
-            startActivity(newActivity1);
+            EventListViewActivity fragment = new EventListViewActivity();
+            bundle = new Bundle();
+            bundle.putInt("case", 1);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frag_container, fragment);
+            fragmentTransaction.commit();
         }
     }
 }

@@ -16,6 +16,8 @@ public class SlidingMenu extends AppCompatActivity
 
     Toolbar toolbar = null;
     NavigationView navigationView = null;
+    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class SlidingMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.Home) {
             MainActivity fragment = new MainActivity();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
@@ -96,6 +99,9 @@ public class SlidingMenu extends AppCompatActivity
             }
         else if (id == R.id.Events) {
             EventListViewActivity fragment = new EventListViewActivity();
+            bundle = new Bundle();
+            bundle.putInt("case", 0);
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frag_container, fragment);
