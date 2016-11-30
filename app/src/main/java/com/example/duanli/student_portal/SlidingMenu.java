@@ -38,6 +38,8 @@ public class SlidingMenu extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        setTitle("Home");
     }
 
     @Override
