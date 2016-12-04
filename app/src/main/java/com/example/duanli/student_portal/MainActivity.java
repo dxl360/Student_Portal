@@ -1,6 +1,7 @@
 package com.example.duanli.student_portal;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
