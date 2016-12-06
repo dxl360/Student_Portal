@@ -37,6 +37,7 @@ public class eventsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent addEvent = new Intent(getActivity(), NewEventActivity.class);
+                addEvent.putExtra("edit", 0);
                 getActivity().startActivity(addEvent);
             }
         });

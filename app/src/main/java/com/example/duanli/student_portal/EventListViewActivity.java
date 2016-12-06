@@ -21,6 +21,7 @@ public class EventListViewActivity extends Fragment{
 
     private ListView mListView;
     Bundle bundle;
+    int eventId;
 
     public EventListViewActivity() {}
 
@@ -66,7 +67,9 @@ public class EventListViewActivity extends Fragment{
                 Intent detailIntent = new Intent(getContext(), EventDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
                 detailIntent.putExtra("url", selectedRecipe.instructionUrl);
-
+                eventId = position + 1;
+                System.out.println(position);
+                detailIntent.putExtra("eventId", eventId);
                 startActivity(detailIntent);
             }
 

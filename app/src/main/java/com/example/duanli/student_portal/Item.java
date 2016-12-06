@@ -10,19 +10,18 @@ public class Item implements Serializable {
 
     private int itemID;
     private String itemPicture;
-    private int Seller;
-    private String sellerName;
+    private int sellerID;
     private String itemName;
     private String price;
     private String contact;
     private String description;
     private int status; //0 available 1 reserved 2 resolved
 
-    public String getSellerName() {
-        return sellerName;
+    public int getSellerName() {
+        return sellerID;
     }
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
+    public void setSellerName(int sellerID) {
+        this.sellerID = sellerID;
     }
 
     public String getItemName() {
@@ -53,14 +52,26 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public Item(){}
+    public Item(){
+        super();
+    }
 
-    public Item(String SellerName,String ItemName,String Price,String Contact,String Description) {
-        sellerName = SellerName;
-        itemName = ItemName;
-        price = Price;
-        contact = Contact;
-        description = Description;
+    public Item(int itemID, String ItemName,int SellerID){
+        super();
+        this.itemID = itemID;
+        this.itemName = ItemName;
+        this.sellerID = SellerID;
+    }
+
+    public Item(int itemID, String ItemName,String itemPicture, int SellerID,String Price,String Contact,String Description, int status) {
+        this.itemID = itemID;
+        this.itemName = ItemName;
+        this.itemPicture = itemPicture;
+        this.sellerID = SellerID;
+        this.price = Price;
+        this.contact = Contact;
+        this.description = Description;
+        this.status = status;
     }
 
     public boolean addItem(){

@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Event implements Serializable {
 
     private int eventID= -1;
-    private String organizerName="";
+    private int organizerID=0;
     private String eventName="";
     private String posterURL="";
     private String date="";
@@ -20,19 +20,19 @@ public class Event implements Serializable {
     private String description="";
 
 
-    public String getOrganizerNameName() {
-        return organizerName;
+    public int getOrganizerID() {
+        return organizerID;
     }
-    public void setOrganizerNameName(String organizerName) {
-        this.organizerName = organizerName;
+    public void setOrganizerID(int organizerID) {
+        this.organizerID = organizerID;
     }
 
     public int getEventID() {return eventID;}
 
-    public String getItemName() {
+    public String getEventName() {
         return eventName;
     }
-    public void setItemName(String eventName) {
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
@@ -81,8 +81,9 @@ public class Event implements Serializable {
 
     public Event(){}
 
-    public Event(String OrganizerName,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
-        organizerName = OrganizerName;
+    public Event(int EventID, int OrganizerID,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
+        eventID=EventID;
+        organizerID = OrganizerID;
         eventName = EventName;
         date = Date;
         time = Time;

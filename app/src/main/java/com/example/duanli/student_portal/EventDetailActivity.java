@@ -28,6 +28,8 @@ public class EventDetailActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    SPDatabaseHelper spdh;
+    int eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class EventDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.event_toolbar);
         setSupportActionBar(toolbar);
-
+        spdh = SPDatabaseHelper.getInstance(this);
         event_content_Initialize("@string/demoEventID");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,7 @@ public class EventDetailActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        eventId = getIntent().getExtras().getInt("eventId");
     }
 
     @Override
@@ -108,7 +111,10 @@ public class EventDetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
                 return true;
             case R.id.edit_event:
-                startActivity(new Intent(EventDetailActivity.this, NewEventActivity.class));
+                Intent intent = new Intent(EventDetailActivity.this, NewEventActivity.class);
+                intent.putExtra("edit", 1);
+                intent.putExtra("eventId", eventId);
+                startActivity(intent);
                 return true;
             //    case R.id.edit_permission:
             //        startActivity(new Intent(EventDetailActivity.this, Permission.class));
@@ -132,30 +138,40 @@ public class EventDetailActivity extends AppCompatActivity {
 //        layout.setTitle("@string/demoEventTitle");
         ImageView view = (ImageView) findViewById(R.id.event_backdrop);
         view.setImageResource(R.drawable.picture_eventposter);
-
+        System.out.println("eventId before is " + eventId);
+        eventId = 1;
         TextView tvEventName = (TextView) findViewById(R.id.tvEventName);
-        tvEventName.setText(getResources().getString(R.string.demoEventTitle));
+        //tvEventName.setText(getResources().getString(R.string.demoEventTitle));
+        tvEventName.setText(spdh.queryEvent(eventId).getEventName());
 
         TextView tvEventOrganizer = (TextView) findViewById(R.id.tvEventOrganizer);
-        tvEventOrganizer.setText(getResources().getString(R.string.demoEventOrganizer));
+        //tvEventOrganizer.setText(getResources().getString(R.string.demoEventOrganizer));
+        int organizerID = spdh.queryEvent(eventId).getOrganizerID();
+        tvEventOrganizer.setText(spdh.queryUserID(organizerID).getUserName());
 
         TextView tvEventTimeDate = (TextView) findViewById(R.id.tvEventTimeDate);
-        tvEventTimeDate.setText(getResources().getString(R.string.demoEventTimeDate));
+        //tvEventTimeDate.setText(getResources().getString(R.string.demoEventTimeDate));
+        tvEventTimeDate.setText(spdh.queryEvent(eventId).getDate() + " " + spdh.queryEvent(eventId).getTime());
 
         TextView tvEventLocation = (TextView) findViewById(R.id.tvEventLocation);
-        tvEventLocation.setText(getResources().getString(R.string.demoEventLocation));
+        //tvEventLocation.setText(getResources().getString(R.string.demoEventLocation));
+        tvEventLocation.setText(spdh.queryEvent(eventId).getLocation());
 
         TextView tvEventPrice = (TextView) findViewById(R.id.tvEventPrice);
-        tvEventPrice.setText(getResources().getString(R.string.demoEventPrice));
+        //tvEventPrice.setText(getResources().getString(R.string.demoEventPrice));
+        tvEventPrice.setText(String.valueOf(spdh.queryEvent(eventId).getPrice()));
 
         TextView tvEventCapacity = (TextView) findViewById(R.id.tvEventCapacity);
-        tvEventCapacity.setText(getResources().getString(R.string.demoEventCapacity));
+//        tvEventCapacity.setText(getResources().getString(R.string.demoEventCapacity));
+        tvEventCapacity.setText(String.valueOf(spdh.queryEvent(eventId).getCapacity()));
 
         TextView tvEventHashTag = (TextView) findViewById(R.id.tvEventHashTag);
         tvEventHashTag.setText(getResources().getString(R.string.demoEventHashTag));
 
         TextView tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
-        tvEventDescription.setText(getResources().getString(R.string.demoEventDescription));
+//        tvEventDescription.setText(getResources().getString(R.string.demoEventDescription));
+        tvEventDescription.setText(spdh.queryEvent(eventId).getDescription());
+
     }
 
     /**

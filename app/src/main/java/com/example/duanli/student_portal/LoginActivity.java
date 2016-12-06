@@ -433,7 +433,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // create a instance of SQLite Database
-        spdh = new SPDatabaseHelper(this);
+        spdh = SPDatabaseHelper.getInstance(this);
         //spdh = spdh.open();
 
         // Get The Reference Of Buttons
@@ -458,6 +458,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.equals(storedPassword)) {
                     Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
                     ThisUser.setUserID(currentUser.getUserID());
+                    System.out.println(spdh.queryEvent(1).getDescription());
+                    System.out.println(spdh.queryEvent(2).getDescription());
                     Intent intent = new Intent(getApplicationContext(), SlidingMenu.class);
                     startActivity(intent);
                 } else {

@@ -13,13 +13,15 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
 
     Button Create;
     EditText etEventName,etDate,etTime,etLocation,etPrice,etCapacity,etDescription;
-    String organizerName,eventName,date,time,location,description;
-    int price,capacity;
+    String eventName,date,time,location,description;
+    int organizerID, price,capacity, eventId;
+    SPDatabaseHelper spdh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+        spdh = SPDatabaseHelper.getInstance(this);
         etEventName = (EditText) findViewById(R.id.etEventName);
         etDate = (EditText) findViewById(R.id.etDate);
         etTime = (EditText) findViewById(R.id.etTime);
@@ -31,15 +33,30 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         Create.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        System.out.println(getIntent().getExtras().getInt("edit"));
+        if (getIntent().getExtras().getInt("edit")==1){
+            eventId = getIntent().getExtras().getInt("eventId");
+            etEventName.setText(spdh.queryEvent(eventId).getEventName());
+            etDate.setText(spdh.queryEvent(eventId).getDate());
+            etTime.setText(spdh.queryEvent(eventId).getTime());
+            etLocation.setText(spdh.queryEvent(eventId).getLocation());
+            etCapacity.setText(String.valueOf(spdh.queryEvent(eventId).getCapacity()));
+            etPrice.setText(String.valueOf(spdh.queryEvent(eventId).getPrice()));
+            etDescription.setText(spdh.queryEvent(eventId).getDescription());
+        }
     }
 
     @Override
     public void onClick(View v) {
+
+
+
         if(v.getId() == R.id.button) {
             Toast.makeText(NewEventActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
-            organizerName = new User().getUserName();
+            organizerID = ThisUser.getUserID();
+            System.out.println(organizerID);
             eventName = etEventName.getText().toString();
             date = etDate.getText().toString();
             time = etTime.getText().toString();
@@ -47,23 +64,24 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             price = Integer.parseInt(etPrice.getText().toString());
             capacity = Integer.parseInt(etCapacity.getText().toString());
             description = etDescription.getText().toString();
-            if (isValidOrganizerName(organizerName) && isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
-            Event event = new Event(organizerName,eventName,date,time,location,price,capacity,description);
-            event.addEvent();
+            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
+//            event.addEvent();
+            if (getIntent().getExtras().getInt("edit")==1){
+                Event event = new Event(eventId,organizerID,eventName,date,time,location,price,capacity,description);
+                spdh.updateEvent(event);
+            }
+            else {
+                Event event = new Event(-1,organizerID,eventName,date,time,location,price,capacity,description);
+                spdh.insertEvent(event);
+            }
+//            System.out.println(spdh.queryEvent(1).getDescription());
             finish();
-            startActivity(new Intent(this, EventDetailActivity.class));
+            startActivity(new Intent(this, SlidingMenu.class));
+            System.out.println(spdh.queryEvent(2).getDescription());
         }
 
     }
 
-    public static boolean isValidOrganizerName(String s)
-    {
-        String ITEMNAME_REGEX="^(?=.{5,20}$)[a-zA-Z0-9]+$";
-        if (!s.equals("")) {
-            if (s.matches(ITEMNAME_REGEX)) {
-                return true;}}
-        return false;
-    }
 
     public static boolean isValidEventName(String s)
     {

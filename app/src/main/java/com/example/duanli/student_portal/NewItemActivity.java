@@ -44,8 +44,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             contact = etContact.getText().toString();
             description = etDescription.getText().toString();
             if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
-            Item item = new Item(sellerName,itemName,price,contact,description);
-            item.addItem();
+//            Item item = new Item(sellerName,itemName,price,contact,description);
+//            item.addItem();
             finish();
             startActivity(new Intent(this, ItemDetailActivity.class));
         }

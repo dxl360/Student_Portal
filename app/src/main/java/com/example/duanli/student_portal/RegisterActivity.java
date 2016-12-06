@@ -34,12 +34,14 @@ public class RegisterActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        spdh = SPDatabaseHelper.getInstance(this);
         createInDatabase();
     }
 
     public void saveUser(String userName, String password, String confirmPassword, boolean istest) {
         // get Instance of Database Adapter
-        spdh = new SPDatabaseHelper(this);
+//        spdh = new SPDatabaseHelper(this);
+
         //loginDataBaseAdapter = loginDataBaseAdapter.open();
         // check if any of the fields are vacant
         if (userName.equals("") || password.equals("") || confirmPassword.equals("")) {

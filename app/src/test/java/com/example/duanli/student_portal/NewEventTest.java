@@ -8,21 +8,21 @@ public class NewEventTest{
 
     NewEventActivity test = new NewEventActivity();
 
-    @Test
-    public void isValidOrganizerNameTest() {
-        //test empty
-        String case1 = "";
-        assertTrue(!test.isValidOrganizerName(case1));
-        //test boundary
-        String case2 = "asdfasldfakjsdlfajdslkafjlsdjfadslkfjalsdkfjlasdjfalsdjfasldjfalsdjfasdlkjfajlsdkflajsdfkaldjfa";
-        assertTrue(!test.isValidOrganizerName(case2));
-        //test wrong character
-        String case3 = ";;d.;as;d,f";
-        assertTrue(!test.isValidOrganizerName(case3));
-        //test true
-        String case4 = "StudentGovernment";
-        assertTrue(test.isValidOrganizerName(case4));
-    }
+//    @Test
+//    public void isValidOrganizerNameTest() {
+//        //test empty
+//        String case1 = "";
+//        assertTrue(!test.isValidOrganizerName(case1));
+//        //test boundary
+//        String case2 = "asdfasldfakjsdlfajdslkafjlsdjfadslkfjalsdkfjlasdjfalsdjfasldjfalsdjfasdlkjfajlsdkflajsdfkaldjfa";
+//        assertTrue(!test.isValidOrganizerName(case2));
+//        //test wrong character
+//        String case3 = ";;d.;as;d,f";
+//        assertTrue(!test.isValidOrganizerName(case3));
+//        //test true
+//        String case4 = "StudentGovernment";
+//        assertTrue(test.isValidOrganizerName(case4));
+//    }
     @Test
     public void isValidEventNameTest() {
         //test empty
