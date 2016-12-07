@@ -1399,7 +1399,6 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
                 KEY_RESERVE_SELLER+" = '"+Integer.toString(sellerID)+"'"+
                 " AND "+KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'", null);
-
         if(c.getCount()<1) // itemName Not Exist
         {
             c.close();
@@ -1408,6 +1407,88 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         c.moveToFirst();
         return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
     }
+
+    public int queryReserveBuyer(int buyerID, int itemID){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'"+
+                " AND "+KEY_RESERVE_BUYER+" = '"+Integer.toString(itemID)+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
+    }
+
+    public int queryBuyer(int reservationId){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_BUYER)));
+    }
+
+    public int querySeller(int reservationId){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_SELLER)));
+    }
+
+    public int queryNewReserve(int sellerID, int itemID){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_SELLER+" = '"+Integer.toString(sellerID)+"'"+
+                " AND "+KEY_RESERVE_ITEM+" = '"+Integer.toString(itemID)+"'"+
+                " AND "+KEY_RESERVE_STATUS+" = '"+0+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
+    }
+
+    public int queryReservationStatus(int reservationId){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_STATUS)));
+    }
+
+    public boolean queryWatch(int buyerId, int itemID){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_WATCHLIST+" WHERE "+
+                KEY_WATCHLIST_BUYER+" = '"+Integer.toString(buyerId)+"'"+
+                " AND "+KEY_WATCHLIST_ID+" = '"+Integer.toString(itemID)+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return false;
+        }
+        return true;
+    }
+
 
     //return the linked list of all event ids that the participant bookmarked
     public LinkedList<Integer> queryBookmark(int participant)
@@ -1570,6 +1651,18 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             }
         }
         return result;
+    }
+
+    public boolean querySell(int sellerID, int itemId)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_SELL+" WHERE "+KEY_SELL_SELLER+" = '"+ sellerID+"'"+" AND "+ KEY_SELL_ID+" = '"+itemId+"'",null);
+        if(c.getCount()<1) // seller didn't create any sell
+        {
+            c.close();
+            return false;
+        }
+        return true;
     }
 
 
