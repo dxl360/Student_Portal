@@ -51,26 +51,26 @@
                 android:fontFamily="sans-serif-medium"
                 android:textSize="28sp" />
 
-            <TextView
-                android:id="@+id/tvItemTypeTag"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_below="@+id/tvItemName"
-                android:layout_alignParentLeft="true"
-                android:text="@string/ItemTypeTag"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tvItemTypeTag"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginLeft="@dimen/text_margin"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_below="@+id/tvItemName"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:text="@string/ItemTypeTag"/>-->
 
-            <TextView
-                android:id="@+id/tvItemType"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_below="@+id/tvItemName"
-                android:layout_toRightOf="@+id/tvItemTypeTag"
-                android:layout_marginLeft="5dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvItemType"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_below="@+id/tvItemName"-->
+                <!--android:layout_toRightOf="@+id/tvItemTypeTag"-->
+                <!--android:layout_marginLeft="5dp" />-->
 
             <TextView
                 android:id="@+id/tvItemPriceTag"
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:layout_below="@+id/tvItemType"
+                android:layout_below="@+id/tvItemName"
                 android:layout_alignParentLeft="true"
                 android:text="@string/ItemPriceTag"/>
 
@@ -88,7 +88,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvItemType"
+                android:layout_below="@+id/tvItemName"
                 android:textSize="14sp"
                 android:layout_toRightOf="@+id/tvItemPriceTag"
                 android:layout_marginLeft="5dp" />

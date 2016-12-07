@@ -68,7 +68,6 @@ public class EventListViewActivity extends Fragment{
                 detailIntent.putExtra("title", selectedRecipe.title);
                 detailIntent.putExtra("url", selectedRecipe.instructionUrl);
                 eventId = position + 1;
-                System.out.println(position);
                 detailIntent.putExtra("eventId", eventId);
                 startActivity(detailIntent);
             }

@@ -12,10 +12,25 @@ public class Item implements Serializable {
     private String itemPicture;
     private int sellerID;
     private String itemName;
-    private String price;
+    private int price;
     private String contact;
     private String description;
     private int status; //0 available 1 reserved 2 resolved
+
+
+    public int getItemID() {
+        return itemID;
+    }
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
+
+    public int getSellerID() {
+        return sellerID;
+    }
+    public void setSellerID(int sellerID) {
+        this.sellerID = sellerID;
+    }
 
     public int getSellerName() {
         return sellerID;
@@ -31,10 +46,10 @@ public class Item implements Serializable {
         this.itemName = itemName;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -52,6 +67,13 @@ public class Item implements Serializable {
         this.description = description;
     }
 
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public Item(){
         super();
     }
@@ -63,7 +85,18 @@ public class Item implements Serializable {
         this.sellerID = SellerID;
     }
 
-    public Item(int itemID, String ItemName,String itemPicture, int SellerID,String Price,String Contact,String Description, int status) {
+    public Item(int itemID, String ItemName,int SellerID, int Price, String Contact, String Description, int Status){
+        super();
+        this.itemID = itemID;
+        this.itemName = ItemName;
+        this.sellerID = SellerID;
+        this.price = Price;
+        this.contact = Contact;
+        this.description = Description;
+        this.status = Status;
+    }
+
+    public Item(int itemID, String ItemName,String itemPicture, int SellerID,int Price,String Contact,String Description, int status) {
         this.itemID = itemID;
         this.itemName = ItemName;
         this.itemPicture = itemPicture;

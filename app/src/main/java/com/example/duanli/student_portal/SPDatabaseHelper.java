@@ -919,12 +919,18 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         // Create and/or open the database for writing
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
+        System.out.println("begin");
         try {
             // The user might already exist in the database (i.e. the same user created multiple posts).
             ContentValues values = new ContentValues();
             values.put(KEY_ITEM_NAME, item.getItemName());
-            //values.put(KEY_ITEM_Picture,item.picture);
             values.put(KEY_ITEM_SELLER, item.getSellerName());
+            values.put(KEY_ITEM_PRICE, item.getPrice());
+            values.put(KEY_ITEM_CONTACT, item.getContact());
+            values.put(KEY_ITEM_DESCRIPTION, item.getDescription());
+            values.put(KEY_ITEM_STATUS, item.getStatus());
+            System.out.println("put values");
+            //values.put(KEY_ITEM_Picture,item.picture);
             db.insertOrThrow(TABLE_ITEM, null, values);
 //            int check=(this.queryUser(item.getSellerName())).getUserID();
 //            if (check!=-1)
@@ -938,6 +944,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
 //            }
             // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
             db.setTransactionSuccessful();
+            System.out.println("successful");
         } catch (Exception e) {
             System.out.println("Error while insert item to database");
         } finally {
@@ -1282,6 +1289,51 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return eventId;
     }
 
+    public int updateItem(Item item) {
+        // Create and/or open the database for writing
+        SQLiteDatabase db = getWritableDatabase();
+        int itemId = -1;
+        // It's a good idea to wrap our insert in a transaction. This helps with performance and ensures
+        // consistency of the database.
+        db.beginTransaction();
+        try {
+            // The user might already exist in the database (i.e. the same user created multiple posts).
+            ContentValues values = new ContentValues();
+            values.put(KEY_ITEM_NAME, item.getItemName());
+            values.put(KEY_ITEM_SELLER, item.getSellerID());
+            values.put(KEY_ITEM_PRICE, item.getPrice());
+            values.put(KEY_ITEM_CONTACT, item.getContact());
+            values.put(KEY_ITEM_DESCRIPTION, item.getDescription());
+            values.put(KEY_ITEM_STATUS, item.getStatus());
+            // First try to update the user in case the user already exists in the database
+            // This assumes userNames are unique
+            int rows = db.update(TABLE_ITEM, values, KEY_ITEM_ID + "= ?", new String[]{String.valueOf(item.getItemID())});
+            // Check if update succeeded
+            if (rows == 1) {
+                // Get the primary key of the user we just updated
+                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?",
+                        KEY_ITEM_ID, TABLE_ITEM, KEY_ITEM_ID);
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(item.getItemID())});
+                try {
+                    if (cursor.moveToFirst()) {
+                        itemId = cursor.getInt(0);
+                        db.setTransactionSuccessful();
+                    }
+                } finally {
+                    if (cursor != null && !cursor.isClosed()) {
+                        cursor.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error while trying to update item to database");
+        } finally {
+            db.endTransaction();
+        }
+        return itemId;
+    }
+
+
     public int updateItemStatus(int itemID, int status)
     {
         SQLiteDatabase db = getWritableDatabase();
@@ -1356,7 +1408,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return result;
     }
 
-    public Item queryItem(String itemID){
+    public Item queryItem(int itemID){
         SQLiteDatabase db = getWritableDatabase();
         Cursor c= db.rawQuery("SELECT * FROM item WHERE "+KEY_ITEM_ID+" = '"+itemID+"'",null);
 
@@ -1366,7 +1418,13 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             return new Item(-1, "noItem", -1);
         }
         c.moveToFirst();
-        Item result= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),c.getString(c.getColumnIndex(KEY_ITEM_NAME)),Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))));
+        Item result= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),
+                c.getString(c.getColumnIndex(KEY_ITEM_NAME)),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_PRICE))),
+                c.getString(c.getColumnIndex(KEY_ITEM_CONTACT)),
+                        c.getString(c.getColumnIndex(KEY_ITEM_DESCRIPTION)),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_STATUS))));
         return result;
     }
 
