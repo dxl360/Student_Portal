@@ -1,6 +1,8 @@
 package com.example.duanli.student_portal;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class EventListViewActivity extends Fragment{
@@ -20,6 +24,7 @@ public class EventListViewActivity extends Fragment{
     public static final String TAG = EventListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+    //private static final String TABLE_EVENT= "event";
     Bundle bundle;
     int eventId;
 
@@ -35,23 +40,23 @@ public class EventListViewActivity extends Fragment{
         int filter = bundle.getInt("case");
         //int filter = getIntent().getExtras().getInt("case");
 
-        final ArrayList<Recipe> recipeList;
+        final ArrayList<ListCell> eventList;
         // Get data to display
-        if (filter == 1) {
-            recipeList = Recipe.getRecipesFromFile("eventsJoined.json", getContext());
-        }
-        else if  (filter == 2){
-            recipeList = Recipe.getRecipesFromFile("eventsInterested.json", getContext());
-        }
-        else if  (filter == 3){
-            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
-        }
-        else {
-           recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
-        }
+//        if (filter == 1) {
+//            recipeList = Recipe.getRecipesFromFile("eventsJoined.json", getContext());
+//        }
+//        else if  (filter == 2){
+//            recipeList = Recipe.getRecipesFromFile("eventsInterested.json", getContext());
+//        }
+//        else if  (filter == 3){
+//            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
+//        }
+//        else {
+            eventList = ListCell.getCellsFromDatabase("event", 0, getContext());
+        //}
 
         // Create adapter
-        ListViewAdapter adapter = new ListViewAdapter(getContext(), recipeList);
+        ListViewAdapter adapter = new ListViewAdapter(getContext(), eventList);
 
         // Create list view
         mListView = (ListView) rootView.findViewById(R.id.event_list);
@@ -62,11 +67,10 @@ public class EventListViewActivity extends Fragment{
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe selectedRecipe = recipeList.get(position);
-
+                ListCell selectedRecipe = eventList.get(position);
                 Intent detailIntent = new Intent(getContext(), EventDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
-                detailIntent.putExtra("url", selectedRecipe.instructionUrl);
+                //detailIntent.putExtra("url", selectedRecipe.instructionUrl);
                 eventId = position + 1;
                 detailIntent.putExtra("eventId", eventId);
                 startActivity(detailIntent);
@@ -90,4 +94,8 @@ public class EventListViewActivity extends Fragment{
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 }

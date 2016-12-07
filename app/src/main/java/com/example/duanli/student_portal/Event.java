@@ -23,6 +23,7 @@ public class Event implements Serializable {
     public int getOrganizerID() {
         return organizerID;
     }
+
     public void setOrganizerID(int organizerID) {
         this.organizerID = organizerID;
     }

@@ -1,17 +1,17 @@
-//package com.example.duanli.student_portal;
-//
-///**
-// * Created by tianlinlu on 16/10/27.
-// */
-//
-//import android.content.Intent;
-//import android.test.ActivityUnitTestCase;
-//import android.widget.Button;
-//
-//import org.junit.Test;
-//
+package com.example.duanli.student_portal;
+
+/**
+ * Created by tianlinlu on 16/10/27.
+ */
+
+import android.content.Intent;
+import android.test.ActivityUnitTestCase;
+import android.widget.Button;
+
+import org.junit.Test;
+
 //public class EventListViewTest extends ActivityUnitTestCase<EventListViewActivity> {
-//
+
 //    private Intent mMainIntent;
 //
 //
@@ -24,7 +24,7 @@
 //        super.setUp();
 //        mMainIntent = new Intent(Intent.ACTION_MAIN);
 //    }
-//
+
 //    @Test
 //    public void testButton () {
 //        EventListViewActivity activity = startActivity(mMainIntent, null, null);

@@ -30,10 +30,11 @@ public class ItemListViewActivity extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_item_list_view, container, false);
 
         // Get data to display
-        final ArrayList<Recipe> recipeList = Recipe.getRecipesFromFile("recipes.json", getContext());
+        final ArrayList<ListCell> eventList;
+        eventList = ListCell.getCellsFromDatabase("", 0, getContext());
 
         // Create adapter
-        ListViewAdapter adapter = new ListViewAdapter(getContext(), recipeList);
+        ListViewAdapter adapter = new ListViewAdapter(getContext(), eventList);
 
         // Create list view
         mListView = (ListView) rootView.findViewById(R.id.exchange_list);
@@ -44,12 +45,10 @@ public class ItemListViewActivity extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recipe selectedRecipe = recipeList.get(position);
-
-                Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
+                ListCell selectedRecipe = eventList.get(position);
+                Intent detailIntent = new Intent(getContext(), EventDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
-                detailIntent.putExtra("url", selectedRecipe.instructionUrl);
-
+                //detailIntent.putExtra("url", selectedRecipe.instructionUrl);
                 startActivity(detailIntent);
             }
 
