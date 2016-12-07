@@ -35,6 +35,7 @@ public class EventDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+        eventId = getIntent().getExtras().getInt("eventId");
         Toolbar toolbar = (Toolbar) findViewById(R.id.event_toolbar);
         setSupportActionBar(toolbar);
         spdh = SPDatabaseHelper.getInstance(this);
@@ -51,7 +52,6 @@ public class EventDetailActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        eventId = getIntent().getExtras().getInt("eventId");
     }
 
     @Override
@@ -139,7 +139,7 @@ public class EventDetailActivity extends AppCompatActivity {
         ImageView view = (ImageView) findViewById(R.id.event_backdrop);
         view.setImageResource(R.drawable.picture_eventposter);
         System.out.println("eventId before is " + eventId);
-        eventId = 1;
+
         TextView tvEventName = (TextView) findViewById(R.id.tvEventName);
         //tvEventName.setText(getResources().getString(R.string.demoEventTitle));
         tvEventName.setText(spdh.queryEvent(eventId).getEventName());

@@ -617,6 +617,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -1646,6 +1648,71 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         int rows = db.delete(RELATIONSHIP_PERMIT, whereClause, whereArgs);
         return rows;
     }
+
+
+    public ArrayList<Event> retrieveEvents (int cond) {
+        ArrayList<Event> result= new ArrayList<Event>();
+        SQLiteDatabase db = getWritableDatabase();
+        String query;
+        if (cond == 1){
+            query = "SELECT * FROM " + TABLE_EVENT + " WHERE " + KEY_EVENT_ORGANIZER + " = " + ThisUser.getUserID();
+        }
+        else {
+            query = "SELECT * FROM " + TABLE_EVENT;
+        }
+        Cursor c= db.rawQuery(query, null);
+        if(c.getCount() < 1)
+        {
+            c.close();
+            return result;
+        }
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Event eventResult= new Event(Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ID))),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ORGANIZER))),
+                            c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
+                            c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
+                            c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
+                            c.getString(c.getColumnIndex(KEY_EVENT_LOCATION)),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_PRICE))),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_CAPACITY))),
+                            c.getString(c.getColumnIndex(KEY_EVENT_DESCRIPTION)));
+                    result.add(eventResult);
+                } while (c.moveToNext());
+            }
+        }
+        return result;
+    }
+
+
+    public ArrayList<Item> retrieveItems (int cond) {
+        ArrayList<Item> result= new ArrayList<Item>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+ TABLE_ITEM, null);
+        if(c.getCount() < 1)
+        {
+            c.close();
+            return result;
+        }
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    Item itemResult= new Item();  // gai !!
+                    result.add(itemResult);
+                } while (c.moveToNext());
+            }
+        }
+        return result;
+    }
+
+
+
+
+
+
+
+
 
 
 /*    // Get all posts in the database

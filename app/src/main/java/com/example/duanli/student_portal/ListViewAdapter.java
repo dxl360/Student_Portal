@@ -18,10 +18,10 @@ public class ListViewAdapter extends BaseAdapter {
     public static final HashMap<String, Integer> LABEL_COLORS = new HashMap<String, Integer>();
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Recipe> mDataSource;
+    private ArrayList<ListCell> mDataSource;
 
 
-    public ListViewAdapter(Context context, ArrayList<Recipe> items) {
+    public ListViewAdapter(Context context, ArrayList<ListCell> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -111,18 +111,18 @@ public class ListViewAdapter extends BaseAdapter {
         TextView titleTextView = holder.titleTextView;
         TextView subtitleTextView = holder.subtitleTextView;
         TextView detailTextView = holder.detailTextView;
-//    ImageView thumbnailImageView = holder.thumbnailImageView;
+        //ImageView thumbnailImageView = holder.thumbnailImageView;
 
         //Get corresponding recipe for row
-        Recipe recipe = (Recipe) getItem(position);
+        ListCell cell = (ListCell) getItem(position);
 
-        // Update row view's textviews to display recipe information
-        titleTextView.setText(recipe.title);
-        subtitleTextView.setText(recipe.description);
-        detailTextView.setText(recipe.label);
+        // Update row view's textViews to display recipe information
+        titleTextView.setText(cell.title);
+        subtitleTextView.setText(cell.description);
+        detailTextView.setText(cell.label);
 
-//    // Use Picasso to load the image. Temporarily have a placeholder in case it's slow to load
-//    Picasso.with(mContext).load(recipe.imageUrl).placeholder(R.mipmap
+//      // Use Picasso to load the image. Temporarily have a placeholder in case it's slow to load
+//      Picasso.with(mContext).load(recipe.imageUrl).placeholder(R.mipmap
 //        .ic_launcher).into(thumbnailImageView);
 
         // Style text views
@@ -135,7 +135,7 @@ public class ListViewAdapter extends BaseAdapter {
         Typeface detailTypeFace = Typeface.createFromAsset(mContext.getAssets(),
                 "fonts/Quicksand-Bold.otf");
         detailTextView.setTypeface(detailTypeFace);
-//    detailTextView.setTextColor(android.support.v4.content.ContextCompat.getColor(mContext, LABEL_COLORS
+//      detailTextView.setTextColor(android.support.v4.content.ContextCompat.getColor(mContext, LABEL_COLORS
 //        .get(recipe.label)));
 
         return convertView;
@@ -145,6 +145,6 @@ public class ListViewAdapter extends BaseAdapter {
         public TextView titleTextView;
         public TextView subtitleTextView;
         public TextView detailTextView;
-        public ImageView thumbnailImageView;
+        //public ImageView thumbnailImageView;
     }
 }
