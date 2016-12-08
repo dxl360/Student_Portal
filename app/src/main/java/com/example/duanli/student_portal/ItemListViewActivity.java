@@ -20,6 +20,7 @@ public class ItemListViewActivity extends Fragment {
     public static final String TAG = ItemListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+    int itemId;
 
     public ItemListViewActivity() {}
 
@@ -30,11 +31,11 @@ public class ItemListViewActivity extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_item_list_view, container, false);
 
         // Get data to display
-        final ArrayList<ListCell> eventList;
-        eventList = ListCell.getCellsFromDatabase("", 0, getContext());
+        final ArrayList<ListCell> itemList;
+        itemList = ListCell.getCellsFromDatabase("item", 0, getContext());
 
         // Create adapter
-        ListViewAdapter adapter = new ListViewAdapter(getContext(), eventList);
+        ListViewAdapter adapter = new ListViewAdapter(getContext(), itemList);
 
         // Create list view
         mListView = (ListView) rootView.findViewById(R.id.exchange_list);
@@ -45,9 +46,12 @@ public class ItemListViewActivity extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListCell selectedRecipe = eventList.get(position);
-                Intent detailIntent = new Intent(getContext(), EventDetailActivity.class);
+                ListCell selectedRecipe = itemList.get(position);
+                Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
+                itemId = position + 1;
+                detailIntent.putExtra("itemId", itemId);
+                System.out.println("itemId = " + itemId);
                 //detailIntent.putExtra("url", selectedRecipe.instructionUrl);
                 startActivity(detailIntent);
             }

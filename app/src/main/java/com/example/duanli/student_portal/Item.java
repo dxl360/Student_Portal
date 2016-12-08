@@ -32,12 +32,6 @@ public class Item implements Serializable {
         this.sellerID = sellerID;
     }
 
-    public int getSellerName() {
-        return sellerID;
-    }
-    public void setSellerName(int sellerID) {
-        this.sellerID = sellerID;
-    }
 
     public String getItemName() {
         return itemName;
@@ -107,10 +101,5 @@ public class Item implements Serializable {
         this.status = status;
     }
 
-    public boolean addItem(){
-//        DatabaseManager DbMan = DatabaseManager.getInstance();
-//        DbMan.addItem(sellerName,itemName,price,contact,description);
-        return true;
-    }
 
 }

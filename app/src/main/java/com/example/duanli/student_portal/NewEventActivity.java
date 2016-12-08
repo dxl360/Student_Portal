@@ -64,8 +64,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             price = Integer.parseInt(etPrice.getText().toString());
             capacity = Integer.parseInt(etCapacity.getText().toString());
             description = etDescription.getText().toString();
-            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
-//            event.addEvent();
+//            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
             if (getIntent().getExtras().getInt("edit")==1){
                 Event event = new Event(eventId,organizerID,eventName,date,time,location,price,capacity,description);
                 spdh.updateEvent(event);

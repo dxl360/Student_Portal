@@ -13,11 +13,11 @@ public class ListCell {
 
     public static ArrayList<ListCell> getCellsFromDatabase(String type, int filter, Context context) {
         ArrayList<ListCell> result = new ArrayList<>();
-        ArrayList<Event> cells;
+
         try {
             SPDatabaseHelper spdh = new SPDatabaseHelper(context);
             if (type.equals("event")) {
-                cells = spdh.retrieveEvents(filter);
+                ArrayList<Event> cells = spdh.retrieveEvents(filter);
                 for (int i = 0; i < cells.size(); i++) {
                     ListCell temp = new ListCell();
                     temp.title = cells.get(i).getEventName();
@@ -27,7 +27,14 @@ public class ListCell {
                 }
             }
             else if (type.equals("item")) {
-                // retrieve items to display
+                ArrayList<Item> cells = spdh.retrieveItems(filter);
+                for (int i = 0; i < cells.size(); i++) {
+                    ListCell temp = new ListCell();
+                    temp.title = cells.get(i).getItemName();
+                    temp.description = cells.get(i).getContact();
+                    temp.label = String.valueOf(cells.get(i).getPrice());
+                    result.add(temp);
+                }
             }
 
         } catch (Exception e) {

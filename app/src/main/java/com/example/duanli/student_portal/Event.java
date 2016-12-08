@@ -94,10 +94,5 @@ public class Event implements Serializable {
         description = Description;
     }
 
-    public boolean addEvent(){
-//        DatabaseManager DbMan = DatabaseManager.getInstance();
-//        DbMan.addEvent(organizerName,eventName,date,time,capacity,location,description);
-        return true;
-    }
 
 }

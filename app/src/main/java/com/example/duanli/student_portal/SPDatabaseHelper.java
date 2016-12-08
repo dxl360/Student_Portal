@@ -641,7 +641,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     private static final String RELATIONSHIP_BLOCK="block";
     private static final String RELATIONSHIP_RATING="rating";
     private static final String RELATIONSHIP_ORGANIZE="organize";
-    private static final String RELATIONSHIP_JOIN="join";
+    private static final String RELATIONSHIP_JOIN="joins";
     private static final String RELATIONSHIP_BOOKMARK="bookmark";
     private static final String RELATIONSHIP_PERMIT="permit";
 
@@ -675,19 +675,19 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_RATING_SCORE = "score";
 
     //Organize
-    private static final String KEY_ORGANIZER_EVENT = "eventID";
+    private static final String KEY_ORGANIZER_EVENT = "eventId";
     private static final String KEY_ORGANIZER_ORGANIZER = "organizer";
 
     //JOIN
-    private static final String KEY_JOIN_EVENT = "eventID";
+    private static final String KEY_JOIN_EVENT = "eventId";
     private static final String KEY_JOIN_PARTICIPANT = "participant";
 
     //BOOKMARK
-    private static final String KEY_BOOKMARK_EVENT = "eventID";
+    private static final String KEY_BOOKMARK_EVENT = "eventId";
     private static final String KEY_BOOKMARK_PARTICIPANT = "participant";
 
     //Permit
-    private static final String KEY_PERMIT_EVENT = "eventID";
+    private static final String KEY_PERMIT_EVENT = "eventId";
     private static final String KEY_PERMIT_PARTICIPANT = "participant";
 
     // User Table Columns
@@ -926,7 +926,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             // The user might already exist in the database (i.e. the same user created multiple posts).
             ContentValues values = new ContentValues();
             values.put(KEY_ITEM_NAME, item.getItemName());
-            values.put(KEY_ITEM_SELLER, item.getSellerName());
+            values.put(KEY_ITEM_SELLER, item.getSellerID());
             values.put(KEY_ITEM_PRICE, item.getPrice());
             values.put(KEY_ITEM_CONTACT, item.getContact());
             values.put(KEY_ITEM_DESCRIPTION, item.getDescription());
@@ -1470,7 +1470,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
                 KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'"+
-                " AND "+KEY_RESERVE_BUYER+" = '"+Integer.toString(itemID)+"'", null);
+                " AND "+KEY_RESERVE_ITEM+" = '"+Integer.toString(itemID)+"'", null);
         if(c.getCount()<1) // itemName Not Exist
         {
             c.close();
@@ -1478,6 +1478,19 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         }
         c.moveToFirst();
         return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
+    }
+    public int queryReserveStatus(int buyerID, int itemID){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'"+
+                " AND "+KEY_RESERVE_ITEM+" = '"+Integer.toString(itemID)+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_STATUS)));
     }
 
     public int queryBuyer(int reservationId){
@@ -1665,8 +1678,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     {
         LinkedList<Integer> result= new LinkedList<Integer>();
         SQLiteDatabase db = getWritableDatabase();
-        String whereClause= KEY_JOIN_EVENT+" = ?"+ " AND "+ KEY_JOIN_PARTICIPANT+" = ?";
-        String[] whereArgs = new String[] {Integer.toString(event),Integer.toString(participant)};
+        //Cursor c= db.rawQuery("SELECT * FROM join WHERE eventId = '" + event + "' AND participant = '" + participant + "'",null);
         Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_JOIN+" WHERE "+KEY_JOIN_PARTICIPANT+" = '"+participant+"'" + " AND "+ KEY_JOIN_EVENT+" = '"+event+"'",null);
         if(c.getCount()<1) // seller didn't create any sell
         {
@@ -1796,7 +1808,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         String whereClause= KEY_WATCHLIST_BUYER+" = ?"+ " AND "+ KEY_WATCHLIST_ID+" = ?";
         String[] whereArgs = new String[] {Integer.toString(buyer),Integer.toString(item)};
-        int rows = db.delete(RELATIONSHIP_PERMIT, whereClause, whereArgs);
+        int rows = db.delete(RELATIONSHIP_WATCHLIST, whereClause, whereArgs);
         return rows;
     }
 
@@ -1849,7 +1861,13 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
-                    Item itemResult= new Item();  // gai !!
+                    Item itemResult= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),
+                            c.getString(c.getColumnIndex(KEY_ITEM_NAME)),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_PRICE))),
+                            c.getString(c.getColumnIndex(KEY_ITEM_CONTACT)),
+                            c.getString(c.getColumnIndex(KEY_ITEM_DESCRIPTION)),
+                            Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_STATUS))));
                     result.add(itemResult);
                 } while (c.moveToNext());
             }

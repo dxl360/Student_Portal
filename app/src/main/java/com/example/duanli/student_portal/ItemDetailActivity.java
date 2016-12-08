@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -23,6 +24,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     int itemId;
     int userId;
     int reservationId=0;
+    int reservationStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         userId = ThisUser.getUserID();
         itemId = getIntent().getExtras().getInt("itemId");
+        System.out.println("itemId = " + itemId);
         spdh = SPDatabaseHelper.getInstance(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.item_toolbar);
         setSupportActionBar(toolbar);
@@ -52,7 +55,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         {
             inflater.inflate(R.menu.seller_detail, menu);
             reservationId=spdh.queryNewReserve(userId, itemId);
-            if (reservationId!=0) //has not been reserved
+            if (reservationId==0) //has not been reserved
             {
                 MenuItem reject = menu.findItem(R.id.reject);
                 reject.setVisible(false);
@@ -65,6 +68,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         else { //buyer
             inflater.inflate(R.menu.buyer_detail, menu);
             reservationId=spdh.queryReserveBuyer(userId, itemId);
+            reservationStatus=spdh.queryReserveStatus(userId, itemId);
             if (spdh.queryWatch(userId,itemId)) //has watched
             {
                 MenuItem watchlist = menu.findItem(R.id.watchlist);
@@ -77,6 +81,12 @@ public class ItemDetailActivity extends AppCompatActivity {
             }
             if (reservationId!=0) //has reserved
             {
+                if(reservationStatus ==1){
+                    Toast.makeText(ItemDetailActivity.this, "Reservation is rejected. Please cancel reservation and reserve the item again.", Toast.LENGTH_LONG).show();
+                }
+                if(reservationStatus ==2){
+                    Toast.makeText(ItemDetailActivity.this, "Reservation is accepted and the transaction is completed.", Toast.LENGTH_LONG).show();
+                }
                 MenuItem reserve = menu.findItem(R.id.reserve);
                 reserve.setVisible(false);
             }
@@ -91,24 +101,32 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int sellerId=spdh.querySeller(reservationId);
+        int sellerId=spdh.queryItem(itemId).getSellerID();
         int buyerId=spdh.queryBuyer(reservationId);
         switch (item.getItemId()) {
             case R.id.watchlist:
                 //watchlist
                 spdh.insertWatchlist(itemId,userId,sellerId);
+                Snackbar.make(getWindow().getDecorView(), "The item has been added to Watchlist.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 return true;
             case R.id.cancel_watchlist:
                 //cancel_watchlist
                 spdh.deleteWatchlist(itemId,userId);
+                Snackbar.make(getWindow().getDecorView(), "The item has been removed from Watchlist.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 return true;
             case R.id.reserve:
                 //reserve
                 spdh.insertReserve(itemId,sellerId,userId,0);
+                Snackbar.make(getWindow().getDecorView(), "The item has been added to Reservation List.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 return true;
             case R.id.cancel_reserve:
                 //cancel reserve
                 spdh.deleteReservation(reservationId);
+                Snackbar.make(getWindow().getDecorView(), "The item has been removed from Reservation List.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 return true;
             case R.id.edit_item:
                 Intent intent = new Intent(ItemDetailActivity.this, NewItemActivity.class);
@@ -148,21 +166,23 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
 
     private void item_content_Initialize(){
-        Item currentItem=spdh.queryItem(Integer.toString(itemId));
+        Item currentItem=spdh.queryItem(itemId);
         ImageView view = (ImageView)findViewById(R.id.item_backdrop);
         view.setImageResource(R.drawable.mask);
 
         TextView tvItemName = (TextView)findViewById(R.id.tvItemName);
         tvItemName.setText(currentItem.getItemName());
 
-        TextView tvItemType = (TextView)findViewById(R.id.tvItemType);
+        //TextView tvItemType = (TextView)findViewById(R.id.tvItemType);
         //tvItemType.setText(currentItem.getItemType());
 
         TextView tvItemPrice = (TextView)findViewById(R.id.tvItemPrice);
-        tvItemPrice.setText(currentItem.getPrice());
+        tvItemPrice.setText(String.valueOf(currentItem.getPrice()));
 
         TextView tvItemSeller = (TextView)findViewById(R.id.tvItemSeller);
-        tvItemSeller .setText(spdh.queryUserID(spdh.querySeller(reservationId)).getUserName());
+        int sellerID = spdh.queryItem(itemId).getSellerID();
+        tvItemSeller.setText(spdh.queryUserID(sellerID).getUserName());
+        //tvItemSeller .setText(spdh.queryUserID(spdh.querySeller(reservationId)).getUserName());
 
         TextView tvSellerContact = (TextView)findViewById(R.id.tvSellerContact);
         tvSellerContact.setText(currentItem.getContact());

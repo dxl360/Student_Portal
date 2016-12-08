@@ -168,8 +168,8 @@ public class EventDetailActivity extends AppCompatActivity {
 //        tvEventCapacity.setText(getResources().getString(R.string.demoEventCapacity));
         tvEventCapacity.setText(String.valueOf(current.getCapacity()));
 
-        TextView tvEventHashTag = (TextView) findViewById(R.id.tvEventHashTag);
-        tvEventHashTag.setText(getResources().getString(R.string.demoEventHashTag));
+        //TextView tvEventHashTag = (TextView) findViewById(R.id.tvEventHashTag);
+        //tvEventHashTag.setText(getResources().getString(R.string.demoEventHashTag));
 
         TextView tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
 //        tvEventDescription.setText(getResources().getString(R.string.demoEventDescription));

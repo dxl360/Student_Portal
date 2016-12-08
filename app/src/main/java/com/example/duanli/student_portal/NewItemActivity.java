@@ -13,22 +13,34 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
     Button Create;
     EditText etItemName,etPrice,etContact,etDescription;
-    String sellerName,itemName,price,contact,description;
+    String itemName,contact,description;
+    int sellerID, price,itemId, status;
+    SPDatabaseHelper spdh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
-
+        spdh = SPDatabaseHelper.getInstance(this);
         etItemName = (EditText) findViewById(R.id.etItemName);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etContact = (EditText) findViewById(R.id.etContact);
         etDescription = (EditText) findViewById(R.id.etDescription);
         Create = (Button) findViewById(R.id.button);
         Create.setOnClickListener(this);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        int edit = getIntent().getExtras().getInt("edit");
+        System.out.println("edit = " + edit);
+        if (getIntent().getExtras().getInt("edit")==1){
+            itemId = getIntent().getExtras().getInt("itemId");
+            System.out.println("itemId = " + itemId);
+            etItemName.setText(spdh.queryItem(itemId).getItemName());
+            etPrice.setText(String.valueOf(spdh.queryItem(itemId).getPrice()));
+            etContact.setText(spdh.queryItem(itemId).getContact());
+            etDescription.setText(spdh.queryItem(itemId).getDescription());
+            status = spdh.queryItem(itemId).getStatus();
+        }
     }
 
     @Override
@@ -38,16 +50,24 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(NewItemActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
-            sellerName = new User().getUserName();
+            sellerID = ThisUser.getUserID();
             itemName = etItemName.getText().toString();
-            price = etPrice.getText().toString();
+            price = Integer.parseInt(etPrice.getText().toString());
             contact = etContact.getText().toString();
             description = etDescription.getText().toString();
-            if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
-//            Item item = new Item(sellerName,itemName,price,contact,description);
-//            item.addItem();
+ //           if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
+            if (getIntent().getExtras().getInt("edit")==1){
+                Item item = new Item(itemId,itemName,sellerID,price,contact,description,status);
+                spdh.updateItem(item);
+            }
+            else {
+                System.out.println("edit is "+getIntent().getExtras().getInt("edit"));
+                status = 0;
+                Item item = new Item(-1,itemName,sellerID,price,contact,description,status);
+                spdh.insertItem(item);
+            }
             finish();
-            startActivity(new Intent(this, ItemDetailActivity.class));
+            startActivity(new Intent(this, SlidingMenu.class));
         }
 
     }
