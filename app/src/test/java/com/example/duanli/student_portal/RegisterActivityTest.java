@@ -35,13 +35,35 @@ public class RegisterActivityTest {
     }
 
     @Test
-    public void emailValidator_CorrectEmailSimple_ReturnsTrue() {
+    public void ValidRegistrationTest() {
         RegisterActivity ra = new RegisterActivity();
+
+        //Test false
+
+        //test password does not match confirmation password
         ra.saveUser("xx@case.edu", "bb", "cc", true);
         assertThat(ra.success, is(false));
-        ra.saveUser("fff@case.edu", "ff", "ff", true);
-        assertThat(ra.success, is(true));
-        ra.saveUser("", "vv", "vv", true);
+        //test invalid password
+        ra.saveUser("fff@case.edu", "bb", "bb", true);
         assertThat(ra.success, is(false));
+        //test invalid username
+        ra.saveUser("fff", "bb", "bb", true);
+        assertThat(ra.success, is(false));
+
+        //Test empty
+
+        //test empty username
+        ra.saveUser("", "bb", "bb", true);
+        assertThat(ra.success, is(false));
+        //test empty password
+        ra.saveUser("fff@case.edu", "","", true);
+        assertThat(ra.success, is(false));
+
+        //Test true
+
+        //test valid password and username
+        //length 8-20, at least 1 uppercase, 1 lowercase, 1 number
+        ra.saveUser("fff@case.edu", "Abc123456", "Abc123456", true);
+        assertThat(ra.success, is(true));
     }
 }

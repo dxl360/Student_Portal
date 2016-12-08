@@ -89,17 +89,17 @@ public class Item implements Serializable {
         this.description = Description;
         this.status = Status;
     }
-
-    public Item(int itemID, String ItemName,String itemPicture, int SellerID,int Price,String Contact,String Description, int status) {
-        this.itemID = itemID;
-        this.itemName = ItemName;
-        this.itemPicture = itemPicture;
-        this.sellerID = SellerID;
-        this.price = Price;
-        this.contact = Contact;
-        this.description = Description;
-        this.status = status;
-    }
+//
+//    public Item(int itemID, String ItemName,String itemPicture, int SellerID,int Price,String Contact,String Description, int status) {
+//        this.itemID = itemID;
+//        this.itemName = ItemName;
+//        this.itemPicture = itemPicture;
+//        this.sellerID = SellerID;
+//        this.price = Price;
+//        this.contact = Contact;
+//        this.description = Description;
+//        this.status = status;
+//    }
 
 
 }
