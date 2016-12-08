@@ -10,8 +10,8 @@ import android.widget.Button;
 
 import org.junit.Test;
 
-//public class EventListViewTest extends ActivityUnitTestCase<EventListViewActivity> {
-
+public class EventListViewTest  {
+//  extends ActivityUnitTestCase<EventListViewActivity>
 //    private Intent mMainIntent;
 //
 //
@@ -24,7 +24,7 @@ import org.junit.Test;
 //        super.setUp();
 //        mMainIntent = new Intent(Intent.ACTION_MAIN);
 //    }
-
+//
 //    @Test
 //    public void testButton () {
 //        EventListViewActivity activity = startActivity(mMainIntent, null, null);
@@ -34,4 +34,4 @@ import org.junit.Test;
 //        assertNotNull(i);
 //        //assertTrue(isFinishCalled());
 //    }
-//}
+}

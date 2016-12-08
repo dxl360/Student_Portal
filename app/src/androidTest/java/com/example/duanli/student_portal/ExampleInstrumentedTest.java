@@ -16,14 +16,6 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 
-//Test the EventActivity Class. This class contains the following method, including method1, method2, method3...
-//Test onCreate() method.
-//Test0
-//(insert your code here)
-////Test1
-//(insert your code here)
-//Test many
-
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
