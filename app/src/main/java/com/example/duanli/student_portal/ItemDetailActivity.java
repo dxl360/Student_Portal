@@ -118,13 +118,15 @@ public class ItemDetailActivity extends AppCompatActivity {
                 return true;
             case R.id.reserve:
                 //reserve
-                spdh.insertReserve(itemId,sellerId,userId,0);
+                spdh.insertReserve(itemId,sellerId,userId,0);//new reservation status = 0
+                spdh.updateItemStatus(itemId,1);//reserved item status = 1
                 Snackbar.make(getWindow().getDecorView(), "The item has been added to Reservation List.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 return true;
             case R.id.cancel_reserve:
                 //cancel reserve
                 spdh.deleteReservation(reservationId);
+                spdh.updateItemStatus(itemId,0);//unreserved/available item status = 0
                 Snackbar.make(getWindow().getDecorView(), "The item has been removed from Reservation List.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 return true;
@@ -136,13 +138,15 @@ public class ItemDetailActivity extends AppCompatActivity {
                 return true;
             case R.id.reject:
                 //reject_reservation
-                spdh.updateReservationStatus(reservationId,1);
+                spdh.updateReservationStatus(reservationId,1);//rejected reservation status = 1
+                spdh.updateItemStatus(itemId,0);//unreserved/available item status = 0
                 Snackbar.make(getWindow().getDecorView(),"The reservation has been rejected.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 return true;
             case R.id.resolve:
                 //resolve_reservation
-                spdh.updateReservationStatus(reservationId,2);
+                spdh.updateReservationStatus(reservationId,2);//resolved reservation status = 2
+                spdh.updateItemStatus(itemId,2);//resolved/sold item status = 2
                 Snackbar.make(getWindow().getDecorView(),"The reservation has been resolved.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 return true;
@@ -154,7 +158,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 return true;
             case R.id.delete_item:
                 //delete in database
-                startActivity(new Intent(ItemDetailActivity.this, ManageActivity.class));
+                //startActivity(new Intent(ItemDetailActivity.this, ManageActivity.class));
                 spdh.deleteItem(itemId);
                 //startActivity(new Intent(ItemDetailActivity.this, MainActivity.class));
                 Snackbar.make(getWindow().getDecorView(),"The item has been deleted.", Snackbar.LENGTH_LONG)

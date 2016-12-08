@@ -95,7 +95,4 @@ public class EventListViewActivity extends Fragment{
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
 }

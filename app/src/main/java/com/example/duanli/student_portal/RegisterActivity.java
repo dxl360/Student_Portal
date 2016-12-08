@@ -45,31 +45,55 @@ public class RegisterActivity extends AppCompatActivity {
         //loginDataBaseAdapter = loginDataBaseAdapter.open();
         // check if any of the fields are vacant
         if (userName.equals("") || password.equals("") || confirmPassword.equals("")) {
-            Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();
+            if (!istest){ Toast.makeText(getApplicationContext(), "Field Vacant", Toast.LENGTH_LONG).show();}
             success = false;
             return;
         }
         // check if both password matches
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
+            if (!istest){Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();}
             success = false;
             return;
         } else {
-            if (!istest){
-                User user = new User(-1, userName, password);
-                // Save the Data in Database
-                spdh.insertUser(user);
-            }
-            Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();
-            success = true;
+                if(!isValidEmail(userName)){
+                    if (!istest){Toast.makeText(RegisterActivity.this, "Username is not a valid email address", Toast.LENGTH_LONG).show();}
+                    success = false;
+                }
+                if(!isValidPassword(password)){
+                    if (!istest){Toast.makeText(RegisterActivity.this, "Password length should between 8 and 20 with at least 1 number, 1 lower case letter, 1 upper case letter", Toast.LENGTH_LONG).show();}
+                    success = false;
+                }
+                if (isValidEmail(userName) && isValidPassword(password)){
+                    User user = new User(ThisUser.getUserID(), userName, password);
+                    if (!istest){spdh.insertUser(user);
+                    Toast.makeText(getApplicationContext(), "Account Successfully Created ", Toast.LENGTH_LONG).show();}
+                    success = true;
+                    if (!istest){startActivity(new Intent(getApplicationContext(), LoginActivity.class));}
+                }
+
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-        //loginDataBaseAdapter.close();
+    //email has to contain @
+    //Underscore and dot can't be at the end or start of a email address
+    //Underscore and dot can't be next to each other (e.g user_.name).
+    //Underscore or dot can't be used multiple times in a row (e.g user__name / user..name).name
+    public static boolean isValidEmail(String s) {
+        String EMAIL_REGEX = "^(?![_.])[a-zA-Z0-9._](?!.*[_.]{2})(.*)([@]{1})(.{1,})(\\.)(.{1,})+(?<![_.])$";
+        if (!s.equals("")) {
+            if (s.matches(EMAIL_REGEX))
+                return true;}
+        return false;
+    }
+
+    //password length should between 8 and 20
+    //at least 1 number, 1 lower case letter, 1 upper case letter
+    public static boolean isValidPassword(String s){
+        String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,20}$";
+        if (!s.equals("")) {
+            if (s.matches(PASSWORD_REGEX)) {
+                return true;}}
+        return false;
     }
 
     public void createInDatabase() {
@@ -90,6 +114,5 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

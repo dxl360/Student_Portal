@@ -23,12 +23,15 @@ public class Event implements Serializable {
     public int getOrganizerID() {
         return organizerID;
     }
-
     public void setOrganizerID(int organizerID) {
         this.organizerID = organizerID;
     }
 
     public int getEventID() {return eventID;}
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
 
     public String getEventName() {
         return eventName;
@@ -77,8 +80,8 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public String getPosterURL(){ return posterURL;}
-    public void setPosterURL(String posterURL) {this.posterURL=posterURL;}
+//    public String getPosterURL(){ return posterURL;}
+//    public void setPosterURL(String posterURL) {this.posterURL=posterURL;}
 
     public Event(){}
 

@@ -39,10 +39,12 @@ public class User {
     }
 
     public String getUserName(){return this.userName;}
+    public void setUserName(String userName){this.userName = userName;}
 
     public String getPassword(){return this.password;}
 
     public int getUserID() {return this.userID;}
+    public void setUserID(int userID){this.userID = userID;}
 
     public int getGender() {return gender;}
 
@@ -51,10 +53,13 @@ public class User {
     public String getEmail() {return email;}
 
     public double getRate(){return rate;}
+    public void setRate(double rate){this.rate = rate;}
 
     public int getNumberRate(){return numberRate;}
+    public void setNumberRate(int numberRate){this.numberRate = numberRate;}
 
     public String getContact(){return contact;}
+    public void setContact(String contact){this.contact = contact;}
 
     public boolean verifyPassword(String input)
     {
@@ -101,9 +106,6 @@ public class User {
     }
 
     public void updateNOR() {this.numberRate++;}
-
-
-
 
 
 }

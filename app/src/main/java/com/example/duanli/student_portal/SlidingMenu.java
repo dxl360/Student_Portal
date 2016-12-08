@@ -92,6 +92,7 @@ public class SlidingMenu extends AppCompatActivity
         }
         else if (id == R.id.Profile) {
             ProfileActivity fragment = new ProfileActivity();
+            //EditProfileActivity fragment = new EditProfileActivity();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frag_container, fragment);
