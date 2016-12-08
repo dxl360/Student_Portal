@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * @author Chris Tsuei
  * Exchange Fragment which will hold a preview of exchange items
@@ -18,15 +20,16 @@ import android.widget.TextView;
 public class ExchangeFragment extends Fragment {
 
     FloatingActionButton addItem = null;
-
+    SPDatabaseHelper spdh;
+    ArrayList<Item> cells;
+    int size;
     ImageButton left = null;
     ImageButton right = null;
     int items = 0;
     int current = 0;
-
-    String nameScroll [];
-    String descriptionScroll[];
-
+    String nameScroll [] = null;
+    String descriptionScroll[] = null;
+    int id[] = null;
     TextView Title = null;
 
     // empty constructor
@@ -42,23 +45,27 @@ public class ExchangeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_exchange, container, false);
-
+        spdh = SPDatabaseHelper.getInstance(this.getContext());
         // button interactions (click the plus button)
         addItem = (FloatingActionButton) rootView.findViewById(R.id.fabAddItem);
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addItem = new Intent(getActivity(), NewItemActivity.class);
-                addItem.putExtra("edit", 0);
                 getActivity().startActivity(addItem);
             }
         });
 
         Title = (TextView) rootView.findViewById(R.id.topItem);
 
-        nameScroll = new String[4];
-        descriptionScroll = new String[4];
+        // Fetch data from DB to display
+        cells = spdh.retrieveItems(0);
+        size = cells.size();
+        nameScroll = new String[size];
+        descriptionScroll = new String[size];
+        id = new int[size];
         items = 0;
+
 
         topEvents();
         left = (ImageButton) rootView.findViewById(R.id.left_nav);
@@ -77,18 +84,29 @@ public class ExchangeFragment extends Fragment {
                 right();
             }
         });
+
+        Title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewEvent = new Intent(getActivity(), ItemDetailActivity.class);
+                viewEvent.putExtra("itemId", id[current]);
+                startActivity(viewEvent);
+
+            }
+        });
+
         // Inflate the layout for this fragment
         return rootView;
     }
 
     public void topEvents() {
 
-        for(int i = 0; i < 4; i++) {
-
-            this.nameScroll[i] = Integer.toString(i);
-            this.descriptionScroll[i] = new String("desc" + i);
+        for(int i = 0; i < size; i++) {
+            this.nameScroll[i] = "ItemName: "+cells.get(i).getItemName();
+            this.descriptionScroll[i] = "Price: "+String.valueOf(cells.get(i).getPrice());
+            this.id[i] = cells.get(i).getItemID();
         }
-        items = 4;
+        items = size;
         current = 0;
 
         Title.setText(nameScroll[current] + '\n' + descriptionScroll[current]);

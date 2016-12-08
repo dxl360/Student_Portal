@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0b0b0b"
-    tools:context="com.example.duanli.student_portal.eventsFragment">
+    tools:context="com.example.duanli.student_portal.EventFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -26,6 +26,20 @@
         android:alpha=".75"
         android:scaleType="centerCrop"/>
 
+    <ImageButton
+        android:id="@+id/left_nav"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|left"
+        android:src="@mipmap/ic_chevron_left_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/right_nav"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|right"
+        android:src="@mipmap/ic_chevron_right_black_24dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,12 +57,15 @@
         <TextView
             android:text="@string/event_preview"
             android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
             android:layout_height="200dp"
             android:textColor="@android:color/white"
             android:id="@+id/topEvent"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="onClick"
+            android:clickable="true"/>
 
     </LinearLayout>
 

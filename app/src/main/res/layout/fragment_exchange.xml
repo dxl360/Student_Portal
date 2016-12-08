@@ -1,3 +1,71 @@
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#0b0b0b"-->
+    <!--tools:context="com.example.duanli.student_portal.ExchangeFragment">-->
+
+    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--app:srcCompat="@android:drawable/ic_input_add"-->
+        <!--android:id="@+id/fabAddItem"-->
+        <!--app:backgroundTint="@android:color/transparent"-->
+        <!--app:elevation="24dp"-->
+        <!--app:rippleColor="@android:color/transparent"-->
+        <!--android:layout_gravity="end|right"/>-->
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/exchangeImage"-->
+        <!--android:src="@drawable/item3"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:alpha=".75"/>-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/left_nav"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_gravity="center_vertical|left"-->
+        <!--android:src="@mipmap/ic_chevron_left_black_24dp" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/right_nav"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_gravity="center_vertical|right"-->
+        <!--android:src="@mipmap/ic_chevron_right_black_24dp" />-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+        <!--<TextView-->
+            <!--android:text="Exchange"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/eventsHeader"-->
+            <!--android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="28sp"-->
+            <!--android:padding="20dp"/>-->
+
+        <!--<TextView-->
+            <!--android:text="@string/item_preview"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:id="@+id/topItem"-->
+            <!--android:textSize="18sp" />-->
+    <!--</LinearLayout>-->
+
+<!--</FrameLayout>-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -58,11 +126,14 @@
         <TextView
             android:text="@string/item_preview"
             android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
             android:layout_height="200dp"
             android:textColor="@android:color/white"
             android:id="@+id/topItem"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="onClick"
+            android:clickable="true"/>
     </LinearLayout>
 
 </FrameLayout>
