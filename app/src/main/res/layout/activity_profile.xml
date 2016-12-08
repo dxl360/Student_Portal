@@ -49,7 +49,7 @@
                 android:inputType="text"
                 android:layout_marginTop="30dp"
                 android:hint="Username"
-                android:id="@+id/etUsername"/>
+                android:id="@+id/tvUsername"/>
 
 
             <TextView
@@ -58,39 +58,39 @@
                 android:inputType="text"
                 android:layout_marginTop="30dp"
                 android:hint="abc123"
-                android:id="@+id/userNameFromDB"/>
+                android:id="@+id/etUsername"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="phone"
-                android:layout_marginTop="30dp"
-                android:hint="Phone number"
-                android:id="@+id/etPhoneNumber"/>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:inputType="phone"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:hint="Phone number"-->
+                <!--android:id="@+id/etPhoneNumber"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:inputType="text"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:hint="N/A"-->
+                <!--android:id="@+id/etContactFromDB"/>-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:layout_marginTop="30dp"
-                android:hint="N/A"
-                android:id="@+id/etContactFromDB"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="30dp"
                 android:hint="Email"
-                android:id="@+id/etEmail"/>
+                android:id="@+id/tvPassword"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:layout_marginTop="30dp"
                 android:hint="abc123@case.edu"
-                android:id="@+id/etEmailFromDB"/>
+                android:id="@+id/etPassword"/>
 
         </LinearLayout>
     </ScrollView>

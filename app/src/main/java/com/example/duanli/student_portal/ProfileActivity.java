@@ -1,14 +1,12 @@
 package com.example.duanli.student_portal;
 
 import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
  * @author
@@ -16,6 +14,7 @@ import android.widget.Toast;
  */
 public class ProfileActivity extends Fragment {
 
+    SPDatabaseHelper spdh;
     // empty constructor
     public ProfileActivity() {
     }
@@ -32,14 +31,14 @@ public class ProfileActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.activity_profile, container, false);
-
-
+        spdh = SPDatabaseHelper.getInstance(this.getContext());
         // linking xml objects to actual fields
+        rootView.findViewById(R.id.tvUsername);
+        rootView.findViewById(R.id.tvPassword);
         final TextView etUsername = (TextView) rootView.findViewById(R.id.etUsername);
-        final TextView etPhoneNumber = (TextView) rootView.findViewById(R.id.etPhoneNumber);
-        final TextView etEmail = (TextView) rootView.findViewById(R.id.etEmail);
-
-
+        etUsername.setText(spdh.queryUserID(ThisUser.getUserID()).getUserName());
+        final TextView etPassword = (TextView)rootView.findViewById(R.id.etPassword);
+        etPassword.setText(spdh.queryUserID(ThisUser.getUserID()).getPassword());
         // button interactions (onClick)
         final ImageView ivEdit = (ImageView) rootView.findViewById(R.id.ivEdit);
         ivEdit.setOnClickListener(new View.OnClickListener() {
@@ -50,33 +49,9 @@ public class ProfileActivity extends Fragment {
                         getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frag_container, fragment);
                 fragmentTransaction.commit();
-
-                // fetch the Password form database for respective user name
-
-
-                // check if the Stored password matches with  Password entered by user
-
-
             }
 
         });
-        String userName = etUsername.getText().toString();
-
-  /*      User currentUser = spdh.queryUser(userName);
-        String storedPassword = currentUser.getPassword();
-        String phoneNumber = currentUser.getContact();
-        String email = currentUser.getEmail();
-        userName = currentUser.getEmail().substring(0, 3);
-        */
-        TextView etUsernameFromDB = (TextView) rootView.findViewById(R.id.userNameFromDB);
-        TextView etEmailFromDB = (TextView) rootView.findViewById(R.id.etEmailFromDB);
-        TextView etContactFromDB = (TextView) rootView.findViewById(R.id.etContactFromDB);
-        etUsernameFromDB.setText("abc123");
-        etEmailFromDB.setText("abc123@case.edu");
-        etContactFromDB.setText("N/A");
-        etUsername.setText("Username");
-        etPhoneNumber.setText("Phone number");
-        etEmail.setText("Email");
         return rootView;
     }
 }

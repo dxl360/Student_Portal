@@ -47,7 +47,7 @@
 
 
 <TextView
-                android:id="@+id/etUsername"
+                android:id="@+id/tvUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -56,7 +56,7 @@
                 /> />
 
             <EditText
-                android:id="@+id/etABC123"
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -66,42 +66,42 @@
 
                 />
 
+            <!--<TextView-->
+                <!--android:id="@+id/etContact"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:inputType="text"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:hint="Phone number"-->
+                 <!--/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/etNA"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:inputType="phone"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:hint="Enter your phone number."/>-->
+
+
             <TextView
-                android:id="@+id/etContact"
+                android:id="@+id/tvPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:layout_marginTop="30dp"
-                android:hint="Phone number"
+                android:hint="Password"
                  />
 
             <EditText
-                android:id="@+id/etNA"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="phone"
+                android:inputType="text"
                 android:layout_marginTop="30dp"
                 android:textSize="15sp"
-                android:hint="Enter your phone number."/>
-
-
-            <TextView
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="30dp"
-                android:hint="User email"
-                 />
-
-            <EditText
-                android:id="@+id/etABC123Email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="30dp"
-                android:textSize="15sp"
-                android:hint="Enter your email address."/>
+                android:hint="Enter your password."/>
 
             <Button
                 android:id="@+id/bOK"
