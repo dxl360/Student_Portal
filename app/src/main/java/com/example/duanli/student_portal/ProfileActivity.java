@@ -1,5 +1,7 @@
 package com.example.duanli.student_portal;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ImageView;
+
+import com.google.zxing.WriterException;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.ByteMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 /**
  * @author
@@ -35,12 +43,36 @@ public class ProfileActivity extends Fragment {
         // linking xml objects to actual fields
         rootView.findViewById(R.id.tvUsername);
         rootView.findViewById(R.id.tvPassword);
+        String currentUserName = spdh.queryUserID(ThisUser.getUserID()).getUserName();
         final TextView etUsername = (TextView) rootView.findViewById(R.id.etUsername);
-        etUsername.setText(spdh.queryUserID(ThisUser.getUserID()).getUserName());
+        etUsername.setText(currentUserName);
         final TextView etPassword = (TextView)rootView.findViewById(R.id.etPassword);
         etPassword.setText(spdh.queryUserID(ThisUser.getUserID()).getPassword());
         // button interactions (onClick)
         final ImageView ivEdit = (ImageView) rootView.findViewById(R.id.ivEdit);
+
+        ImageView profilePicture = (ImageView) rootView.findViewById(R.id.circleimage);
+
+        try {
+            // generate a 150x150 QR code
+            QRCodeWriter writer = new QRCodeWriter();
+            int size = 512;
+
+            ByteMatrix bitMatrix = writer.encode("This User is" + currentUserName,BarcodeFormat.QR_CODE, size, size);
+            int width = bitMatrix.width();
+            Bitmap bmp = Bitmap.createBitmap(width, width, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < width; y++) {
+                    bmp.setPixel(y, x, bitMatrix.get(x, y)==0 ? Color.BLACK : Color.WHITE);
+                }
+            }
+            if (bmp != null) {
+                profilePicture.setImageBitmap(bmp);
+            }
+        } catch (WriterException e) {
+            System.out.println("Error generating QR code");
+        }
+
         ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,4 +86,23 @@ public class ProfileActivity extends Fragment {
         });
         return rootView;
     }
+
+
+//    public Bitmap generateQrCode(String content) throws WriterException {
+//        try {
+//            // generate a 150x150 QR code
+//            QRCodeWriter writer = new QRCodeWriter();
+//            ByteMatrix bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 150, 150);
+//            int width = bitMatrix.width();
+//            int height = bitMatrix.height();
+//            Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+//            if (bm != null) {
+//                return bm;
+//                //image_view.setImageBitmap(bm);
+//            }
+//        } catch (WriterException e) {
+//            System.out.println("Error generating QR code");
+//        }
+//    }
+
 }

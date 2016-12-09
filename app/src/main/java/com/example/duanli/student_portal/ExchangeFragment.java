@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * Exchange Fragment which will hold a preview of exchange items
  * called by the main activity fragment for display on the homepage
  */
-public class ExchangeFragment extends Fragment {
+public class ExchangeFragment extends Fragment implements View.OnTouchListener {
 
     FloatingActionButton addItem = null;
     SPDatabaseHelper spdh;
@@ -72,19 +73,8 @@ public class ExchangeFragment extends Fragment {
         left = (ImageButton) rootView.findViewById(R.id.left_nav);
         right = (ImageButton) rootView.findViewById(R.id.right_nav);
 
-        left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                left();
-            }
-        });
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                right();
-            }
-        });
+        left.setOnTouchListener(this);
+        right.setOnTouchListener(this);
 
         Title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +88,34 @@ public class ExchangeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
+        if(v == left)
+        {
+            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            {
+                left();
+                v.setAlpha(1f);
+            }
+            else
+            { v.setAlpha(.5f);}
+            return false;
+        }
+        if(v == right)
+        {
+            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            {
+                right();
+                v.setAlpha(1f);
+            }
+            else
+            { v.setAlpha(.5f);}
+            return false;
+        }
+        return true;
     }
 
     public void topEvents() {

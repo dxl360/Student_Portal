@@ -33,7 +33,7 @@
         android:id="@+id/left_nav"
         android:layout_width="40dp"
         android:layout_height="70dp"
-        android:alpha=".6"
+        android:alpha=".5"
         android:layout_gravity="center_vertical"
         android:src="@drawable/left"
         android:background="@null" />
@@ -42,7 +42,7 @@
         android:id="@+id/right_nav"
         android:layout_width="40dp"
         android:layout_height="70dp"
-        android:alpha=".6"
+        android:alpha=".5"
         android:layout_gravity="center_vertical|end"
         android:src="@drawable/right"
         android:background="@null"/>
