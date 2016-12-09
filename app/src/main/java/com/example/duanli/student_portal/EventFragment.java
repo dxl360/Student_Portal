@@ -58,6 +58,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ import java.util.ArrayList;
  * Event Fragment which will hold a preview of event items
  * called by the main activity fragment for display on the homepage
  */
-public class EventFragment extends Fragment {
+public class EventFragment extends Fragment implements View.OnTouchListener{
 
     FloatingActionButton addEvent = null;
     SPDatabaseHelper spdh;
@@ -122,19 +123,8 @@ public class EventFragment extends Fragment {
         left = (ImageButton) rootView.findViewById(R.id.left_nav);
         right = (ImageButton) rootView.findViewById(R.id.right_nav);
 
-        left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                left();
-            }
-        });
-
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                right();
-            }
-        });
+        left.setOnTouchListener(this);
+        right.setOnTouchListener(this);
 
         Title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +139,34 @@ public class EventFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
+        if(v == left)
+        {
+            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            {
+                left();
+                v.setAlpha(1f);
+            }
+            else
+            { v.setAlpha(.5f);}
+            return false;
+        }
+        if(v == right)
+        {
+            if(event.getAction() == MotionEvent.ACTION_DOWN)
+            {
+                right();
+                v.setAlpha(1f);
+            }
+            else
+            { v.setAlpha(.5f);}
+            return false;
+        }
+        return true;
+    }
+
 
     public void topEvents() {
 
@@ -161,6 +179,7 @@ public class EventFragment extends Fragment {
         current = 0;
 
         Title.setText(nameScroll[current] + '\n' + descriptionScroll[current]);
+
     }
 
     public void right() {
