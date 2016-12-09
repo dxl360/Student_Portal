@@ -14,10 +14,10 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_menu_today"
-        app:backgroundTint="?android:attr/colorPrimaryDark"
-        app:fabSize="mini"
-        app:rippleColor="?android:attr/colorBackground" />
+        app:srcCompat="@drawable/calendar"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:rippleColor="?android:attr/colorBackground"
+        app:elevation="7dp" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
