@@ -13,6 +13,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,9 +26,10 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     private static SPDatabaseHelper sInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = "studentPortalDatabase";
+    private static final String DATABASE_NAME = "studentPortalDatabases";
     private static final int DATABASE_VERSION = 1;
-
+    private static final String DB_PATH_SUFFIX = "/databases/";
+    static Context ctx;
     // Table Names
     private static final String TABLE_USER = "user";
     private static final String TABLE_ITEM = "item";
@@ -124,6 +130,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         // See this article for more information: http://bit.ly/6LRzfx
         if (sInstance == null) {
             sInstance = new SPDatabaseHelper(context.getApplicationContext());
+            sInstance.openDataBase();
         }
         return sInstance;
     }
@@ -131,6 +138,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     public SPDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         System.out.println("test line");
+        ctx=context;
     }
 
     // Called when the database connection is being configured.
@@ -182,7 +190,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 KEY_EVENT_CAPACITY + " INTEGER" + "," +
                 KEY_EVENT_DESCRIPTION + " TEXT " + "," +
                 "FOREIGN KEY(" + KEY_EVENT_ORGANIZER + ") REFERENCES " + TABLE_USER + "(" + KEY_USER_ID + ")" +
-                ")";;
+                ")";
 
         String CREATE_RESERVE_TABLE = "CREATE TABLE " + RELATIONSHIP_RESERVE +
                 "(" +
@@ -278,6 +286,47 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + RELATIONSHIP_WATCHLIST);
             onCreate(db);
         }
+    }
+
+    public void copyDatabaseFromAsset() throws IOException {
+        InputStream myInput=ctx.getAssets().open(DATABASE_NAME);
+        String outFileName=getDatabasePath();
+        File f = new File(ctx.getApplicationInfo().dataDir+DB_PATH_SUFFIX);
+        if (!f.exists())
+            f.mkdir();
+
+        OutputStream myOutput =new FileOutputStream(outFileName);
+
+        byte[] buffer= new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer)) > 0) {
+            myOutput.write(buffer, 0, length);
+        }
+
+
+// Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
+    }
+
+    public SQLiteDatabase openDataBase() throws SQLException{
+        File dbFile = ctx.getDatabasePath(DATABASE_NAME);
+        if (!dbFile.exists()) {
+            try {
+                copyDatabaseFromAsset();
+                System.out.println("Copying sucess from Assets folder");
+            } catch (IOException e) {
+                throw new RuntimeException("Error creating source database", e);
+            }
+        }
+        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.CREATE_IF_NECESSARY);
+    }
+
+
+    private static String getDatabasePath() {
+        return ctx.getApplicationInfo().dataDir + DB_PATH_SUFFIX
+                + DATABASE_NAME;
     }
 
 
@@ -480,29 +529,29 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return true;
     }
 
-    // Insert a rating into the database
-    public boolean insertRating(int reservationId, int buyer, int seller, double score) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        try {
-            ContentValues values = new ContentValues();
-            values.put(KEY_RATING_SCORE, score);
-            values.put(KEY_RATING_BUYER, buyer);
-            values.put(KEY_RATING_SELLER, seller);
-            values.put(KEY_RATING_RESERVATION, reservationId);
-            //check if this relationship already exists
-            //
-            //
-            //
-            db.insertOrThrow(RELATIONSHIP_RATING, null, values);
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            System.out.println("Error while create new rating to database");
-        } finally {
-            db.endTransaction();
-        }
-        return true;
-    }
+//    // Insert a rating into the database
+//    public boolean insertRating(int reservationId, int buyer, int seller, double score) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        db.beginTransaction();
+//        try {
+//            ContentValues values = new ContentValues();
+//            values.put(KEY_RATING_SCORE, score);
+//            values.put(KEY_RATING_BUYER, buyer);
+//            values.put(KEY_RATING_SELLER, seller);
+//            values.put(KEY_RATING_RESERVATION, reservationId);
+//            //check if this relationship already exists
+//            //
+//            //
+//            //
+//            db.insertOrThrow(RELATIONSHIP_RATING, null, values);
+//            db.setTransactionSuccessful();
+//        } catch (Exception e) {
+//            System.out.println("Error while create new rating to database");
+//        } finally {
+//            db.endTransaction();
+//        }
+//        return true;
+//    }
 
     // Insert a organize into the database
     public boolean insertOrganize(int eventId, int organizer) {
@@ -570,27 +619,27 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return true;
     }
 
-    // Insert a watchlist into the database
-    public boolean insertPermit(int eventId, int participant) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        try {
-            ContentValues values = new ContentValues();
-            values.put(KEY_PERMIT_EVENT, eventId);
-            values.put(KEY_PERMIT_PARTICIPANT, participant);
-            //check if this relationship already exists
-            //
-            //
-            //
-            db.insertOrThrow(RELATIONSHIP_PERMIT, null, values);
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            System.out.println("Error while create new permit to database");
-        } finally {
-            db.endTransaction();
-        }
-        return true;
-    }
+//    // Insert a permission into the database
+//    public boolean insertPermit(int eventId, int participant) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        db.beginTransaction();
+//        try {
+//            ContentValues values = new ContentValues();
+//            values.put(KEY_PERMIT_EVENT, eventId);
+//            values.put(KEY_PERMIT_PARTICIPANT, participant);
+//            //check if this relationship already exists
+//            //
+//            //
+//            //
+//            db.insertOrThrow(RELATIONSHIP_PERMIT, null, values);
+//            db.setTransactionSuccessful();
+//        } catch (Exception e) {
+//            System.out.println("Error while create new permit to database");
+//        } finally {
+//            db.endTransaction();
+//        }
+//        return true;
+//    }
     /** Update the User Table, the method takes userI as input
      *  No Foreign key involved in the User Table
      *  The method use Username to locate the user
@@ -846,19 +895,19 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return result;
     }
 
-    public int queryReserve(int sellerID, int buyerID){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
-                KEY_RESERVE_SELLER+" = '"+Integer.toString(sellerID)+"'"+
-                " AND "+KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'", null);
-        if(c.getCount()<1) // itemName Not Exist
-        {
-            c.close();
-            return 0;
-        }
-        c.moveToFirst();
-        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
-    }
+//    public int queryReserve(int sellerID, int buyerID){
+//        SQLiteDatabase db = getWritableDatabase();
+//        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+//                KEY_RESERVE_SELLER+" = '"+Integer.toString(sellerID)+"'"+
+//                " AND "+KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'", null);
+//        if(c.getCount()<1) // itemName Not Exist
+//        {
+//            c.close();
+//            return 0;
+//        }
+//        c.moveToFirst();
+//        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
+//    }
 
     public int queryReserveBuyer(int buyerID, int itemID){
         SQLiteDatabase db = getWritableDatabase();
@@ -900,18 +949,18 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_BUYER)));
     }
 
-    public int querySeller(int reservationId){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
-                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
-        if(c.getCount()<1) // itemName Not Exist
-        {
-            c.close();
-            return 0;
-        }
-        c.moveToFirst();
-        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_SELLER)));
-    }
+//    public int querySeller(int reservationId){
+//        SQLiteDatabase db = getWritableDatabase();
+//        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+//                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
+//        if(c.getCount()<1) // itemName Not Exist
+//        {
+//            c.close();
+//            return 0;
+//        }
+//        c.moveToFirst();
+//        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_SELLER)));
+//    }
 
     public int queryNewReserve(int sellerID, int itemID){
         SQLiteDatabase db = getWritableDatabase();
@@ -928,18 +977,18 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
     }
 
-    public int queryReservationStatus(int reservationId){
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
-                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
-        if(c.getCount()<1) // itemName Not Exist
-        {
-            c.close();
-            return 0;
-        }
-        c.moveToFirst();
-        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_STATUS)));
-    }
+//    public int queryReservationStatus(int reservationId){
+//        SQLiteDatabase db = getWritableDatabase();
+//        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+//                KEY_RESERVE_ID+" = '"+reservationId+"'", null);
+//        if(c.getCount()<1) // itemName Not Exist
+//        {
+//            c.close();
+//            return 0;
+//        }
+//        c.moveToFirst();
+//        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_STATUS)));
+//    }
 
     public boolean queryWatch(int buyerId, int itemID){
         SQLiteDatabase db = getWritableDatabase();
@@ -1081,20 +1130,20 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         }
         return true;
     }
-
-    //Check permit
-    public boolean queryPermit(int participant, int event)
-    {
-        LinkedList<Integer> result= new LinkedList<Integer>();
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_PERMIT+" WHERE "+KEY_PERMIT_PARTICIPANT+" = '"+participant+"'" + " AND "+ KEY_PERMIT_EVENT+" = '"+event+"'",null);
-        if(c.getCount()<1) // seller didn't create any sell
-        {
-            c.close();
-            return false;
-        }
-        return true;
-    }
+//
+//    //Check permit
+//    public boolean queryPermit(int participant, int event)
+//    {
+//        LinkedList<Integer> result= new LinkedList<Integer>();
+//        SQLiteDatabase db = getWritableDatabase();
+//        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_PERMIT+" WHERE "+KEY_PERMIT_PARTICIPANT+" = '"+participant+"'" + " AND "+ KEY_PERMIT_EVENT+" = '"+event+"'",null);
+//        if(c.getCount()<1) // seller didn't create any sell
+//        {
+//            c.close();
+//            return false;
+//        }
+//        return true;
+//    }
 
     //return the linked list of all item ids that the seller created
     public LinkedList<Integer> querySell(int sellerID)
@@ -1190,13 +1239,13 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return rows;
     }
 
-    public int deletePermission(int event, int participant){
-        SQLiteDatabase db = getWritableDatabase();
-        String whereClause= KEY_PERMIT_EVENT+" = ?"+ " AND "+ KEY_PERMIT_PARTICIPANT+" = ?";
-        String[] whereArgs = new String[] {Integer.toString(event),Integer.toString(participant)};
-        int rows = db.delete(RELATIONSHIP_PERMIT, whereClause, whereArgs);
-        return rows;
-    }
+//    public int deletePermission(int event, int participant){
+//        SQLiteDatabase db = getWritableDatabase();
+//        String whereClause= KEY_PERMIT_EVENT+" = ?"+ " AND "+ KEY_PERMIT_PARTICIPANT+" = ?";
+//        String[] whereArgs = new String[] {Integer.toString(event),Integer.toString(participant)};
+//        int rows = db.delete(RELATIONSHIP_PERMIT, whereClause, whereArgs);
+//        return rows;
+//    }
 
     public int deleteWatchlist(int item, int buyer){
         SQLiteDatabase db = getWritableDatabase();
@@ -1292,54 +1341,4 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         }
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-/*    // Get all posts in the database
-    public List<ItemI> getAllItems() {
-        List<ItemI> posts = new ArrayList<>();
-        // SELECT * FROM POSTS
-        // LEFT OUTER JOIN USERS
-        // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
-        String ITEMS_SELECT_QUERY =
-                String.format("SELECT * FROM %s LEFT OUTER JOIN %s ON %s.%s = %s.%s",
-                        TABLE_POSTS,
-                        TABLE_USERS,
-                        TABLE_POSTS, KEY_POST_USER_ID_FK,
-                        TABLE_USERS, KEY_USER_ID);
-        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
-        // disk space scenarios)
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    User newUser = new User();
-                    newUser.userName = cursor.getString(cursor.getColumnIndex(KEY_USER_NAME));
-                    newUser.profilePictureUrl = cursor.getString(cursor.getColumnIndex(KEY_USER_PROFILE_PICTURE_URL));
-                    Post newPost = new Post();
-                    newPost.text = cursor.getString(cursor.getColumnIndex(KEY_POST_TEXT));
-                    newPost.user = newUser;
-                    posts.add(newPost);
-                } while(cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to get posts from database");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
-        }
-        return posts;
-    }*/
-
-
-
 }
