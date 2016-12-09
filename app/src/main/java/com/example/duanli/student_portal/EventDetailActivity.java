@@ -132,6 +132,11 @@ public class EventDetailActivity extends AppCompatActivity {
                 Snackbar.make(getWindow().getDecorView(), "The event has been deleted.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 return true;
+            case R.id.navigate:
+                Event current = spdh.queryEvent(eventId);
+                String address = "http://maps.google.co.in/maps?q=" + current.getLocation();
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(address));
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(item);
         }

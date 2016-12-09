@@ -24,5 +24,10 @@
         android:orderInCategory="2"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/navigate"
+        android:title="Navigate"
+        android:orderInCategory="2"
+        app:showAsAction="never"/>
+
 </menu>
 
