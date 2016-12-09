@@ -110,6 +110,7 @@ public class EventFragment extends Fragment {
         Title = (TextView) rootView.findViewById(R.id.topEvent);
 
         // Fetch data from DB to display
+        spdh = new SPDatabaseHelper(getContext());
         cells = spdh.retrieveEvents(0);
         size = cells.size();
         nameScroll = new String[size];
@@ -152,8 +153,8 @@ public class EventFragment extends Fragment {
     public void topEvents() {
 
         for(int i = 0; i < size; i++) {
-            this.nameScroll[i] = "EventName: "+cells.get(i).getEventName();
-            this.descriptionScroll[i] = "Time: "+cells.get(i).getDate()+" "+cells.get(i).getTime();
+            this.nameScroll[i] = cells.get(i).getEventName();
+            this.descriptionScroll[i] = cells.get(i).getDate()+" "+cells.get(i).getTime();
             this.id[i] = cells.get(i).getEventID();
         }
         items = size;

@@ -1211,7 +1211,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         ArrayList<Event> result= new ArrayList<Event>();
         SQLiteDatabase db = getWritableDatabase();
         String query;
-        if (cond == 1){
+        if (cond == 3){
             query = "SELECT * FROM " + TABLE_EVENT + " WHERE " + KEY_EVENT_ORGANIZER + " = " + ThisUser.getUserID();
         }
         else {

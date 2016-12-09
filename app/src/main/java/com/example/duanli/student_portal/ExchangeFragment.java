@@ -52,6 +52,7 @@ public class ExchangeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent addItem = new Intent(getActivity(), NewItemActivity.class);
+                addItem.putExtra("edit",0);
                 getActivity().startActivity(addItem);
             }
         });
@@ -102,8 +103,8 @@ public class ExchangeFragment extends Fragment {
     public void topEvents() {
 
         for(int i = 0; i < size; i++) {
-            this.nameScroll[i] = "ItemName: "+cells.get(i).getItemName();
-            this.descriptionScroll[i] = "Price: "+String.valueOf(cells.get(i).getPrice());
+            this.nameScroll[i] = cells.get(i).getItemName();
+            this.descriptionScroll[i] = "Price is $"+String.valueOf(cells.get(i).getPrice());
             this.id[i] = cells.get(i).getItemID();
         }
         items = size;

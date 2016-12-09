@@ -48,12 +48,12 @@ public class EventListViewActivity extends Fragment{
 //        else if  (filter == 2){
 //            recipeList = Recipe.getRecipesFromFile("eventsInterested.json", getContext());
 //        }
-//        else if  (filter == 3){
-//            recipeList = Recipe.getRecipesFromFile("eventsStarted.json", getContext());
-//        }
-//        else {
+         if  (filter == 3){
+            eventList = ListCell.getCellsFromDatabase("event", 3, getContext());
+         }
+         else {
             eventList = ListCell.getCellsFromDatabase("event", 0, getContext());
-        //}
+         }
 
         // Create adapter
         ListViewAdapter adapter = new ListViewAdapter(getContext(), eventList);
@@ -71,7 +71,7 @@ public class EventListViewActivity extends Fragment{
                 Intent detailIntent = new Intent(getContext(), EventDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
                 //detailIntent.putExtra("url", selectedRecipe.instructionUrl);
-                eventId = position + 1;
+                eventId = selectedRecipe.id;
                 detailIntent.putExtra("eventId", eventId);
                 startActivity(detailIntent);
             }

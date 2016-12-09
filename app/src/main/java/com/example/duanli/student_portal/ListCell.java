@@ -10,6 +10,7 @@ public class ListCell {
     public String title;
     public String description;
     public String label;
+    public int id;
 
     public static ArrayList<ListCell> getCellsFromDatabase(String type, int filter, Context context) {
         ArrayList<ListCell> result = new ArrayList<>();
@@ -23,6 +24,7 @@ public class ListCell {
                     temp.title = cells.get(i).getEventName();
                     temp.description = cells.get(i).getLocation();
                     temp.label = cells.get(i).getDate();
+                    temp.id = cells.get(i).getEventID();
                     result.add(temp);
                 }
             }
@@ -33,6 +35,7 @@ public class ListCell {
                     temp.title = cells.get(i).getItemName();
                     temp.description = cells.get(i).getContact();
                     temp.label = String.valueOf(cells.get(i).getPrice());
+                    temp.id = cells.get(i).getItemID();
                     result.add(temp);
                 }
             }
