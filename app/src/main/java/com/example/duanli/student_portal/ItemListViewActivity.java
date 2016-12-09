@@ -20,6 +20,7 @@ public class ItemListViewActivity extends Fragment {
     public static final String TAG = ItemListViewActivity.class.getSimpleName();
 
     private ListView mListView;
+    Bundle bundle;
     int itemId;
 
     public ItemListViewActivity() {}
@@ -30,9 +31,23 @@ public class ItemListViewActivity extends Fragment {
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.activity_item_list_view, container, false);
 
+        bundle = this.getArguments();
+        int filter = bundle.getInt("case");
         // Get data to display
         final ArrayList<ListCell> itemList;
-        itemList = ListCell.getCellsFromDatabase("item", 0, getContext());
+        // Get data to display
+        if (filter == 1) {
+            itemList = ListCell.getCellsFromDatabase("item", 1, getContext());
+        }
+        else if  (filter == 2){
+            itemList = ListCell.getCellsFromDatabase("item", 2, getContext());
+        }
+        else if  (filter == 3){
+            itemList = ListCell.getCellsFromDatabase("item", 3, getContext());
+        }
+        else {
+            itemList = ListCell.getCellsFromDatabase("item", 0, getContext());
+        }
 
         // Create adapter
         ListViewAdapter adapter = new ListViewAdapter(getContext(), itemList);
@@ -49,7 +64,7 @@ public class ItemListViewActivity extends Fragment {
                 ListCell selectedRecipe = itemList.get(position);
                 Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
                 detailIntent.putExtra("title", selectedRecipe.title);
-                itemId = position + 1;
+                itemId = selectedRecipe.id;
                 detailIntent.putExtra("itemId", itemId);
                 System.out.println("itemId = " + itemId);
                 //detailIntent.putExtra("url", selectedRecipe.instructionUrl);

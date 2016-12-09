@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/item1"
+            android:id="@+id/boughtImage"
             android:scaleType="centerCrop"
             android:alpha=".75"
             />
@@ -20,13 +21,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Items I've bought"
+            android:text="Items I've reserved"
             android:ems="10"
             android:textSize="30sp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
-            android:id="@+id/editText"
+            android:id="@+id/itemBought"
             android:textColor="@android:color/white"
             android:textStyle="normal|bold" />
 
@@ -43,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/item2"
+            android:id="@+id/watchlistImage"
             android:scaleType="centerCrop"
             android:alpha=".75"
             />
@@ -52,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Items that I watchlisted"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/itemWatchlisted"
             android:selectAllOnFocus="false"
             android:textStyle="normal|bold"
             android:textSize="30sp"
@@ -72,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/item3"
+            android:id="@+id/soldImage"
             android:scaleType="centerCrop"
             android:alpha=".75"
             />
@@ -80,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="Items I've sold"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/itemSold"
             android:selectAllOnFocus="false"
             android:textStyle="normal|bold"
             android:textSize="30sp"

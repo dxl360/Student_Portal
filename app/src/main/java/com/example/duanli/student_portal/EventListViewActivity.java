@@ -42,13 +42,13 @@ public class EventListViewActivity extends Fragment{
 
         final ArrayList<ListCell> eventList;
         // Get data to display
-//        if (filter == 1) {
-//            recipeList = Recipe.getRecipesFromFile("eventsJoined.json", getContext());
-//        }
-//        else if  (filter == 2){
-//            recipeList = Recipe.getRecipesFromFile("eventsInterested.json", getContext());
-//        }
-         if  (filter == 3){
+        if (filter == 1) {
+            eventList = ListCell.getCellsFromDatabase("event", 1, getContext());
+        }
+        else if  (filter == 2){
+            eventList = ListCell.getCellsFromDatabase("event", 2, getContext());
+        }
+         else if  (filter == 3){
             eventList = ListCell.getCellsFromDatabase("event", 3, getContext());
          }
          else {

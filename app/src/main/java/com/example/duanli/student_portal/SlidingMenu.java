@@ -121,6 +121,9 @@ public class SlidingMenu extends AppCompatActivity
         }
         else if (id == R.id.Exchange) {
             ItemListViewActivity fragment = new ItemListViewActivity();
+            bundle = new Bundle();
+            bundle.putInt("case", 0);
+            fragment.setArguments(bundle);
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frag_container, fragment);

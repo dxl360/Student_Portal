@@ -1214,6 +1214,14 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         if (cond == 3){
             query = "SELECT * FROM " + TABLE_EVENT + " WHERE " + KEY_EVENT_ORGANIZER + " = " + ThisUser.getUserID();
         }
+        else if (cond == 1){
+            query = "SELECT * FROM " + TABLE_EVENT + " WHERE " + KEY_EVENT_ID + " IN (SELECT " + KEY_JOIN_EVENT +
+                    " FROM " + RELATIONSHIP_JOIN + " WHERE " + KEY_JOIN_PARTICIPANT + " = " + ThisUser.getUserID() + ")";
+        }
+        else if (cond == 2){
+            query = "SELECT * FROM " + TABLE_EVENT + " WHERE " + KEY_EVENT_ID + " IN (SELECT " + KEY_BOOKMARK_EVENT +
+                    " FROM " + RELATIONSHIP_BOOKMARK + " WHERE " + KEY_BOOKMARK_PARTICIPANT + " = " + ThisUser.getUserID() + ")";
+        }
         else {
             query = "SELECT * FROM " + TABLE_EVENT;
         }
@@ -1246,7 +1254,23 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     public ArrayList<Item> retrieveItems (int cond) {
         ArrayList<Item> result= new ArrayList<Item>();
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c= db.rawQuery("SELECT * FROM "+ TABLE_ITEM + " WHERE "+KEY_ITEM_STATUS+" = '"+ 0 +"'", null);
+        String query;
+        if (cond == 3) {
+            query = "SELECT * FROM " + TABLE_ITEM + " WHERE " + KEY_ITEM_ID + " IN (SELECT " + KEY_SELL_ID +
+                    " FROM " + RELATIONSHIP_SELL + " WHERE " + KEY_SELL_SELLER + " = " + ThisUser.getUserID() + ")";
+        }
+        else if (cond == 1) {
+            query = "SELECT * FROM " + TABLE_ITEM + " WHERE " + KEY_ITEM_ID + " IN (SELECT " + KEY_RESERVE_ITEM +
+                    " FROM " + RELATIONSHIP_RESERVE + " WHERE " + KEY_RESERVE_BUYER + " = " + ThisUser.getUserID() + ")";
+        }
+        else if (cond == 2) {
+            query = "SELECT * FROM " + TABLE_ITEM + " WHERE " + KEY_ITEM_ID + " IN (SELECT " + KEY_WATCHLIST_ID +
+                    " FROM " + RELATIONSHIP_WATCHLIST + " WHERE " + KEY_WATCHLIST_BUYER + " = " + ThisUser.getUserID() + ")";
+        }
+        else {
+            query = "SELECT * FROM "+ TABLE_ITEM + " WHERE "+ KEY_ITEM_STATUS + " = '"+ 0 +"'";
+        }
+        Cursor c= db.rawQuery(query, null);
         if(c.getCount() < 1)
         {
             c.close();
