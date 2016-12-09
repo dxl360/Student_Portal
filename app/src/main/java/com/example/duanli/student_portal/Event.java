@@ -11,7 +11,7 @@ public class Event implements Serializable {
     private int eventID= -1;
     private int organizerID=0;
     private String eventName="";
-    private String posterURL="";
+    private String eventPictureUrl="";
     private String date="";
     private String time="";
     private String location="";
@@ -80,14 +80,15 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-//    public String getPosterURL(){ return posterURL;}
-//    public void setPosterURL(String posterURL) {this.posterURL=posterURL;}
+    public String getEventPictureUrl(){ return eventPictureUrl;}
+    public void setEventPictureUrl(String posterURL) {this.eventPictureUrl=eventPictureUrl;}
 
     public Event(){}
 
-    public Event(int EventID, int OrganizerID,String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
+    public Event(int EventID, int OrganizerID, String EventPictureUrl, String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
         eventID=EventID;
         organizerID = OrganizerID;
+        eventPictureUrl = EventPictureUrl;
         eventName = EventName;
         date = Date;
         time = Time;

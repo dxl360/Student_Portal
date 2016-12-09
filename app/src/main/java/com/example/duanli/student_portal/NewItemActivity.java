@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button Create;
-    EditText etItemName,etPrice,etContact,etDescription;
-    String itemName,contact,description;
+    EditText etItemName,etPrice,etContact,etURL,etDescription;
+    String itemName,contact,description,URL;
     int sellerID, price,itemId, status;
     SPDatabaseHelper spdh;
 
@@ -25,6 +25,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         etItemName = (EditText) findViewById(R.id.etItemName);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etContact = (EditText) findViewById(R.id.etContact);
+        etURL = (EditText) findViewById(R.id.etURL);
         etDescription = (EditText) findViewById(R.id.etDescription);
         Create = (Button) findViewById(R.id.button);
         Create.setOnClickListener(this);
@@ -34,12 +35,13 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         System.out.println("edit = " + edit);
         if (getIntent().getExtras().getInt("edit")==1){
             itemId = getIntent().getExtras().getInt("itemId");
-            System.out.println("itemId = " + itemId);
-            etItemName.setText(spdh.queryItem(itemId).getItemName());
-            etPrice.setText(String.valueOf(spdh.queryItem(itemId).getPrice()));
-            etContact.setText(spdh.queryItem(itemId).getContact());
-            etDescription.setText(spdh.queryItem(itemId).getDescription());
-            status = spdh.queryItem(itemId).getStatus();
+            Item current = spdh.queryItem(itemId);
+            etItemName.setText(current.getItemName());
+            etPrice.setText(String.valueOf(current.getPrice()));
+            etContact.setText(current.getContact());
+            etURL.setText(current.getItemPictureUrl());
+            etDescription.setText(current.getDescription());
+            status = current.getStatus();
         }
     }
 
@@ -54,17 +56,19 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             itemName = etItemName.getText().toString();
             price = Integer.parseInt(etPrice.getText().toString());
             contact = etContact.getText().toString();
+            URL = etURL.getText().toString();
             description = etDescription.getText().toString();
  //           if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
             if (getIntent().getExtras().getInt("edit")==1){
-                Item item = new Item(itemId,itemName,sellerID,price,contact,description,status);
+                Item item = new Item(itemId,itemName,URL,sellerID,price,contact,description,status);
                 spdh.updateItem(item);
             }
             else {
                 System.out.println("edit is "+getIntent().getExtras().getInt("edit"));
                 status = 0;
-                Item item = new Item(-1,itemName,sellerID,price,contact,description,status);
+                Item item = new Item(-1,itemName,URL,sellerID,price,contact,description,status);
                 spdh.insertItem(item);
+                spdh.insertSell(spdh.queryItemName(itemName).getItemID(), ThisUser.getUserID(), 0);
             }
             finish();
             startActivity(new Intent(this, SlidingMenu.class));

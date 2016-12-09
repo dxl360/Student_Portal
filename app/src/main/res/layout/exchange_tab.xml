@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Items I've reserved"
+            android:text="Items I reserved"
             android:ems="10"
             android:textSize="30sp"
             android:layout_centerVertical="true"
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Items that I watchlisted"
+            android:text="Items I watched"
             android:ems="10"
             android:id="@+id/itemWatchlisted"
             android:selectAllOnFocus="false"
@@ -81,7 +81,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Items I've sold"
+            android:text="Items I created"
             android:ems="10"
             android:id="@+id/itemSold"
             android:selectAllOnFocus="false"

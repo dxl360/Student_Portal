@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Events I've joined"
+            android:text="Events I joined"
             android:ems="10"
             android:textSize="30sp"
             android:layout_centerVertical="true"
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Events I'm interested"
+            android:text="Events I bookmarked"
             android:ems="10"
             android:id="@+id/eventInterested"
             android:selectAllOnFocus="false"

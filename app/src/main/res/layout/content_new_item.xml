@@ -9,11 +9,16 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_new_item"
     tools:context="com.example.duanli.student_portal.NewItemActivity">
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <EditText
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+            <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -21,7 +26,7 @@
             android:ems="10"
             android:id="@+id/etItemName" />
 
-        <EditText
+            <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -29,7 +34,7 @@
             android:ems="10"
             android:id="@+id/etPrice" />
 
-        <EditText
+            <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -37,7 +42,18 @@
             android:ems="10"
             android:id="@+id/etContact" />
 
-        <EditText
+            <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:lines="2"
+            android:hint="Image URL"
+            android:ems="15"
+            android:id="@+id/etURL" />
+
+            <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
@@ -47,11 +63,11 @@
             android:hint="Item Description"
             android:ems="15"
             android:id="@+id/etDescription" />
-        <Button
+            <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create"
             android:id="@+id/button" />
-    </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

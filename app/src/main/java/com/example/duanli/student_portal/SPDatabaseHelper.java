@@ -369,6 +369,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             // The user might already exist in the database (i.e. the same user created multiple posts).
             ContentValues values = new ContentValues();
             values.put(KEY_ITEM_NAME, item.getItemName());
+            values.put(KEY_ITEM_PICTURE, item.getItemPictureUrl());
             values.put(KEY_ITEM_SELLER, item.getSellerID());
             values.put(KEY_ITEM_PRICE, item.getPrice());
             values.put(KEY_ITEM_CONTACT, item.getContact());
@@ -410,6 +411,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             // The user might already exist in the database (i.e. the same user created multiple posts).
             ContentValues values = new ContentValues();
             values.put(KEY_EVENT_ORGANIZER, event.getOrganizerID());
+            values.put(KEY_EVENT_PICTURE, event.getEventPictureUrl());
             values.put(KEY_EVENT_NAME, event.getEventName());
             values.put(KEY_EVENT_DATE, event.getDate());
             values.put(KEY_EVENT_TIME, event.getTime());
@@ -698,6 +700,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             // The user might already exist in the database (i.e. the same user created multiple posts).
             ContentValues values = new ContentValues();
             values.put(KEY_EVENT_ORGANIZER, event.getOrganizerID());
+            values.put(KEY_EVENT_PICTURE, event.getEventPictureUrl());
             values.put(KEY_EVENT_NAME, event.getEventName());
             values.put(KEY_EVENT_DATE, event.getDate());
             values.put(KEY_EVENT_TIME, event.getTime());
@@ -746,6 +749,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             ContentValues values = new ContentValues();
             values.put(KEY_ITEM_NAME, item.getItemName());
             values.put(KEY_ITEM_SELLER, item.getSellerID());
+            values.put(KEY_ITEM_PICTURE, item.getItemPictureUrl());
             values.put(KEY_ITEM_PRICE, item.getPrice());
             values.put(KEY_ITEM_CONTACT, item.getContact());
             values.put(KEY_ITEM_DESCRIPTION, item.getDescription());
@@ -865,10 +869,32 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         c.moveToFirst();
         Item result= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),
                 c.getString(c.getColumnIndex(KEY_ITEM_NAME)),
+                c.getString(c.getColumnIndex(KEY_ITEM_PICTURE)),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_PRICE))),
                 c.getString(c.getColumnIndex(KEY_ITEM_CONTACT)),
                         c.getString(c.getColumnIndex(KEY_ITEM_DESCRIPTION)),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_STATUS))));
+        return result;
+    }
+
+    public Item queryItemName(String itemName){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM item WHERE "+KEY_ITEM_NAME+" = '"+itemName+"'",null);
+
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return new Item(-1, "noItem", -1);
+        }
+        c.moveToFirst();
+        Item result= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),
+                c.getString(c.getColumnIndex(KEY_ITEM_NAME)),
+                c.getString(c.getColumnIndex(KEY_ITEM_PICTURE)),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_PRICE))),
+                c.getString(c.getColumnIndex(KEY_ITEM_CONTACT)),
+                c.getString(c.getColumnIndex(KEY_ITEM_DESCRIPTION)),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_STATUS))));
         return result;
     }
@@ -885,6 +911,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         c.moveToFirst();
         Event result= new Event(Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ID))),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ORGANIZER))),
+                c.getString(c.getColumnIndex(KEY_EVENT_PICTURE)),
                 c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
                 c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
                 c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
@@ -895,6 +922,28 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return result;
     }
 
+    public Event queryEventName(String eventName){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+TABLE_EVENT+" WHERE "+KEY_EVENT_NAME+" = '"+eventName+"'",null);
+
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return new Event();
+        }
+        c.moveToFirst();
+        Event result= new Event(Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ID))),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ORGANIZER))),
+                c.getString(c.getColumnIndex(KEY_EVENT_PICTURE)),
+                c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
+                c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
+                c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
+                c.getString(c.getColumnIndex(KEY_EVENT_LOCATION)),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_PRICE))),
+                Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_CAPACITY))),
+                c.getString(c.getColumnIndex(KEY_EVENT_DESCRIPTION)));
+        return result;
+    }
 //    public int queryReserve(int sellerID, int buyerID){
 //        SQLiteDatabase db = getWritableDatabase();
 //        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
@@ -909,7 +958,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
 //        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
 //    }
 
-    public int queryReserveBuyer(int buyerID, int itemID){
+    public int queryReserveID(int buyerID, int itemID){
         SQLiteDatabase db = getWritableDatabase();
         Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
                 KEY_RESERVE_BUYER+" = '"+Integer.toString(buyerID)+"'"+
@@ -975,6 +1024,21 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         }
         c.moveToFirst();
         return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_ID)));
+    }
+
+    public int queryReserveBuyer(int sellerID, int itemID){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM "+RELATIONSHIP_RESERVE+" WHERE "+
+                KEY_RESERVE_SELLER+" = '"+Integer.toString(sellerID)+"'"+
+                " AND "+KEY_RESERVE_ITEM+" = '"+Integer.toString(itemID)+"'"+
+                " AND "+KEY_RESERVE_STATUS+" = '"+0+"'", null);
+        if(c.getCount()<1) // itemName Not Exist
+        {
+            c.close();
+            return 0;
+        }
+        c.moveToFirst();
+        return Integer.parseInt(c.getString(c.getColumnIndex(KEY_RESERVE_BUYER)));
     }
 
 //    public int queryReservationStatus(int reservationId){
@@ -1285,6 +1349,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 do {
                     Event eventResult= new Event(Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ID))),
                             Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_ORGANIZER))),
+                            c.getString(c.getColumnIndex(KEY_EVENT_PICTURE)),
                             c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
                             c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
                             c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
@@ -1330,6 +1395,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 do {
                     Item itemResult= new Item(Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_ID))),
                             c.getString(c.getColumnIndex(KEY_ITEM_NAME)),
+                            c.getString(c.getColumnIndex(KEY_ITEM_PICTURE)),
                             Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_SELLER))),
                             Integer.parseInt(c.getString(c.getColumnIndex(KEY_ITEM_PRICE))),
                             c.getString(c.getColumnIndex(KEY_ITEM_CONTACT)),

@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class NewEventActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button Create;
-    EditText etEventName,etDate,etTime,etLocation,etPrice,etCapacity,etDescription;
-    String eventName,date,time,location,description;
+    EditText etEventName,etDate,etTime,etLocation,etPrice,etCapacity,etURL,etDescription;
+    String eventName,date,time,location,URL,description;
     int organizerID, price,capacity, eventId;
     SPDatabaseHelper spdh;
 
@@ -28,6 +28,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         etLocation = (EditText) findViewById(R.id.etLocation);
         etCapacity = (EditText) findViewById(R.id.etCapacity);
         etPrice = (EditText) findViewById(R.id.etPrice);
+        etURL = (EditText) findViewById(R.id.etURL);
         etDescription = (EditText) findViewById(R.id.etDescription);
         Create = (Button) findViewById(R.id.button);
         Create.setOnClickListener(this);
@@ -36,13 +37,15 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         System.out.println(getIntent().getExtras().getInt("edit"));
         if (getIntent().getExtras().getInt("edit")==1){
             eventId = getIntent().getExtras().getInt("eventId");
-            etEventName.setText(spdh.queryEvent(eventId).getEventName());
-            etDate.setText(spdh.queryEvent(eventId).getDate());
-            etTime.setText(spdh.queryEvent(eventId).getTime());
-            etLocation.setText(spdh.queryEvent(eventId).getLocation());
-            etCapacity.setText(String.valueOf(spdh.queryEvent(eventId).getCapacity()));
-            etPrice.setText(String.valueOf(spdh.queryEvent(eventId).getPrice()));
-            etDescription.setText(spdh.queryEvent(eventId).getDescription());
+            Event current = spdh.queryEvent(eventId);
+            etEventName.setText(current.getEventName());
+            etDate.setText(current.getDate());
+            etTime.setText(current.getTime());
+            etLocation.setText(current.getLocation());
+            etCapacity.setText(String.valueOf(current.getCapacity()));
+            etPrice.setText(String.valueOf(current.getPrice()));
+            etURL.setText(current.getDescription());
+            etDescription.setText(current.getDescription());
         }
     }
 
@@ -63,20 +66,21 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             location = etLocation.getText().toString();
             price = Integer.parseInt(etPrice.getText().toString());
             capacity = Integer.parseInt(etCapacity.getText().toString());
+            URL = etURL.getText().toString();
             description = etDescription.getText().toString();
 //            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
             if (getIntent().getExtras().getInt("edit")==1){
-                Event event = new Event(eventId,organizerID,eventName,date,time,location,price,capacity,description);
+                Event event = new Event(eventId,organizerID,URL,eventName,date,time,location,price,capacity,description);
                 spdh.updateEvent(event);
             }
             else {
-                Event event = new Event(-1,organizerID,eventName,date,time,location,price,capacity,description);
+                Event event = new Event(-1,organizerID,URL,eventName,date,time,location,price,capacity,description);
                 spdh.insertEvent(event);
+                spdh.insertOrganize(spdh.queryEventName(eventName).getEventID(), ThisUser.getUserID());
             }
 //            System.out.println(spdh.queryEvent(1).getDescription());
             finish();
             startActivity(new Intent(this, SlidingMenu.class));
-            System.out.println(spdh.queryEvent(2).getDescription());
         }
 
     }

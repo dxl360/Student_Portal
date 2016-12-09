@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
     private int itemID;
-    private String itemPicture;
+    private String itemPictureUrl;
     private int sellerID;
     private String itemName;
     private int price;
@@ -32,6 +32,12 @@ public class Item implements Serializable {
         this.sellerID = sellerID;
     }
 
+    public String getItemPictureUrl() {
+        return itemPictureUrl;
+    }
+    public void setItemPictureUrl(String itemPictureUrl) {
+        this.itemPictureUrl = itemPictureUrl;
+    }
 
     public String getItemName() {
         return itemName;
@@ -79,10 +85,11 @@ public class Item implements Serializable {
         this.sellerID = SellerID;
     }
 
-    public Item(int itemID, String ItemName,int SellerID, int Price, String Contact, String Description, int Status){
+    public Item(int itemID, String ItemName, String ItemPictureUrl, int SellerID, int Price, String Contact, String Description, int Status){
         super();
         this.itemID = itemID;
         this.itemName = ItemName;
+        this.itemPictureUrl = ItemPictureUrl;
         this.sellerID = SellerID;
         this.price = Price;
         this.contact = Contact;

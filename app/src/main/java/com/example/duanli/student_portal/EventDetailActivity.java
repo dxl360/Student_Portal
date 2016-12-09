@@ -18,6 +18,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.Serializable;
 
@@ -140,8 +142,12 @@ public class EventDetailActivity extends AppCompatActivity {
 //        layout.setTitle("@string/demoEventTitle");
         ImageView view = (ImageView) findViewById(R.id.event_backdrop);
         Event current = spdh.queryEvent(eventId);
-        view.setImageResource(R.drawable.picture_eventposter);
-        System.out.println("eventId before is " + eventId);
+        //view.setImageResource(R.drawable.picture_eventposter);
+        String url = current.getEventPictureUrl();
+        ImageLoaderConfiguration config = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(config);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage(url, view);
 
         TextView tvEventName = (TextView) findViewById(R.id.tvEventName);
         //tvEventName.setText(getResources().getString(R.string.demoEventTitle));
