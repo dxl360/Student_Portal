@@ -458,6 +458,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.equals(storedPassword)) {
                     Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
                     ThisUser.setUserID(currentUser.getUserID());
+                    ThisUser.setUsername(currentUser.getUserName());
+                    ThisUser.setEmail(currentUser.getEmail());
                     System.out.println(spdh.queryEvent(1).getDescription());
                     System.out.println(spdh.queryEvent(2).getDescription());
                     Intent intent = new Intent(getApplicationContext(), SlidingMenu.class);

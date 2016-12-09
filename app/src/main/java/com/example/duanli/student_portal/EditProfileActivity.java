@@ -44,6 +44,7 @@ public class EditProfileActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 String userName = etUsername.getText().toString();
+                ThisUser.setUsername(userName);
                 String password = etPassword.getText().toString();
                 validation(userName, password, false);
                 ProfileActivity fragment = new ProfileActivity();
