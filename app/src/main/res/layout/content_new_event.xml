@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Date"
+                android:hint="Date: Format 2016-01-01"
                 android:ems="10"
                 android:id="@+id/etDate" />
 
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Time"
+                android:hint="Start Time: Format 23:59"
                 android:ems="10"
                 android:id="@+id/etTime" />
 
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="endTime"
+                android:hint="End Time: Format 23:59"
                 android:ems="10"
                 android:id="@+id/etEndTime" />
 
