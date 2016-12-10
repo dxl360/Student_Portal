@@ -25,16 +25,16 @@ This test account has created two events (Welcome Party and Frat Party), joined 
 
 If you want to test as the organizer of events the test account joined, you can log into the following accounts:
 
-Organizer of First event
+(Organizer of First event)
 Username: dxl360@case.edu
 Password: 123456
 
-Organizer of PhD Thesis
+(Organizer of PhD Thesis)
 Username: dxl360@case.edu
 Password: 123456
 
 If you want to test as the seller of items the test account reserved, you can log into the following account:
 
-Seller of Wierd Stuff
+(Seller of Wierd Stuff)
 Username: dxl360@case.edu
 Password: 123456
