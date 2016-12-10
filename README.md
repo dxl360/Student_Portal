@@ -30,7 +30,7 @@ Username: dxl360@case.edu
 Password: 123456
 
 (Organizer of PhD Thesis)
-Username: dxl360@case.edu
+Username: yxd155@case.edu
 Password: 123456
 
 If you want to test as the seller of items the test account reserved, you can log into the following account:
