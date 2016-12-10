@@ -21,4 +21,4 @@ If you want to test the application using an account that has everything already
 Username: test@case.edu
 Password: Test1234
 
-This test account has created two events (Welcome Party and Frat Party), joined two events (First event and PhD Thesis Defense) and bookmarked one event (Thwing Study Over). For the Exchange, test has created two items (minifridge and STATS Textbook), watchlisted one (STATS Textbook) and reserved one item (weird stuff). The reserved item will not appear on the general exchange listview, but if you cancel the reservation, the item wierd stuff will appear on the exchange listview.
+This test account has created two events (Welcome Party and Frat Party), joined two events (First event and PhD Thesis Defense) and bookmarked one event (Thwing Study Over). For the Exchange, test has created two items (minifridge and STATS Textbook), watchlisted one (STATS Textbook) and reserved one item (wierd stuff). The reserved item will not appear on the general exchange listview, but if you cancel the reservation, the item wierd stuff will appear on the exchange listview.
