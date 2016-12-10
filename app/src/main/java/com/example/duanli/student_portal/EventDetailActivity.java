@@ -213,7 +213,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
         TextView tvEventTimeDate = (TextView) findViewById(R.id.tvEventTimeDate);
         //tvEventTimeDate.setText(getResources().getString(R.string.demoEventTimeDate));
-        tvEventTimeDate.setText(current.getDate() + " " + current.getTime());
+        tvEventTimeDate.setText(current.getDate() + " " + current.getTime() + "-" + current.getEndTime());
 
         TextView tvEventLocation = (TextView) findViewById(R.id.tvEventLocation);
         //tvEventLocation.setText(getResources().getString(R.string.demoEventLocation));

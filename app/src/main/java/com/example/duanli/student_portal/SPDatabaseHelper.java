@@ -119,6 +119,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_EVENT_ORGANIZER = "organizer";
     private static final String KEY_EVENT_DATE = "date";
     private static final String KEY_EVENT_TIME = "time";
+    private static final String KEY_EVENT_END_TIME = "endTime";
     private static final String KEY_EVENT_LOCATION = "location";
     private static final String KEY_EVENT_PRICE = "price";
     private static final String KEY_EVENT_CAPACITY = "capacity";
@@ -150,7 +151,6 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("test line");
         String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER +
                 "(" +
                 KEY_USER_ID + " integer primary key autoincrement," +
@@ -185,6 +185,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 KEY_EVENT_ORGANIZER + " INTEGER " + "," +
                 KEY_EVENT_DATE + " TEXT" + "," +
                 KEY_EVENT_TIME + " TEXT" + "," +
+                KEY_EVENT_END_TIME + " TEXT" + "," +
                 KEY_EVENT_LOCATION + " TEXT " + "," +
                 KEY_EVENT_PRICE + " INTEGER" + "," +
                 KEY_EVENT_CAPACITY + " INTEGER" + "," +
@@ -415,6 +416,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             values.put(KEY_EVENT_NAME, event.getEventName());
             values.put(KEY_EVENT_DATE, event.getDate());
             values.put(KEY_EVENT_TIME, event.getTime());
+            values.put(KEY_EVENT_END_TIME, event.getTime());
             values.put(KEY_EVENT_LOCATION, event.getLocation());
             values.put(KEY_EVENT_PRICE, event.getPrice());
             values.put(KEY_EVENT_CAPACITY, event.getCapacity());
@@ -704,6 +706,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
             values.put(KEY_EVENT_NAME, event.getEventName());
             values.put(KEY_EVENT_DATE, event.getDate());
             values.put(KEY_EVENT_TIME, event.getTime());
+            values.put(KEY_EVENT_END_TIME, event.getTime());
             values.put(KEY_EVENT_LOCATION, event.getLocation());
             values.put(KEY_EVENT_PRICE, event.getPrice());
             values.put(KEY_EVENT_CAPACITY, event.getCapacity());
@@ -915,6 +918,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
                 c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
                 c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
+                c.getString(c.getColumnIndex(KEY_EVENT_END_TIME)),
                 c.getString(c.getColumnIndex(KEY_EVENT_LOCATION)),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_PRICE))),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_CAPACITY))),
@@ -938,6 +942,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
                 c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
                 c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
+                c.getString(c.getColumnIndex(KEY_EVENT_END_TIME)),
                 c.getString(c.getColumnIndex(KEY_EVENT_LOCATION)),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_PRICE))),
                 Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_CAPACITY))),
@@ -1353,6 +1358,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                             c.getString(c.getColumnIndex(KEY_EVENT_NAME)),
                             c.getString(c.getColumnIndex(KEY_EVENT_DATE)),
                             c.getString(c.getColumnIndex(KEY_EVENT_TIME)),
+                            c.getString(c.getColumnIndex(KEY_EVENT_END_TIME)),
                             c.getString(c.getColumnIndex(KEY_EVENT_LOCATION)),
                             Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_PRICE))),
                             Integer.parseInt(c.getString(c.getColumnIndex(KEY_EVENT_CAPACITY))),
