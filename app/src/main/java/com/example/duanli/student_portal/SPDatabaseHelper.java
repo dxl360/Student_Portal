@@ -1284,13 +1284,13 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
         return rows;
     }
 
-    public int deleteBlock(int buyer, int seller){
-        SQLiteDatabase db = getWritableDatabase();
-        String whereClause= KEY_BLOCK_BUYER+" = ?"+ " AND "+ KEY_BLOCK_SELLER+" = ?";
-        String[] whereArgs = new String[] {Integer.toString(buyer),Integer.toString(seller)};
-        int rows = db.delete(RELATIONSHIP_BLOCK, whereClause, whereArgs);
-        return rows;
-    }
+//    public int deleteBlock(int buyer, int seller){
+//        SQLiteDatabase db = getWritableDatabase();
+//        String whereClause= KEY_BLOCK_BUYER+" = ?"+ " AND "+ KEY_BLOCK_SELLER+" = ?";
+//        String[] whereArgs = new String[] {Integer.toString(buyer),Integer.toString(seller)};
+//        int rows = db.delete(RELATIONSHIP_BLOCK, whereClause, whereArgs);
+//        return rows;
+//    }
 
     public int deleteJoin(int event, int participant){
         SQLiteDatabase db = getWritableDatabase();
