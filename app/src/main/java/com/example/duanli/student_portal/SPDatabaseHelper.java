@@ -174,7 +174,7 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 KEY_ITEM_CONTACT + " TEXT" +","+
                 KEY_ITEM_DESCRIPTION + " TEXT "+","+
                 KEY_ITEM_STATUS + " INTEGER "+","+
-                "FOREIGN KEY(" + KEY_ITEM_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+
+                "FOREIGN KEY(" + KEY_ITEM_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_EVENT_TABLE = "CREATE TABLE " + TABLE_EVENT +
@@ -190,68 +190,68 @@ public class SPDatabaseHelper extends SQLiteOpenHelper{
                 KEY_EVENT_PRICE + " INTEGER" + "," +
                 KEY_EVENT_CAPACITY + " INTEGER" + "," +
                 KEY_EVENT_DESCRIPTION + " TEXT " + "," +
-                "FOREIGN KEY(" + KEY_EVENT_ORGANIZER + ") REFERENCES " + TABLE_USER + "(" + KEY_USER_ID + ")" +
+                "FOREIGN KEY(" + KEY_EVENT_ORGANIZER + ") REFERENCES " + TABLE_USER + "(" + KEY_USER_ID + ")" + " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_RESERVE_TABLE = "CREATE TABLE " + RELATIONSHIP_RESERVE +
                 "(" +
                 KEY_RESERVE_ID + " integer primary key autoincrement," +
                 KEY_RESERVE_STATUS + " INTEGER" + ","+
-                "FOREIGN KEY(" + KEY_RESERVE_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_RESERVE_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_RESERVE_ITEM + ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+
+                "FOREIGN KEY(" + KEY_RESERVE_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_RESERVE_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_RESERVE_ITEM + ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_SELL_TABLE = "CREATE TABLE " + RELATIONSHIP_SELL +
                 "(" +
                 KEY_SELL_STATUS + " INTEGER" + ","+
-                "FOREIGN KEY(" + KEY_SELL_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_SELL_ID+ ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+
+                "FOREIGN KEY(" + KEY_SELL_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_SELL_ID+ ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_WATCHLIST_TABLE = "CREATE TABLE " + RELATIONSHIP_WATCHLIST +
                 "(" +
-                "FOREIGN KEY(" + KEY_WATCHLIST_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_WATCHLIST_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_WATCHLIST_ID+ ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+
+                "FOREIGN KEY(" + KEY_WATCHLIST_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_WATCHLIST_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_WATCHLIST_ID+ ") REFERENCES "+TABLE_ITEM+ "("+ KEY_ITEM_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_BLOCK_TABLE = "CREATE TABLE " + RELATIONSHIP_BLOCK +
                 "(" +
-                "FOREIGN KEY(" + KEY_BLOCK_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_BLOCK_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+
+                "FOREIGN KEY(" + KEY_BLOCK_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_BLOCK_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_RATING_TABLE = "CREATE TABLE " + RELATIONSHIP_RATING +
                 "(" +
                 KEY_RATING_SCORE + " DOUBLE" + ","+
-                "FOREIGN KEY(" + KEY_RATING_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_RATING_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_RATING_RESERVATION+ ") REFERENCES "+RELATIONSHIP_RESERVE+ "("+ KEY_RESERVE_ID + ")"+
+                "FOREIGN KEY(" + KEY_RATING_BUYER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_RATING_SELLER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_RATING_RESERVATION+ ") REFERENCES "+RELATIONSHIP_RESERVE+ "("+ KEY_RESERVE_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_ORGANIZE_TABLE = "CREATE TABLE " + RELATIONSHIP_ORGANIZE +
                 "(" +
-                "FOREIGN KEY(" + KEY_ORGANIZER_ORGANIZER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_ORGANIZER_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+
+                "FOREIGN KEY(" + KEY_ORGANIZER_ORGANIZER + ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_ORGANIZER_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_JOIN_TABLE = "CREATE TABLE " + RELATIONSHIP_JOIN +
                 "(" +
-                "FOREIGN KEY(" + KEY_JOIN_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_JOIN_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+
+                "FOREIGN KEY(" + KEY_JOIN_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_JOIN_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_BOOKMARK_TABLE = "CREATE TABLE " + RELATIONSHIP_BOOKMARK +
                 "(" +
-                "FOREIGN KEY(" + KEY_BOOKMARK_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_BOOKMARK_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+
+                "FOREIGN KEY(" + KEY_BOOKMARK_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_BOOKMARK_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         String CREATE_PERMIT_TABLE = "CREATE TABLE " + RELATIONSHIP_PERMIT +
                 "(" +
-                "FOREIGN KEY(" + KEY_PERMIT_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+","+
-                "FOREIGN KEY(" + KEY_PERMIT_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+
+                "FOREIGN KEY(" + KEY_PERMIT_PARTICIPANT+ ") REFERENCES "+TABLE_USER+ "("+ KEY_USER_ID + ")"+ " ON DELETE CASCADE, "+
+                "FOREIGN KEY(" + KEY_PERMIT_EVENT+ ") REFERENCES "+TABLE_EVENT+ "("+ KEY_EVENT_ID + ")"+ " ON DELETE CASCADE "+
                 ")";
 
         db.execSQL(CREATE_USER_TABLE);
