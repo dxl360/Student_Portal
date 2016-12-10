@@ -8,8 +8,17 @@ Valid passwords have to be 8 to 20 characters and include at least one uppercase
 
 If the page your are accessing is within the sliding menu, in order to go back to the previous page, you must use the sliding menu to go to the previous page (ex create new event to manage page). Hitting the back button in those instances will take you back to the login page.
 
-To test our application, we used 
-username: abc123@case.edu
-password:
+What does work:
+QR code generation (see profile page)
+Add event/item, reject user (if event/item creator)
+Google maps for directions in eventDetail
 
-Also you need at least two accounts to test the differnt pages that will show up for a buyer or seller (itemDetailActivity) as well as the creator of the event and an event particpant (eventDetailActivity)
+What doesn't work:
+Event detail page: add to calendar does not work. Something to do with getting permissions on the device.
+
+If you want to test the application using an account that has everything already, log into the following account.
+
+Username: test@case.edu
+Password: Test1234
+
+This test account has created two events (Welcome Party and Frat Party), joined two events (First event and PhD Thesis Defense) and bookmarked one event (Thwing Study Over). For the Exchange, test has created two items (minifridge and STATS Textbook), watchlisted one (STATS Textbook) and reserved one item (weird stuff). The reserved item will not appear on the general exchange listview, but if you cancel the reservation, the item wierd stuff will appear on the exchange listview.
