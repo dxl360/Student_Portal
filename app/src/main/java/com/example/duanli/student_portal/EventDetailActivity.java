@@ -1,5 +1,6 @@
 package com.example.duanli.student_portal;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -122,6 +123,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
         String title=current.getEventName();
         String location=current.getLocation();
+        /*
         Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra(CalendarContract.Events.TITLE, title);
@@ -133,6 +135,32 @@ public class EventDetailActivity extends AppCompatActivity {
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
         intent.putExtra(CalendarContract.Events.CALENDAR_ID,1);
         startActivity(intent);
+*/
+        Cursor cursor=getContentResolver().query(Uri.parse("content://com.android.calendar/calendars"), new String[]{"_id", "displayname"}, null, null, null);
+
+        cursor.moveToFirst();
+        // Get calendars name
+        String calendarNames[] = new String[cursor.getCount()];
+        // Get calendars id
+        int[] calendarId = new int[cursor.getCount()];
+        for (int i = 0; i < calendarNames.length; i++)
+        {
+            calendarId[i] = cursor.getInt(0);
+            calendarNames[i] = cursor.getString(1);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        ContentValues contentEvent = new ContentValues();
+        contentEvent.put("calendar_id", 1);
+        contentEvent.put("title", title);
+        contentEvent.put("eventLocation", location);
+        contentEvent.put("dtstart",startMillis);
+        contentEvent.put("dtend",endMillis);
+
+        Uri eventsUri = Uri.parse("content://com.android.calendar/events");
+        getContentResolver().insert(eventsUri, contentEvent);
+
     }
 
     @Override
