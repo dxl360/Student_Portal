@@ -172,7 +172,7 @@ public class EventFragment extends Fragment implements View.OnTouchListener{
 
         for(int i = 0; i < size; i++) {
             this.nameScroll[i] = cells.get(i).getEventName();
-            this.descriptionScroll[i] = cells.get(i).getDate()+" "+cells.get(i).getTime();
+            this.descriptionScroll[i] = cells.get(i).getDate()+" "+cells.get(i).getTime()+"-"+cells.get(i).getEndTime();
             this.id[i] = cells.get(i).getEventID();
         }
         items = size;

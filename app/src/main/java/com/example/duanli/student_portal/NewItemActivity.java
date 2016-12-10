@@ -14,7 +14,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     Button Create;
     EditText etItemName,etPrice,etContact,etURL,etDescription;
     String itemName,contact,description,URL;
-    int sellerID, price,itemId, status;
+    int sellerID, price=0,itemId, status;
     SPDatabaseHelper spdh;
 
     @Override

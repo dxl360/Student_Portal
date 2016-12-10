@@ -54,7 +54,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //add to google calendar
-                addToDeviceCalendar();
+                //addToDeviceCalendar();
                 Snackbar.make(view, "The event is added to your calendar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -90,79 +90,6 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
         return true;
-    }
-
-    public static int[] readTime(String input){
-        int hour=Integer.parseInt(input.substring(0,2));
-        int minutes=Integer.parseInt(input.substring(3,5));
-        int[] result={hour, minutes};
-        return result;
-    }
-
-
-
-    public void addToDeviceCalendar(){
-        Event current=spdh.queryEvent(eventId);
-        //get start time and end time, assume the event finishes in one day
-        String Date=current.getDate();
-        int year=Integer.parseInt(Date.substring(0,4));
-        int month=Integer.parseInt(Date.substring(5,7));
-        int day=Integer.parseInt(Date.substring(8,10));
-        String stTime=current.getTime();
-        String enTime=current.getEndTime();
-        int stHour=Integer.parseInt(stTime.substring(0,2));
-        int stMinutes=Integer.parseInt(enTime.substring(3,5));
-        int enHour=Integer.parseInt(stTime.substring(0,2));
-        int enMinutes=Integer.parseInt(enTime.substring(3,5));
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(year, month, day, stHour, stMinutes);
-        long startMillis = beginTime.getTimeInMillis();
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(year, month, day, enHour, enMinutes);
-        long endMillis = endTime.getTimeInMillis();
-
-        String title=current.getEventName();
-        String location=current.getLocation();
-        /*
-        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.setType("vnd.android.cursor.item/event");
-        intent.putExtra(CalendarContract.Events.TITLE, title);
-        intent.putExtra(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-        intent.putExtra(CalendarContract.Events.DTSTART, startMillis);
-        intent.putExtra(CalendarContract.Events.DTEND, endMillis);
-        intent.putExtra("allDay", false);
-        intent.putExtra("rrule", "FREQ=DAILY;COUNT=1");;
-        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
-        intent.putExtra(CalendarContract.Events.CALENDAR_ID,1);
-        startActivity(intent);
-*/
-        Cursor cursor=getContentResolver().query(Uri.parse("content://com.android.calendar/calendars"), new String[]{"_id", "displayname"}, null, null, null);
-
-        cursor.moveToFirst();
-        // Get calendars name
-        String calendarNames[] = new String[cursor.getCount()];
-        // Get calendars id
-        int[] calendarId = new int[cursor.getCount()];
-        for (int i = 0; i < calendarNames.length; i++)
-        {
-            calendarId[i] = cursor.getInt(0);
-            calendarNames[i] = cursor.getString(1);
-            cursor.moveToNext();
-        }
-        cursor.close();
-
-        ContentValues contentEvent = new ContentValues();
-        contentEvent.put("calendar_id", 1);
-        contentEvent.put("title", title);
-        contentEvent.put("eventLocation", location);
-        contentEvent.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-        contentEvent.put("dtstart",startMillis);
-        contentEvent.put("dtend",endMillis);
-
-
-        Uri eventsUri = Uri.parse("content://com.android.calendar/events");
-        getContentResolver().insert(eventsUri, contentEvent);
-
     }
 
     @Override
@@ -206,7 +133,7 @@ public class EventDetailActivity extends AppCompatActivity {
             //        return true;
             case R.id.delete_event:
                 //delete in database
-                startActivity(new Intent(EventDetailActivity.this, ManageActivity.class));
+                //startActivity(new Intent(EventDetailActivity.this, ManageActivity.class));
                 spdh.deleteEvent(eventId);
                 Snackbar.make(getWindow().getDecorView(), "The event has been deleted.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -266,4 +193,77 @@ public class EventDetailActivity extends AppCompatActivity {
         tvEventDescription.setText(current.getDescription());
 
     }
+
+    //    public static int[] readTime(String input){
+//        int hour=Integer.parseInt(input.substring(0,2));
+//        int minutes=Integer.parseInt(input.substring(3,5));
+//        int[] result={hour, minutes};
+//        return result;
+//    }
+
+
+
+//    public void addToDeviceCalendar(){
+//        Event current=spdh.queryEvent(eventId);
+//        //get start time and end time, assume the event finishes in one day
+//        String Date=current.getDate();
+//        int year=Integer.parseInt(Date.substring(0,4));
+//        int month=Integer.parseInt(Date.substring(5,7));
+//        int day=Integer.parseInt(Date.substring(8,10));
+//        String stTime=current.getTime();
+//        String enTime=current.getEndTime();
+//        int stHour=Integer.parseInt(stTime.substring(0,2));
+//        int stMinutes=Integer.parseInt(enTime.substring(3,5));
+//        int enHour=Integer.parseInt(stTime.substring(0,2));
+//        int enMinutes=Integer.parseInt(enTime.substring(3,5));
+//        Calendar beginTime = Calendar.getInstance();
+//        beginTime.set(year, month, day, stHour, stMinutes);
+//        long startMillis = beginTime.getTimeInMillis();
+//        Calendar endTime = Calendar.getInstance();
+//        endTime.set(year, month, day, enHour, enMinutes);
+//        long endMillis = endTime.getTimeInMillis();
+//
+//        String title=current.getEventName();
+//        String location=current.getLocation();
+//
+//        Intent intent = new Intent(Intent.ACTION_INSERT);
+//        intent.setType("vnd.android.cursor.item/event");
+//        intent.putExtra(CalendarContract.Events.TITLE, title);
+//        intent.putExtra(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+//        intent.putExtra(CalendarContract.Events.DTSTART, startMillis);
+//        intent.putExtra(CalendarContract.Events.DTEND, endMillis);
+//        intent.putExtra("allDay", false);
+//        intent.putExtra("rrule", "FREQ=DAILY;COUNT=1");;
+//        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
+//        intent.putExtra(CalendarContract.Events.CALENDAR_ID,1);
+//        startActivity(intent);
+//
+//        Cursor cursor=getContentResolver().query(Uri.parse("content://com.android.calendar/calendars"), new String[]{"_id", "displayname"}, null, null, null);
+//
+//        cursor.moveToFirst();
+//        // Get calendars name
+//        String calendarNames[] = new String[cursor.getCount()];
+//        // Get calendars id
+//        int[] calendarId = new int[cursor.getCount()];
+//        for (int i = 0; i < calendarNames.length; i++)
+//        {
+//            calendarId[i] = cursor.getInt(0);
+//            calendarNames[i] = cursor.getString(1);
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+//
+//        ContentValues contentEvent = new ContentValues();
+//        contentEvent.put("calendar_id", 1);
+//        contentEvent.put("title", title);
+//        contentEvent.put("eventLocation", location);
+//        contentEvent.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+//        contentEvent.put("dtstart",startMillis);
+//        contentEvent.put("dtend",endMillis);
+//
+//
+//        Uri eventsUri = Uri.parse("content://com.android.calendar/events");
+//        getContentResolver().insert(eventsUri, contentEvent);
+//
+//    }
 }
