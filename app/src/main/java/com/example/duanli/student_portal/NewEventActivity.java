@@ -16,6 +16,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
     String eventName,date,time,endTime,location,URL,description;
     int organizerID, price,capacity, eventId;
     SPDatabaseHelper spdh;
+    boolean success = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,6 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
 
 
         if(v.getId() == R.id.button) {
-            Toast.makeText(NewEventActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
             organizerID = ThisUser.getUserID();
@@ -67,23 +67,44 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             time = etTime.getText().toString();
             endTime = etEndTime.getText().toString();
             location = etLocation.getText().toString();
-            price = Integer.parseInt(etPrice.getText().toString());
-            capacity = Integer.parseInt(etCapacity.getText().toString());
+
             URL = etURL.getText().toString();
             description = etDescription.getText().toString();
 //            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
-            if (getIntent().getExtras().getInt("edit")==1){
-                Event event = new Event(eventId,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
-                spdh.updateEvent(event);
+            if (eventName.equals("") || etPrice.getText().toString().equals("") || etCapacity.getText().toString().equals("") || date.equals("")||time.equals("")||endTime.equals("")||location.equals("") || description.equals("")) {
+                Toast.makeText(getApplicationContext(), "Please enter all fields expect for Image URL(Optional).", Toast.LENGTH_LONG).show();
+            }
+            else if (!isValidDate(date)){
+                Toast.makeText(getApplicationContext(), "Please enter a valid date. Format: yyyy-mm-dd", Toast.LENGTH_LONG).show();
+            }
+            else if (!isValidTime(time)){
+                Toast.makeText(getApplicationContext(), "Please enter a valid start time. Format: xx:xx", Toast.LENGTH_LONG).show();
+            }
+            else if (!isValidTime(time)){
+                Toast.makeText(getApplicationContext(), "Please enter a valid end time. Format: xx:xx", Toast.LENGTH_LONG).show();
             }
             else {
-                Event event = new Event(-1,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
-                spdh.insertEvent(event);
-                spdh.insertOrganize(spdh.queryEventName(eventName).getEventID(), ThisUser.getUserID());
+                success = true;
             }
-//            System.out.println(spdh.queryEvent(1).getDescription());
-            finish();
-            startActivity(new Intent(this, SlidingMenu.class));
+
+            if (success) {
+                price = Integer.parseInt(etPrice.getText().toString());
+                capacity = Integer.parseInt(etCapacity.getText().toString());
+                if (getIntent().getExtras().getInt("edit")==1){
+                    Event event = new Event(eventId,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
+                    spdh.updateEvent(event);
+                }
+                else {
+                    Event event = new Event(-1,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
+                    spdh.insertEvent(event);
+                    spdh.insertOrganize(spdh.queryEventName(eventName).getEventID(), ThisUser.getUserID());
+                }
+                Toast.makeText(NewEventActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SlidingMenu.class));
+            }
+
+//            finish();
+
         }
 
     }

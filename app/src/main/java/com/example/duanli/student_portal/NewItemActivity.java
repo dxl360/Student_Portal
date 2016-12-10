@@ -16,6 +16,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     String itemName,contact,description,URL;
     int sellerID, price=0,itemId, status;
     SPDatabaseHelper spdh;
+    boolean success = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +50,41 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         if(v.getId() == R.id.button) {
-            Toast.makeText(NewItemActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, Db_connection.class);
             //startActivity(intent);
             sellerID = ThisUser.getUserID();
             itemName = etItemName.getText().toString();
-            price = Integer.parseInt(etPrice.getText().toString());
+
             contact = etContact.getText().toString();
             URL = etURL.getText().toString();
             description = etDescription.getText().toString();
- //           if (isValidSellerName(sellerName) && isValidItemName(itemName) && isValidContact(contact) && isValidDescription(description));
-            if (getIntent().getExtras().getInt("edit")==1){
-                Item item = new Item(itemId,itemName,URL,sellerID,price,contact,description,status);
-                spdh.updateItem(item);
+            if (itemName.equals("") || etPrice.getText().toString().equals("") || contact.equals("") || description.equals("")) {
+                Toast.makeText(getApplicationContext(), "Please enter all fields expect for Image URL(Optional).", Toast.LENGTH_LONG).show();
+            }
+            else if (!isValidContact(contact)){
+                Toast.makeText(getApplicationContext(), "Please enter a valid phone number. Format: (123)-123-1234 / 1231231234", Toast.LENGTH_LONG).show();}
             }
             else {
-                System.out.println("edit is "+getIntent().getExtras().getInt("edit"));
-                status = 0;
-                Item item = new Item(-1,itemName,URL,sellerID,price,contact,description,status);
-                spdh.insertItem(item);
-                spdh.insertSell(spdh.queryItemName(itemName).getItemID(), ThisUser.getUserID(), 0);
+                success = true;
             }
-            finish();
-            startActivity(new Intent(this, SlidingMenu.class));
-        }
+
+            if (success){
+                price = Integer.parseInt(etPrice.getText().toString());
+                if (getIntent().getExtras().getInt("edit")==1){
+                    Item item = new Item(itemId,itemName,URL,sellerID,price,contact,description,status);
+                    spdh.updateItem(item);
+                }
+                else {
+                    System.out.println("edit is "+getIntent().getExtras().getInt("edit"));
+                    status = 0;
+                    Item item = new Item(-1,itemName,URL,sellerID,price,contact,description,status);
+                    spdh.insertItem(item);
+                    spdh.insertSell(spdh.queryItemName(itemName).getItemID(), ThisUser.getUserID(), 0);
+                }
+                Toast.makeText(NewItemActivity.this, "Submitting", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SlidingMenu.class));
+            }
+            //finish();
 
     }
 
