@@ -155,8 +155,10 @@ public class EventDetailActivity extends AppCompatActivity {
         contentEvent.put("calendar_id", 1);
         contentEvent.put("title", title);
         contentEvent.put("eventLocation", location);
+        contentEvent.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
         contentEvent.put("dtstart",startMillis);
         contentEvent.put("dtend",endMillis);
+
 
         Uri eventsUri = Uri.parse("content://com.android.calendar/events");
         getContentResolver().insert(eventsUri, contentEvent);
