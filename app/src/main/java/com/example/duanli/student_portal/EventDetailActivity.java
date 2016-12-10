@@ -1,8 +1,10 @@
 package com.example.duanli.student_portal;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class EventDetailActivity extends AppCompatActivity {
 
@@ -84,6 +88,50 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public static int[] readTime(String input){
+        int hour=Integer.parseInt(input.substring(0,2));
+        int minutes=Integer.parseInt(input.substring(3,5));
+        int[] result={hour, minutes};
+        return result;
+    }
+
+
+
+    public void addToDeviceCalendar(){
+        Event current=spdh.queryEvent(eventId);
+        //get start time and end time, assume the event finishes in one day
+        String Date=current.getDate();
+        int year=Integer.parseInt(Date.substring(0,4));
+        int month=Integer.parseInt(Date.substring(5,7));
+        int day=Integer.parseInt(Date.substring(8,10));
+        String stTime=current.getTime();
+        String enTime=current.getEndTime();
+        int stHour=Integer.parseInt(stTime.substring(0,2));
+        int stMinutes=Integer.parseInt(enTime.substring(3,5));
+        int enHour=Integer.parseInt(stTime.substring(0,2));
+        int enMinutes=Integer.parseInt(enTime.substring(3,5));
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(year, month, day, stHour, stMinutes);
+        long startMillis = beginTime.getTimeInMillis();
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(year, month, day, enHour, enMinutes);
+        long endMillis = endTime.getTimeInMillis();
+
+        String title=current.getEventName();
+        String location=current.getLocation();
+        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra(CalendarContract.Events.TITLE, title);
+        intent.putExtra(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+        intent.putExtra(CalendarContract.Events.DTSTART, startMillis);
+        intent.putExtra(CalendarContract.Events.DTEND, endMillis);
+        intent.putExtra("allDay", false);
+        intent.putExtra("rrule", "FREQ=DAILY;COUNT=1");;
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location);
+        intent.putExtra(CalendarContract.Events.CALENDAR_ID,1);
+        startActivity(intent);
     }
 
     @Override
