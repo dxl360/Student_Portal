@@ -14,7 +14,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     Button Create;
     EditText etItemName,etPrice,etContact,etURL,etDescription;
     String itemName,contact,description,URL;
-    int sellerID, price=0,itemId, status;
+    int sellerID, price,itemId, status;
     SPDatabaseHelper spdh;
     boolean success = false;
 
@@ -60,24 +60,27 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             description = etDescription.getText().toString();
             if (itemName.equals("") || etPrice.getText().toString().equals("") || contact.equals("") || description.equals("")) {
                 Toast.makeText(getApplicationContext(), "Please enter all fields expect for Image URL(Optional).", Toast.LENGTH_LONG).show();
-            }
-            else if (!isValidContact(contact)){
-                Toast.makeText(getApplicationContext(), "Please enter a valid phone number. Format: (123)-123-1234 / 1231231234", Toast.LENGTH_LONG).show();}
-            }
-            else {
+                System.out.println("false1");
+            } else if (!isValidContact(contact)) {
+                Toast.makeText(getApplicationContext(), "Please enter a valid phone number. Format: (123)-123-1234 / 1231231234", Toast.LENGTH_LONG).show();
+                System.out.println("false2");
+            } else {
                 success = true;
+                System.out.println("true");
             }
-
-            if (success){
+            System.out.println("before edit");
+            if (success) {
                 price = Integer.parseInt(etPrice.getText().toString());
-                if (getIntent().getExtras().getInt("edit")==1){
-                    Item item = new Item(itemId,itemName,URL,sellerID,price,contact,description,status);
+                System.out.println("before edit1");
+                if (getIntent().getExtras().getInt("edit") == 1) {
+                    Item item = new Item(itemId, itemName, URL, sellerID, price, contact, description, status);
                     spdh.updateItem(item);
-                }
-                else {
-                    System.out.println("edit is "+getIntent().getExtras().getInt("edit"));
+                    System.out.println("before edit2");
+                } else {
+                    System.out.println("before edit3");
+                    System.out.println("edit is " + getIntent().getExtras().getInt("edit"));
                     status = 0;
-                    Item item = new Item(-1,itemName,URL,sellerID,price,contact,description,status);
+                    Item item = new Item(-1, itemName, URL, sellerID, price, contact, description, status);
                     spdh.insertItem(item);
                     spdh.insertSell(spdh.queryItemName(itemName).getItemID(), ThisUser.getUserID(), 0);
                 }
@@ -85,7 +88,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(this, SlidingMenu.class));
             }
             //finish();
-
+        }
     }
 
     public static boolean isValidSellerName(String s)
