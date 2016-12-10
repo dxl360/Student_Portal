@@ -53,6 +53,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //add to google calendar
+                addToDeviceCalendar();
                 Snackbar.make(view, "The event is added to your calendar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
