@@ -23,7 +23,7 @@ public class ListCell {
                     ListCell temp = new ListCell();
                     temp.title = cells.get(i).getEventName();
                     temp.description = cells.get(i).getLocation();
-                    temp.label = cells.get(i).getDate();
+                    temp.label = cells.get(i).getDate() + " | " + cells.get(i).getTime();
                     temp.id = cells.get(i).getEventID();
                     result.add(temp);
                 }
@@ -34,7 +34,7 @@ public class ListCell {
                     ListCell temp = new ListCell();
                     temp.title = cells.get(i).getItemName();
                     temp.description = cells.get(i).getContact();
-                    temp.label = String.valueOf(cells.get(i).getPrice());
+                    temp.label = "Price is $" + String.valueOf(cells.get(i).getPrice());
                     temp.id = cells.get(i).getItemID();
                     result.add(temp);
                 }
