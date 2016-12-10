@@ -1,6 +1,7 @@
 package com.example.duanli.student_portal;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,21 +38,29 @@ public class EditProfileActivity extends Fragment {
         final EditText etUsername = (EditText) rootView.findViewById(R.id.etUsername);
         etUsername.setText(spdh.queryUserID(ThisUser.getUserID()).getUserName());
         final EditText etPassword = (EditText)rootView.findViewById(R.id.etPassword);
-        etPassword.setText(spdh.queryUserID(ThisUser.getUserID()).getPassword());
+        final EditText etNewPassword = (EditText)rootView.findViewById(R.id.etNewPassword);
+
+
+        // etPassword.setText(spdh.queryUserID(ThisUser.getUserID()).getPassword());
         // button interactions (onClick)
         final Button bOK = (Button) rootView.findViewById(R.id.bOK);
         bOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = etUsername.getText().toString();
-                ThisUser.setUsername(userName);
-                String password = etPassword.getText().toString();
-                validation(userName, password, false);
-                ProfileActivity fragment = new ProfileActivity();
-                android.support.v4.app.FragmentTransaction fragmentTransaction =
-                        getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frag_container, fragment);
-                fragmentTransaction.commit();
+                if(etPassword.getText().toString().equals(spdh.queryUserID(ThisUser.getUserID()).getPassword())) {
+                    String userName = etUsername.getText().toString();
+                    ThisUser.setUsername(userName);
+                    String password = etNewPassword.getText().toString();
+                    validation(userName, password, false);
+                    ProfileActivity fragment = new ProfileActivity();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction =
+                            getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frag_container, fragment);
+                    fragmentTransaction.commit();
+                } else {
+                    Snackbar.make(v, "Old password is not valid; please retry", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
 
         });

@@ -14,6 +14,7 @@ public class Event implements Serializable {
     private String eventPictureUrl="";
     private String date="";
     private String time="";
+    private String endTime="";
     private String location="";
     private int price=0;
     private int capacity=0;
@@ -54,6 +55,13 @@ public class Event implements Serializable {
         this.time = time;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -85,18 +93,18 @@ public class Event implements Serializable {
 
     public Event(){}
 
-    public Event(int EventID, int OrganizerID, String EventPictureUrl, String EventName,String Date,String Time,String Location,int Price,int Capacity,String Description) {
+    public Event(int EventID, int OrganizerID, String EventPictureUrl, String EventName,String Date,String Time, String EndTime, String Location,int Price,int Capacity,String Description) {
         eventID=EventID;
         organizerID = OrganizerID;
         eventPictureUrl = EventPictureUrl;
         eventName = EventName;
         date = Date;
         time = Time;
+        endTime = EndTime;
         location = Location;
         price = Price;
         capacity = Capacity;
         description = Description;
     }
-
 
 }

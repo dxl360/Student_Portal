@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class NewEventActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button Create;
-    EditText etEventName,etDate,etTime,etLocation,etPrice,etCapacity,etURL,etDescription;
-    String eventName,date,time,location,URL,description;
+    EditText etEventName,etDate,etEndTime,etTime,etLocation,etPrice,etCapacity,etURL,etDescription;
+    String eventName,date,time,endTime,location,URL,description;
     int organizerID, price,capacity, eventId;
     SPDatabaseHelper spdh;
 
@@ -25,6 +25,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
         etEventName = (EditText) findViewById(R.id.etEventName);
         etDate = (EditText) findViewById(R.id.etDate);
         etTime = (EditText) findViewById(R.id.etTime);
+        etEndTime = (EditText) findViewById(R.id.etEndTime);
         etLocation = (EditText) findViewById(R.id.etLocation);
         etCapacity = (EditText) findViewById(R.id.etCapacity);
         etPrice = (EditText) findViewById(R.id.etPrice);
@@ -41,6 +42,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             etEventName.setText(current.getEventName());
             etDate.setText(current.getDate());
             etTime.setText(current.getTime());
+            etEndTime.setText(current.getEndTime());
             etLocation.setText(current.getLocation());
             etCapacity.setText(String.valueOf(current.getCapacity()));
             etPrice.setText(String.valueOf(current.getPrice()));
@@ -63,6 +65,7 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             eventName = etEventName.getText().toString();
             date = etDate.getText().toString();
             time = etTime.getText().toString();
+            endTime = etEndTime.getText().toString();
             location = etLocation.getText().toString();
             price = Integer.parseInt(etPrice.getText().toString());
             capacity = Integer.parseInt(etCapacity.getText().toString());
@@ -70,11 +73,11 @@ public class NewEventActivity extends AppCompatActivity implements View.OnClickL
             description = etDescription.getText().toString();
 //            if (isValidEventName(eventName) && isValidDate(date) && isValidTime(time) && isValidDescription(description));
             if (getIntent().getExtras().getInt("edit")==1){
-                Event event = new Event(eventId,organizerID,URL,eventName,date,time,location,price,capacity,description);
+                Event event = new Event(eventId,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
                 spdh.updateEvent(event);
             }
             else {
-                Event event = new Event(-1,organizerID,URL,eventName,date,time,location,price,capacity,description);
+                Event event = new Event(-1,organizerID,URL,eventName,date,time,endTime,location,price,capacity,description);
                 spdh.insertEvent(event);
                 spdh.insertOrganize(spdh.queryEventName(eventName).getEventID(), ThisUser.getUserID());
             }
