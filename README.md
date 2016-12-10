@@ -1,16 +1,9 @@
 # Student_Portal
 
-Tests in the app/src/test directory are unit tests and tests in the app/src/anrdoidTest directory are instrumented tests.
+To run our application, you need to have Android studio. Set up an Android emulator (with Android 6.0 or above) and just hit run.
 
-Some of the instrumented tests failed to pass because the page cannot be initialized succesffully by using the unit test framework Robololectirc. We add robolectric in the gradle file and import it in the test file but the symbol still cannot be resolved. So we test the UI display by running the application on the emulator. Through clicking the button,new page will be navigated correctly. Possible flows are:
+After launching the application, you will need to create an account with a valid email and password.
 
-1)register-->login-->main-->create new event/item-->main
-2)main-->sliding menu-->profile/event list view/item list view/manage/logout 
-3)profile-->edit profile
-4)event/item list view-->event/item detail view
-5)manage-->events tab-->events I've joined/events I'm interested/events I started
-6)manage-->exchange tab-->items I've bought/items I've watchlisted/items I've sold
+Valid passwords have to be 8 to 20 characters and include at least one uppercase and lowercase letter as well as one number.
 
-For the current unit tests, we test anything but UI for the reason explained above. So all onCreate/onClick methods cannot be covered. Also we are still working on writing tests, alghough some classes are not applicable to unit tests because they are all about UI. For example, eventtab is just a fragment implemented by manage activity and the only way to test it is to see the if manage page is loaded correctly. 
-
-To see the code coverage, right click the test folder and choose run tests with coverage. 33% (9/29) classes and are covered. Notice that the report shows that there are 66 classes in com.example.duanli.student_portal package but only 29 of them are source code and all the others are tests. Additionally, 32.8% (86/ 262) methods and 26.7% (278/ 1043) lines are covered.
+If the page your are accessing is within the sliding menu, in order to go back to the previous page, you must use the sliding menu to go to the previous page (ex create new event to manage page). Hitting the back button in those instances will take you back to the login page.
